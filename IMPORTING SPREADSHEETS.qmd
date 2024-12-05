@@ -1,0 +1,78 @@
+---
+title: "IMPORTING SPREADSHEETS"
+author: "K.ASABERE"
+df-print: kable
+format: html
+editor: visual
+code-overflow: wrap
+execute: 
+  echo: true
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(writexl)
+```
+
+```{r}
+
+covid <- read_excel("COVID-CasesDeathsHosp(Europe and Americas).xlsx")
+covid
+```
+
+```{r}
+students <- read_excel("students.xlsx")
+
+```
+
+Column names can be provided while loading the dataset
+
+```{r}
+## provide column names when loading
+read_excel("students.xlsx",
+           col_names = c(
+             "students_id","full_name","favorite_food","meal_plan","age"
+           ))
+```
+
+However,the old variable names(header) now becomethe first observations in the data. You can explcitly skip that row using *skip* argument.
+
+```{r}
+read_excel("students.xlsx",
+           col_names = c(
+             "students_id","full_name","favorite_food","meal_plan","age"
+           ),
+           skip = 1)
+```
+
+You can specify which character strings should be recognized as NAs with the na argument
+
+```{r}
+read_excel("students.xlsx",
+           col_names = c(
+             "students_id","full_name","favorite_food","meal_plan","age"
+           ),
+           skip = 1,
+           na =c("","N/A"))
+```
+
+column types for the variables can be specified when loading the dataset.When a column contains a mixture of text and numbers,load the column in as text and make the change once the data is loaded in R
+
+```{r}
+students <- read_excel("students.xlsx",
+           col_names = c(
+             "students_id","full_name","favorite_food","meal_plan","age"
+           ),
+           skip = 1,
+           col_types = c("numeric","text","text","text","text"))
+
+students <- students %>% 
+  mutate(age = if_else(age =="five","5",age),
+         age = parse_number(age))
+students
+```

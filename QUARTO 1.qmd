@@ -1,0 +1,26 @@
+---
+title: "Untitled"
+format: html
+editor: visual
+---
+
+```{library(tidyverse)}
+library(palmerpenguins)
+library(gt)
+```
+
+```{r}
+penguins <- penguins
+head(penguins)
+```
+
+```{library}
+
+```
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).

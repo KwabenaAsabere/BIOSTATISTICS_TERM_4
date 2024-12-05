@@ -1,0 +1,84 @@
+---
+title: "TABLE 1"
+format: pdf
+editor: visual
+execute: 
+  echo: false
+  message: false
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(gtsummary)
+library(gt)
+
+heart_failure <- read_csv("heart_failure_clinical_records_dataset.csv")
+
+```
+
+```{r}
+
+heart_failure <- read_csv("heart_failure_clinical_records_dataset.csv")
+
+glimpse(heart_failure)
+
+spec(heart_failure)
+
+#  Recoding variables 
+
+heart_recoded <-  heart_failure %>% 
+  mutate(`Age(years)` = if_else(age <65,"less than 65","65 and above"),
+  Anaemia=if_else(anaemia == 1,"Yes","No"),
+ Sex = if_else(sex == 1,"Male","Female"),
+`Serum creatinine(mg/dl)` = if_else(serum_creatinine >=1.5,"Elevated","Normal"),
+Diabetes = if_else(diabetes == 1,"Yes","No"),
+Smoking = if_else(smoking ==1, "Yes","No"),
+Hypertension = if_else(high_blood_pressure ==1,"Yes","No"),
+ `Ejection Fraction` = if_else(ejection_fraction <= 30,"HFrEF",
+if_else(ejection_fraction <=45,"HFmrEF","HFpEF")),
+`Serum sodium(mEq/L)`= serum_sodium,
+Platelets = platelets,
+`Time(days)` = time,
+`Creatinine phosphokinase(mcg/dL)`=creatinine_phosphokinase
+)
+
+
+heart_df <- heart_recoded %>% 
+ select(`Age(years)`:`Creatinine phosphokinase(mcg/dL)`)
+
+
+heart_df <- heart_df %>%
+  mutate(`Ejection Fraction` = factor(`Ejection Fraction`, levels = c("HFrEF", "HFmrEF", "HFpEF"),
+labels= c("Reduced ejection fraction(HFrEF)", "Moderate ejection fraction(HFmrEF)",
+    "Preserved ejection fraction(HFpEF)"))) %>% 
+  relocate(Anaemia,.before = Diabetes)
+```
+
+```{r}
+table_one <- heart_df %>% 
+  tbl_summary(
+    by = `Ejection Fraction`,
+    type = c(`Serum sodium(mEq/L)`:`Creatinine phosphokinase(mcg/dL)`) ~ "continuous",
+    statistic = all_continuous() ~ "{mean} ({sd})",
+    digits = all_continuous() ~ 1
+  ) 
+
+
+table_one %>% 
+  add_overall() %>% 
+  bold_labels() %>% 
+  italicize_levels() %>% 
+  modify_spanning_header(
+    update = all_stat_cols() ~ "**Classification of Heart Failure According to Ejection Fraction**"
+  ) %>% 
+  modify_footnote(
+    update = all_stat_cols() ~
+      "mean(sd) for continuous ;n(%) for categorical"
+  ) 
+  
+
+```
+

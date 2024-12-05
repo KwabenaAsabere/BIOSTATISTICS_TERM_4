@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="K.Asabere">
+
+<title>EDA AND LOADING DATA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="EDA &amp; LOADING DATA_files/libs/clipboard/clipboard.min.js"></script>
+<script src="EDA &amp; LOADING DATA_files/libs/quarto-html/quarto.js"></script>
+<script src="EDA &amp; LOADING DATA_files/libs/quarto-html/popper.min.js"></script>
+<script src="EDA &amp; LOADING DATA_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="EDA &amp; LOADING DATA_files/libs/quarto-html/anchor.min.js"></script>
+<link href="EDA &amp; LOADING DATA_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="EDA &amp; LOADING DATA_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="EDA &amp; LOADING DATA_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="EDA &amp; LOADING DATA_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="EDA &amp; LOADING DATA_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">EDA AND LOADING DATA</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>K.Asabere </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="creating-a-tibble" class="level1">
+<h1>Creating a tibble</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">#tibble(very simlilar to a dataframe)</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a>cats_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="at">coat =</span> <span class="fu">c</span>(<span class="st">"calico"</span>,<span class="st">"black"</span>,<span class="st">"tabby"</span>),</span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="at">weight =</span> <span class="fu">c</span>(<span class="fl">1.2</span>,<span class="dv">4</span>,<span class="fl">3.1</span>),</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="at">likes_string =</span> <span class="fu">c</span>(T,T,F)</span>
+<span id="cb1-8"><a href="#cb1-8"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>cats_tibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  coat   weight likes_string
+  &lt;chr&gt;   &lt;dbl&gt; &lt;lgl&gt;       
+1 calico    1.2 TRUE        
+2 black     4   TRUE        
+3 tabby     3.1 FALSE       </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">#tribble (row-wise)</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>cats_tribble <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="sc">~</span>coat,<span class="sc">~</span>weight,<span class="sc">~</span>like_string,</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="st">"calico"</span>,<span class="fl">1.2</span>,T,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="st">"black"</span>,<span class="dv">4</span>,T,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>  <span class="st">"tabby"</span>,<span class="fl">3.1</span>,F</span>
+<span id="cb3-7"><a href="#cb3-7"></a>)</span>
+<span id="cb3-8"><a href="#cb3-8"></a>cats_tribble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  coat   weight like_string
+  &lt;chr&gt;   &lt;dbl&gt; &lt;lgl&gt;      
+1 calico    1.2 TRUE       
+2 black     4   TRUE       
+3 tabby     3.1 FALSE      </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>avengers <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"avengers.csv"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">glimpse</span>(avengers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 173
+Columns: 21
+$ URL                           &lt;chr&gt; "http://marvel.wikia.com/Henry_Pym_(Eart…
+$ `Name/Alias`                  &lt;chr&gt; "Henry Jonathan \"Hank\" Pym", "Janet va…
+$ Appearances                   &lt;dbl&gt; 1269, 1165, 3068, 2089, 2402, 612, 3458,…
+$ `Current?`                    &lt;chr&gt; "YES", "YES", "YES", "YES", "YES", "YES"…
+$ Gender                        &lt;chr&gt; "MALE", "FEMALE", "MALE", "MALE", "MALE"…
+$ `Probationary Introl`         &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ `Full/Reserve Avengers Intro` &lt;chr&gt; "Sep-63", "Sep-63", "Sep-63", "Sep-63", …
+$ Year                          &lt;dbl&gt; 1963, 1963, 1963, 1963, 1963, 1963, 1964…
+$ `Years since joining`         &lt;dbl&gt; 52, 52, 52, 52, 52, 52, 51, 50, 50, 50, …
+$ Honorary                      &lt;chr&gt; "Full", "Full", "Full", "Full", "Full", …
+$ Death1                        &lt;chr&gt; "YES", "YES", "YES", "YES", "YES", "NO",…
+$ Return1                       &lt;chr&gt; "NO", "YES", "YES", "YES", "YES", NA, "Y…
+$ Death2                        &lt;chr&gt; NA, NA, NA, NA, "YES", NA, NA, "YES", NA…
+$ Return2                       &lt;chr&gt; NA, NA, NA, NA, "NO", NA, NA, "YES", NA,…
+$ Death3                        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ Return3                       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ Death4                        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ Return4                       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ Death5                        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ Return5                       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …
+$ Notes                         &lt;chr&gt; "Merged with Ultron in Rage of Ultron Vo…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">spec</span>(avengers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>cols(
+  URL = col_character(),
+  `Name/Alias` = col_character(),
+  Appearances = col_double(),
+  `Current?` = col_character(),
+  Gender = col_character(),
+  `Probationary Introl` = col_character(),
+  `Full/Reserve Avengers Intro` = col_character(),
+  Year = col_double(),
+  `Years since joining` = col_double(),
+  Honorary = col_character(),
+  Death1 = col_character(),
+  Return1 = col_character(),
+  Death2 = col_character(),
+  Return2 = col_character(),
+  Death3 = col_character(),
+  Return3 = col_character(),
+  Death4 = col_character(),
+  Return4 = col_character(),
+  Death5 = col_character(),
+  Return5 = col_character(),
+  Notes = col_character()
+)</code></pre>
+</div>
+</div>
+</section>
+<section id="haven" class="level1">
+<h1>Haven</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a>crf33<span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"crf33.dta"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="fu">glimpse</span>(crf33)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 45
+Columns: 4
+$ a     &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2…
+$ b     &lt;dbl&gt; 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 2, 2…
+$ y     &lt;dbl&gt; 24, 33, 37, 29, 42, 44, 36, 25, 27, 43, 38, 29, 28, 47, 48, 30, …
+$ order &lt;dbl&gt; 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2…</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="fu">str</span>(crf33)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [45 × 4] (S3: tbl_df/tbl/data.frame)
+ $ a    : num [1:45] 1 1 1 1 1 1 1 1 1 1 ...
+  ..- attr(*, "format.stata")= chr "%8.0g"
+ $ b    : num [1:45] 1 1 1 1 1 2 2 2 2 2 ...
+  ..- attr(*, "format.stata")= chr "%8.0g"
+ $ y    : num [1:45] 24 33 37 29 42 44 36 25 27 43 ...
+  ..- attr(*, "format.stata")= chr "%8.0g"
+ $ order: num [1:45] 1 2 3 4 5 1 2 3 4 5 ...
+  ..- attr(*, "format.stata")= chr "%8.0g"</code></pre>
+</div>
+</div>
+</section>
+<section id="readxl" class="level1">
+<h1>readxl</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb13-2"><a href="#cb13-2"></a>steak <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"steak-risk-survey.xlsx"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="fu">glimpse</span>(steak)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 550
+Columns: 15
+$ RespondentID           &lt;dbl&gt; 3237565956, 3234982343, 3234973379, 3234972383,…
+$ hypothetical_scenario  &lt;chr&gt; "Lottery B", "Lottery A", "Lottery A", "Lottery…
+$ smoke_cigarettes       &lt;chr&gt; NA, "No", "No", "Yes", "No", "No", "No", "No", …
+$ drink_alcohol          &lt;chr&gt; NA, "Yes", "Yes", "Yes", "Yes", "No", "Yes", "Y…
+$ gamble                 &lt;chr&gt; NA, "No", "Yes", "Yes", "No", "No", "No", "Yes"…
+$ skydiving              &lt;chr&gt; NA, "No", "No", "No", "No", "No", "No", "Yes", …
+$ drive_above_speedlimit &lt;chr&gt; NA, "No", "Yes", "Yes", "Yes", "Yes", "Yes", "Y…
+$ cheated_partner        &lt;chr&gt; NA, "No", "Yes", "Yes", "Yes", "No", "Yes", "No…
+$ eat_steak              &lt;chr&gt; NA, "Yes", "Yes", "Yes", "Yes", "Yes", "No", "Y…
+$ steak_preference       &lt;chr&gt; NA, "Medium rare", "Rare", "Medium", "Medium", …
+$ gender                 &lt;chr&gt; NA, "Male", "Male", "Male", "Male", "Male", "Ma…
+$ age                    &lt;chr&gt; NA, "&gt; 60", "&gt; 60", "&gt; 60", "&gt; 60", "18-29", "&gt;…
+$ income                 &lt;chr&gt; NA, "$50,000 - $99,999", "$150,000+", "$50,000 …
+$ education              &lt;chr&gt; NA, "Some college or Associate degree", "Gradua…
+$ census_region          &lt;chr&gt; NA, "East North Central", "South Atlantic", "Ne…</code></pre>
+</div>
+</div>
+<p>#skimr</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">library</span>(skimr)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="fu">skim</span>(avengers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">avengers</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">173</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">21</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">18</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 11%">
+<col style="width: 16%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 10%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">min</th>
+<th style="text-align: right;">max</th>
+<th style="text-align: right;">empty</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: right;">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">URL</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">67</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">173</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Name/Alias</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.94</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">162</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Current?</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gender</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Probationary Introl</td>
+<td style="text-align: right;">158</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Full/Reserve Avengers Intro</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0.92</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Honorary</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Death1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Return1</td>
+<td style="text-align: right;">104</td>
+<td style="text-align: right;">0.40</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Death2</td>
+<td style="text-align: right;">156</td>
+<td style="text-align: right;">0.10</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Return2</td>
+<td style="text-align: right;">157</td>
+<td style="text-align: right;">0.09</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Death3</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Return3</td>
+<td style="text-align: right;">171</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Death4</td>
+<td style="text-align: right;">172</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Return4</td>
+<td style="text-align: right;">172</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Death5</td>
+<td style="text-align: right;">172</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Return5</td>
+<td style="text-align: right;">172</td>
+<td style="text-align: right;">0.01</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Notes</td>
+<td style="text-align: right;">98</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">255</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">71</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Appearances</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">414.05</td>
+<td style="text-align: right;">677.99</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">491</td>
+<td style="text-align: right;">4333</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Year</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1988.45</td>
+<td style="text-align: right;">30.37</td>
+<td style="text-align: right;">1900</td>
+<td style="text-align: right;">1979</td>
+<td style="text-align: right;">1996</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">2015</td>
+<td style="text-align: left;">▁▁▁▅▇</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Years since joining</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">26.55</td>
+<td style="text-align: right;">30.37</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">115</td>
+<td style="text-align: left;">▇▅▁▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>diamonds <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">group_by</span>(cut) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3"></a>  skimr<span class="sc">::</span><span class="fu">skim</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Name</td>
+<td style="text-align: left;">Piped data</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of rows</td>
+<td style="text-align: left;">53940</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Number of columns</td>
+<td style="text-align: left;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_______________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Column type frequency:</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">factor</td>
+<td style="text-align: left;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">________________________</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Group variables</td>
+<td style="text-align: left;">cut</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: left;">cut</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: left;">ordered</th>
+<th style="text-align: right;">n_unique</th>
+<th style="text-align: left;">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">color</td>
+<td style="text-align: left;">Fair</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">G: 314, F: 312, H: 303, E: 224</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">color</td>
+<td style="text-align: left;">Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">E: 933, F: 909, G: 871, H: 702</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">color</td>
+<td style="text-align: left;">Very Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">E: 2400, G: 2299, F: 2164, H: 1824</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">color</td>
+<td style="text-align: left;">Premium</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">G: 2924, H: 2360, E: 2337, F: 2331</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">color</td>
+<td style="text-align: left;">Ideal</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">G: 4884, E: 3903, F: 3826, H: 3115</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">clarity</td>
+<td style="text-align: left;">Fair</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">SI2: 466, SI1: 408, VS2: 261, I1: 210</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">clarity</td>
+<td style="text-align: left;">Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">SI1: 1560, SI2: 1081, VS2: 978, VS1: 648</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">clarity</td>
+<td style="text-align: left;">Very Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">SI1: 3240, VS2: 2591, SI2: 2100, VS1: 1775</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">clarity</td>
+<td style="text-align: left;">Premium</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">SI1: 3575, VS2: 3357, SI2: 2949, VS1: 1989</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">clarity</td>
+<td style="text-align: left;">Ideal</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">VS2: 5071, SI1: 4282, VS1: 3589, VVS: 2606</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">skim_variable</th>
+<th style="text-align: left;">cut</th>
+<th style="text-align: right;">n_missing</th>
+<th style="text-align: right;">complete_rate</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+<th style="text-align: left;">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">carat</td>
+<td style="text-align: left;">Fair</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.05</td>
+<td style="text-align: right;">0.52</td>
+<td style="text-align: right;">0.22</td>
+<td style="text-align: right;">0.70</td>
+<td style="text-align: right;">1.00</td>
+<td style="text-align: right;">1.20</td>
+<td style="text-align: right;">5.01</td>
+<td style="text-align: left;">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">carat</td>
+<td style="text-align: left;">Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">0.23</td>
+<td style="text-align: right;">0.50</td>
+<td style="text-align: right;">0.82</td>
+<td style="text-align: right;">1.01</td>
+<td style="text-align: right;">3.01</td>
+<td style="text-align: left;">▇▆▂▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">carat</td>
+<td style="text-align: left;">Very Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.81</td>
+<td style="text-align: right;">0.46</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">0.41</td>
+<td style="text-align: right;">0.71</td>
+<td style="text-align: right;">1.02</td>
+<td style="text-align: right;">4.00</td>
+<td style="text-align: left;">▇▃▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">carat</td>
+<td style="text-align: left;">Premium</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.89</td>
+<td style="text-align: right;">0.52</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">0.41</td>
+<td style="text-align: right;">0.86</td>
+<td style="text-align: right;">1.20</td>
+<td style="text-align: right;">4.01</td>
+<td style="text-align: left;">▇▆▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">carat</td>
+<td style="text-align: left;">Ideal</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.70</td>
+<td style="text-align: right;">0.43</td>
+<td style="text-align: right;">0.20</td>
+<td style="text-align: right;">0.35</td>
+<td style="text-align: right;">0.54</td>
+<td style="text-align: right;">1.01</td>
+<td style="text-align: right;">3.50</td>
+<td style="text-align: left;">▇▂▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">depth</td>
+<td style="text-align: left;">Fair</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">64.04</td>
+<td style="text-align: right;">3.64</td>
+<td style="text-align: right;">43.00</td>
+<td style="text-align: right;">64.40</td>
+<td style="text-align: right;">65.00</td>
+<td style="text-align: right;">65.90</td>
+<td style="text-align: right;">79.00</td>
+<td style="text-align: left;">▁▁▃▇▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">depth</td>
+<td style="text-align: left;">Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">62.37</td>
+<td style="text-align: right;">2.17</td>
+<td style="text-align: right;">54.30</td>
+<td style="text-align: right;">61.30</td>
+<td style="text-align: right;">63.40</td>
+<td style="text-align: right;">63.80</td>
+<td style="text-align: right;">67.00</td>
+<td style="text-align: left;">▁▂▂▇▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">depth</td>
+<td style="text-align: left;">Very Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">61.82</td>
+<td style="text-align: right;">1.38</td>
+<td style="text-align: right;">56.80</td>
+<td style="text-align: right;">60.90</td>
+<td style="text-align: right;">62.10</td>
+<td style="text-align: right;">62.90</td>
+<td style="text-align: right;">64.90</td>
+<td style="text-align: left;">▁▂▅▇▂</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">depth</td>
+<td style="text-align: left;">Premium</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">61.26</td>
+<td style="text-align: right;">1.16</td>
+<td style="text-align: right;">58.00</td>
+<td style="text-align: right;">60.50</td>
+<td style="text-align: right;">61.40</td>
+<td style="text-align: right;">62.20</td>
+<td style="text-align: right;">63.00</td>
+<td style="text-align: left;">▁▃▆▇▇</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">depth</td>
+<td style="text-align: left;">Ideal</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">61.71</td>
+<td style="text-align: right;">0.72</td>
+<td style="text-align: right;">43.00</td>
+<td style="text-align: right;">61.30</td>
+<td style="text-align: right;">61.80</td>
+<td style="text-align: right;">62.20</td>
+<td style="text-align: right;">66.70</td>
+<td style="text-align: left;">▁▁▁▇▆</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">table</td>
+<td style="text-align: left;">Fair</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">59.05</td>
+<td style="text-align: right;">3.95</td>
+<td style="text-align: right;">49.00</td>
+<td style="text-align: right;">56.00</td>
+<td style="text-align: right;">58.00</td>
+<td style="text-align: right;">61.00</td>
+<td style="text-align: right;">95.00</td>
+<td style="text-align: left;">▇▆▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">table</td>
+<td style="text-align: left;">Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">58.69</td>
+<td style="text-align: right;">2.85</td>
+<td style="text-align: right;">51.00</td>
+<td style="text-align: right;">56.00</td>
+<td style="text-align: right;">58.00</td>
+<td style="text-align: right;">61.00</td>
+<td style="text-align: right;">66.00</td>
+<td style="text-align: left;">▁▇▇▅▂</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">table</td>
+<td style="text-align: left;">Very Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">57.96</td>
+<td style="text-align: right;">2.12</td>
+<td style="text-align: right;">44.00</td>
+<td style="text-align: right;">56.00</td>
+<td style="text-align: right;">58.00</td>
+<td style="text-align: right;">59.00</td>
+<td style="text-align: right;">66.00</td>
+<td style="text-align: left;">▁▁▆▇▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">table</td>
+<td style="text-align: left;">Premium</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">58.75</td>
+<td style="text-align: right;">1.48</td>
+<td style="text-align: right;">51.00</td>
+<td style="text-align: right;">58.00</td>
+<td style="text-align: right;">59.00</td>
+<td style="text-align: right;">60.00</td>
+<td style="text-align: right;">62.00</td>
+<td style="text-align: left;">▁▁▁▇▃</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">table</td>
+<td style="text-align: left;">Ideal</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">55.95</td>
+<td style="text-align: right;">1.25</td>
+<td style="text-align: right;">43.00</td>
+<td style="text-align: right;">55.00</td>
+<td style="text-align: right;">56.00</td>
+<td style="text-align: right;">57.00</td>
+<td style="text-align: right;">63.00</td>
+<td style="text-align: left;">▁▁▅▇▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">price</td>
+<td style="text-align: left;">Fair</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4358.76</td>
+<td style="text-align: right;">3560.39</td>
+<td style="text-align: right;">337.00</td>
+<td style="text-align: right;">2050.25</td>
+<td style="text-align: right;">3282.00</td>
+<td style="text-align: right;">5205.50</td>
+<td style="text-align: right;">18574.00</td>
+<td style="text-align: left;">▇▃▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">price</td>
+<td style="text-align: left;">Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3928.86</td>
+<td style="text-align: right;">3681.59</td>
+<td style="text-align: right;">327.00</td>
+<td style="text-align: right;">1145.00</td>
+<td style="text-align: right;">3050.50</td>
+<td style="text-align: right;">5028.00</td>
+<td style="text-align: right;">18788.00</td>
+<td style="text-align: left;">▇▃▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">price</td>
+<td style="text-align: left;">Very Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3981.76</td>
+<td style="text-align: right;">3935.86</td>
+<td style="text-align: right;">336.00</td>
+<td style="text-align: right;">912.00</td>
+<td style="text-align: right;">2648.00</td>
+<td style="text-align: right;">5372.75</td>
+<td style="text-align: right;">18818.00</td>
+<td style="text-align: left;">▇▃▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">price</td>
+<td style="text-align: left;">Premium</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4584.26</td>
+<td style="text-align: right;">4349.20</td>
+<td style="text-align: right;">326.00</td>
+<td style="text-align: right;">1046.00</td>
+<td style="text-align: right;">3185.00</td>
+<td style="text-align: right;">6296.00</td>
+<td style="text-align: right;">18823.00</td>
+<td style="text-align: left;">▇▃▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">price</td>
+<td style="text-align: left;">Ideal</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3457.54</td>
+<td style="text-align: right;">3808.40</td>
+<td style="text-align: right;">326.00</td>
+<td style="text-align: right;">878.00</td>
+<td style="text-align: right;">1810.00</td>
+<td style="text-align: right;">4678.50</td>
+<td style="text-align: right;">18806.00</td>
+<td style="text-align: left;">▇▂▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">x</td>
+<td style="text-align: left;">Fair</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6.25</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">5.63</td>
+<td style="text-align: right;">6.18</td>
+<td style="text-align: right;">6.70</td>
+<td style="text-align: right;">10.74</td>
+<td style="text-align: left;">▁▁▇▃▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">x</td>
+<td style="text-align: left;">Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.84</td>
+<td style="text-align: right;">1.06</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">5.02</td>
+<td style="text-align: right;">5.98</td>
+<td style="text-align: right;">6.42</td>
+<td style="text-align: right;">9.44</td>
+<td style="text-align: left;">▁▁▆▇▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">x</td>
+<td style="text-align: left;">Very Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.74</td>
+<td style="text-align: right;">1.10</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">4.75</td>
+<td style="text-align: right;">5.74</td>
+<td style="text-align: right;">6.47</td>
+<td style="text-align: right;">10.01</td>
+<td style="text-align: left;">▁▁▇▆▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">x</td>
+<td style="text-align: left;">Premium</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.97</td>
+<td style="text-align: right;">1.19</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">4.80</td>
+<td style="text-align: right;">6.11</td>
+<td style="text-align: right;">6.80</td>
+<td style="text-align: right;">10.14</td>
+<td style="text-align: left;">▁▁▇▇▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">x</td>
+<td style="text-align: left;">Ideal</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.51</td>
+<td style="text-align: right;">1.06</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">4.54</td>
+<td style="text-align: right;">5.25</td>
+<td style="text-align: right;">6.44</td>
+<td style="text-align: right;">9.65</td>
+<td style="text-align: left;">▁▁▇▃▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">y</td>
+<td style="text-align: left;">Fair</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">6.18</td>
+<td style="text-align: right;">0.96</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">5.57</td>
+<td style="text-align: right;">6.10</td>
+<td style="text-align: right;">6.64</td>
+<td style="text-align: right;">10.54</td>
+<td style="text-align: left;">▁▁▇▃▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">y</td>
+<td style="text-align: left;">Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.85</td>
+<td style="text-align: right;">1.05</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">5.02</td>
+<td style="text-align: right;">5.99</td>
+<td style="text-align: right;">6.44</td>
+<td style="text-align: right;">9.38</td>
+<td style="text-align: left;">▁▁▆▇▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">y</td>
+<td style="text-align: left;">Very Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.77</td>
+<td style="text-align: right;">1.10</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">4.77</td>
+<td style="text-align: right;">5.77</td>
+<td style="text-align: right;">6.51</td>
+<td style="text-align: right;">9.94</td>
+<td style="text-align: left;">▁▁▇▆▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">y</td>
+<td style="text-align: left;">Premium</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.94</td>
+<td style="text-align: right;">1.26</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">4.79</td>
+<td style="text-align: right;">6.06</td>
+<td style="text-align: right;">6.76</td>
+<td style="text-align: right;">58.90</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">y</td>
+<td style="text-align: left;">Ideal</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5.52</td>
+<td style="text-align: right;">1.07</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">4.55</td>
+<td style="text-align: right;">5.26</td>
+<td style="text-align: right;">6.44</td>
+<td style="text-align: right;">31.80</td>
+<td style="text-align: left;">▇▃▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">z</td>
+<td style="text-align: left;">Fair</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.98</td>
+<td style="text-align: right;">0.65</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">3.61</td>
+<td style="text-align: right;">3.97</td>
+<td style="text-align: right;">4.28</td>
+<td style="text-align: right;">6.98</td>
+<td style="text-align: left;">▁▁▇▃▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">z</td>
+<td style="text-align: left;">Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.64</td>
+<td style="text-align: right;">0.65</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">3.07</td>
+<td style="text-align: right;">3.70</td>
+<td style="text-align: right;">4.03</td>
+<td style="text-align: right;">5.79</td>
+<td style="text-align: left;">▁▁▆▇▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">z</td>
+<td style="text-align: left;">Very Good</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.56</td>
+<td style="text-align: right;">0.73</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">2.95</td>
+<td style="text-align: right;">3.56</td>
+<td style="text-align: right;">4.02</td>
+<td style="text-align: right;">31.80</td>
+<td style="text-align: left;">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">z</td>
+<td style="text-align: left;">Premium</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.65</td>
+<td style="text-align: right;">0.73</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">2.94</td>
+<td style="text-align: right;">3.72</td>
+<td style="text-align: right;">4.16</td>
+<td style="text-align: right;">8.06</td>
+<td style="text-align: left;">▁▅▇▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">z</td>
+<td style="text-align: left;">Ideal</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3.40</td>
+<td style="text-align: right;">0.66</td>
+<td style="text-align: right;">0.00</td>
+<td style="text-align: right;">2.80</td>
+<td style="text-align: right;">3.23</td>
+<td style="text-align: right;">3.98</td>
+<td style="text-align: right;">6.03</td>
+<td style="text-align: left;">▁▁▇▃▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="visdat" class="level1">
+<h1>visdat</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">library</span>(visdat)</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">vis_dat</span>(steak)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EDA---LOADING-DATA_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">vis_dat</span>(avengers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EDA---LOADING-DATA_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">vis_miss</span>(avengers, <span class="at">cluster =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EDA---LOADING-DATA_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">vis_miss</span>(airquality, <span class="at">cluster =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EDA---LOADING-DATA_files/figure-html/unnamed-chunk-6-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">vis_compare</span>(cats_tibble,cats_tribble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="EDA---LOADING-DATA_files/figure-html/unnamed-chunk-6-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

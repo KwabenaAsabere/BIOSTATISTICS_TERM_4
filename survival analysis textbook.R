@@ -1,0 +1,151 @@
+library(tidyverse)
+library(survival)
+library(ggsurvfit)
+library(broom)
+library(finalfit)
+colon <- colon
+
+colon |> 
+  group_by(rx) |> 
+  count()
+
+
+
+  colon.OS <- colon |> 
+    filter(etype==1)
+colon.TR <- colon |> 
+  filter(etype==2)
+
+
+colon.OS <- colon.OS |> 
+  mutate(SurvObj =Surv(time,status) )
+
+km_colon <- colon.OS |> 
+  survfit(SurvObj ~1,conf.type="log-log",data=_)
+km_colon
+
+rx_km_colon <- colon.OS |> 
+  survfit(SurvObj ~rx,conf.type="log-log",data=_)
+rx_km_colon
+
+summary(rx_km_colon,time=c(365,730))
+
+colon.OS |> 
+  survfit2(SurvObj ~rx,conf.type="log-log",data=_) |> 
+  ggsurvfit(linewidth=1)+
+  add_risktable()
+
+colon.OS |> 
+  survfit2(SurvObj ~1,conf.type="log-log",data=_) |> 
+  ggsurvfit( linewidth=1,color = "steelblue")+
+  add_risktable()+
+  add_confidence_interval()
+
+## a logrank test can be performed with the survdiff function
+
+# comparing survival by gender
+survdiff(Surv(time,status)~sex,data= colon.OS)
+
+#comparing survival by treatment
+survdiff(Surv(time,status) ~ rx,data= colon.OS)
+
+##cox PH model to assess the effect of gender on survival of patients
+
+sex_cox <- colon.OS |> 
+  coxph(SurvObj ~ sex,data=_)
+
+sex_cox2 <- coxph(Surv(time,status) ~ sex,data=colon.OS)
+sex_cox
+summary(sex_cox)
+
+  
+rx_cox <- coxph(Surv(time,status) ~ rx,data=colon.OS)
+rx_cox
+summary(rx_cox)
+
+## if we want to change the reference rx to Lev+ 5FU
+colon.OS <- colon.OS |> 
+  mutate(rx=fct_relevel(rx,"Lev+5FU"))
+
+rx_cox2 <- coxph(Surv(time,status) ~ rx,data=colon.OS)
+rx_cox2
+summary(rx_cox2)
+
+
+## if we want to change the reference rx to Lev+ 5FU for the entire colon dataset
+
+rx_cox3 <- colon |> mutate(rx=fct_relevel(rx,"Lev+5FU")) |> 
+  coxph(Surv(time,status)~rx,data=_)  
+summary(rx_cox3)
+
+##fitting an extended cox model
+rx_cox4 <- colon.OS |> mutate(rx=fct_relevel(rx,"Obs")) |> 
+ coxph(Surv(time,status)~rx + obstruct + differ + extent + surg +node4,data=_)  
+summary(rx_cox4)
+
+## a more extended model
+rx_cox5<- colon.OS |> 
+  mutate(rx=fct_relevel(rx,"Obs"),
+         extent=as.factor(extent)) |> 
+ coxph(Surv(time,status)~rx + obstruct + differ + extent + surg +node4,data=_) 
+rx_cox5
+summary(rx_cox5) 
+## testing proportional hazard assumption...plot of scaled schonfield residuals should be a
+## horizontal line i.e gradient = 0..so the included hypothesis tests whether 
+## the gradient differs from zero foor each variable. No variable significantly 
+## differs from zero at the 5% significance level.
+
+cox.zph(rx_cox5)
+
+## Cox PH with Weibull distribution
+
+weib_cox <- survreg(Surv(time,status) ~ rx,dist="weibull", data= colon.OS)
+
+summary(weib_cox)
+
+cox_weib <- colon.OS |> 
+  mutate(rx=fct_relevel(rx,"Obs")) |> 
+  survreg(SurvObj~ rx,dist = "weibull",data = _)
+summary(cox_weib)
+
+colon.OS <- colon.OS |> mutate(rx=fct_relevel(rx,"Obs"))
+
+## the parfm package is used to fit cox weibull models directly
+library(parfm)
+weibull_cox <- parfm(Surv(time,status)~ rx,dist="weibull",frailty="none",data= colon.OS)
+weibull_cox
+
+
+##final fit
+dependent= "Surv(time,status)"
+explanatory=c("rx","obstruct","differ","extent","surg","node4")  
+colon.OS |> 
+  finalfit(dependent,explanatory,add_dependent_label = FALSE) |> 
+  rename("Overall Survival"= label) |> 
+  rename(" "=levels) 
+
+#table <- colon.OS |>  summary_factorlist(dependent,explanatory,p=TRUE,
+ #add_dependent_label = TRUE)
+
+## testing the proportional hazard assumption
+##The plot  of scaled Schonfield residuals should be a straight line
+colon.OS |> 
+  coxphmulti(dependent,explanatory) %>% 
+  cox.zph() %>%
+  {zph_result <<- .} %>%
+  plot(var = 6) ## numb of covariates
+
+zph_result
+
+## stratified models are a way of dealing with violations of the PH assumption
+
+explanatory <- c("rx","obstruct","differ","extent",'node4',"strata(surg)","node4")
+colon.OS |> 
+  finalfit(dependent,explanatory)
+##Hazard ratio plot
+colon.OS |> 
+  hr_plot(dependent,explanatory)
+
+## finalfit of hazard ratio plot
+colon.OS|> ff_plot(dependent,explanatory)
+

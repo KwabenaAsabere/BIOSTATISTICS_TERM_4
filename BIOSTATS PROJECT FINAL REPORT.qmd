@@ -1,0 +1,263 @@
+---
+title: "PREDICTORS OF MORTALITY AMONG HOSPITALIZED HEART FAILURE PATIENTS"
+
+author: Asabere Kwabena Asante
+format: pdf
+editor: visual
+df-print: kable
+execute: 
+  echo: true
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
+---
+
+## **Methods and Results section**
+
+### Statement of Research Objective
+
+The objective of this research is to examine the mortality risk factors among heart failure patients admitted at the Institute of Cardiology and Allied Hospital in Faisalabad, Pakistan.
+
+## Methods
+
+### Study Population
+
+This analysis was conducted using data from the medical records of 299 heart failure patients collected at the Faisalabad Institute of Cardiology and at the Allied Hospital in Faisalabad (Punjab, Pakistan), during April–December 2015 . The patients consisted of 105 women and 194 men, and their ages range between 40 and 95 years old. All 299 patients had left ventricular systolic dysfunction confirmed by echocardiography and had previous heart failures that put them in classes III or IV of New York Heart Association (NYHA) classification of the stages of heart failure . Demographic data,physical examination data and laboratory investigation data were all extracted from the the medical records of the patients.
+
+### Measures
+
+All the measures for this study including demographic data,physical examination data and laboratory investigation data were all extracted from the the medical records of the patients.The primary outcome of interest was time to death constructed as the number of days between patient admission and death.Sex was dichotomized as "Male" or "Female",Age in years was analyzed as a categorical variable split into two categories of "Less than 65" and "65 and above".Smoking,Anameia(haematocrit less than 36%),Diabetes,Hypertension status were dichotomized as "Yes" or "No".Ejection fraction(EF) was divided into three categories of "HFrEF","HFmrEF","HFpEF" based on whether the patient had a reduced ejection fraction( EF less than 30%),moderately reduced ejection fraction(EF between 30% and 45%) and preserved ejection fraction(EF greater than 45%) respectively.Serum creatinine,a measure of renal function was categorized into "Elevated" indicating renal dysfunction and "Normal" using a cutoff of 1.5mg/dl.Platelet count was categorised as "Low" (platelets count less than 150,000/dl),"Normal" (platelets count 150,000/dl to 450,000/dl),"Elevated" (platelets count greater than 450,000/dl).The distribution of the variables are presented in Table 1.
+
+### Statistical Analyses
+
+Analyses was performed using the *R version 4.3.3*. Kaplan Meier(KM) method was used to obtain overall survival and univariate descriptive statistics for survival data including median survival time, and to compare the survival experience for the group of heart failure patients by gender,age category, and ejection fraction category. For multivariable regression analyses,Cox proportional hazards regression models were used to analyze the effects of predictor variables on the time to death.Strength of association was measured in terms of hazard ratios(HRs) and 95% confidence limits.The overall differences between estimated survival curves of patients by sex,age and ejection fraction categories were calculated by the log-rank test.
+
+### Results
+
+A total of 299 patients were included in this study.Out of this 194(65%) were males while 105(35%) were female.184(62%) of the patients were less than 65 years old. 93(31%) o f the patients had heart failure with reduced ejection fraction(HFrEF),146(49%) had failure with moderately reduced ejection fraction(HFmrEF) and 60(20%) had heart failure with preserved ejection fraction(HFpEF). Diabetes,hypertension and smoking statuses showed that 125(42%) were diabetic,105(35%) were hypertensive, and 96(32%) were smokers.72(24%) of the patients had renal dysfunction(elevated serum creatinine).The overall distribution and distribution across ejection fraction categories of the variables are as shown in @tbl-charttable below.
+
+```{r}
+library(tidyverse)
+library(gtsummary)
+library(gt) 
+library(survival)
+library(ggsurvfit)
+library(broom)
+library(finalfit)
+
+heart_failure <- read_csv("heart_failure_clinical_records_dataset.csv")
+
+```
+
+```{r}
+heart_recoded <-  heart_failure %>% 
+  mutate(`Age(years)` = if_else(age <65,"Less than 65","65 and above"),
+  Anaemia=if_else(anaemia == 1,"Yes","No"),
+ Sex = if_else(sex == 1,"Male","Female"),
+`Serum creatinine(mg/dl)` = if_else(serum_creatinine >=1.5,"Elevated","Normal"),
+Diabetes = if_else(diabetes == 1,"Yes","No"),
+Smoking = if_else(smoking ==1, "Yes","No"),
+Hypertension = if_else(high_blood_pressure ==1,"Yes","No"),
+ `Ejection Fraction` = if_else(ejection_fraction <= 30,"HFrEF",
+if_else(ejection_fraction <=45,"HFmrEF","HFpEF")),
+`Serum sodium(mEq/L)`= if_else(serum_sodium < 135,"Low",if_else(serum_sodium >145,"High","Normal")),
+`Platelets(/L)` = if_else(platelets < 150000, "Low",if_else(platelets > 450000,"High","Normal")),
+`Time(days)` = time,
+`Creatinine phosphokinase(mcg/dL)`=creatinine_phosphokinase
+)
+```
+
+```{r}
+
+
+
+heart_recoded <-  heart_recoded %>% 
+mutate(Sodium = if_else(serum_sodium < 135,"Low",if_else(serum_sodium >145,"High","Normal")),
+       Platelets = if_else(platelets < 150000, "Low",if_else(platelets > 450000,"High","Normal"))) %>% 
+  rename("Ejection_fraction" = 'Ejection Fraction',
+         "Age_years" = `Age(years)`)
+
+heart_recoded <-  heart_recoded %>% 
+  rename( "Serum_creatinine" = `Serum creatinine(mg/dl)`,
+          "Time_days" = `Time(days)`)
+```
+
+```{r}
+heart_recoded <-  heart_recoded %>% 
+  mutate(
+    Platelets = fct_relevel(Platelets,"Normal"),
+    Age_years = fct_relevel(Age_years,"Less than 65"),
+    Serum_creatinine = fct_relevel(Serum_creatinine,"Normal"),
+    Ejection_fraction = fct_relevel(Ejection_fraction,"HFpEF"),
+    Sodium = fct_relevel(Sodium, "Normal")
+  )
+```
+
+```{r}
+Heart_new <-  heart_recoded %>% 
+  mutate(Hypertension = if_else(Hypertension =="Yes",1,0),
+         Anaemia =if_else(Anaemia =="Yes",1,0),
+         Smoking = if_else(Smoking =="Yes",1,0),
+         Diabetes = if_else(Diabetes== "Yes",1,0),
+         Sex = sex,
+         survobj = Surv(Time_days,DEATH_EVENT)
+         ) %>% 
+  rename(`Age(years)` = "Age_years",
+         `Serum creatinine` = "Serum_creatinine",
+         `Ejection fraction` = "Ejection_fraction")
+```
+
+```{r}
+#| label: tbl-charttable
+#| tbl-cap: Study Participant Characteristics
+
+heart_table_1 <- Heart_new %>% 
+  select(`Age(years)`,Sex,Anaemia,`Serum creatinine`:Hypertension,Sodium,Platelets,`Ejection fraction`)
+
+table_one <- heart_table_1 %>% 
+  tbl_summary(
+    by = `Ejection fraction`,
+    ) 
+
+
+table_one <- table_one %>% 
+  add_overall() %>% 
+  bold_labels() %>% 
+  italicize_levels() %>% 
+  modify_spanning_header(
+    update = all_stat_cols() ~ "**Classification of Heart Failure  According to Ejection Fraction**"
+  ) %>% 
+  modify_footnote(
+    update = all_stat_cols() ~
+      "mean(sd) for continuous ;n(%) for categorical"
+  ) 
+  
+    
+    table_one
+```
+
+The overall survival of the heart failure patients is shown in the Kaplan Meier curve in @fig-plots.
+
+```{r}
+#| label: fig-plots
+#| fig-cap: Kaplan Meier curve showing overall survival of heart failure patients(n= 299)
+
+
+heart_recoded <- heart_recoded %>% 
+  mutate(survobj = Surv(Time_days,DEATH_EVENT))
+
+
+ heart_recoded %>% 
+  survfit2(survobj ~1,data = .) %>% 
+   ggsurvfit(linewidth = 1)+
+   labs(x = "Duration of Hospital stay in days")+
+   add_risktable()+
+   add_confidence_interval()
+```
+
+### *Regression Analysis*
+
+Univariate and multivariate analyses were performed with cox proportional hazard models. The result of the Univariate Cox Proportional Hazard Model Showing Factors Associated With Mortality Among Hospitalized Heart Failure Patients is shown in @tbl-tables below. There were a total of 96(32%) deaths from heart failure by the end of the follow up period.Univariate Cox Proportional Hazard Model Showing Factors Associated With Mortality Among Hospitalized Heart Failure Patients.In the univariate cox proportional hazard model,being 65 years and older,elevated serum creatinine,hypertension, sodium level and ejection fraction were associated with increased mortality among hospitalized heart failure patients.
+
+```{r}
+Heart_new <-  heart_recoded %>% 
+  mutate(Hypertension = if_else(Hypertension =="Yes",1,0),
+         Anaemia =if_else(Anaemia =="Yes",1,0),
+         Smoking = if_else(Smoking =="Yes",1,0),
+         Diabetes = if_else(Diabetes== "Yes",1,0),
+         Sex = sex,
+         survobj = Surv(Time_days,DEATH_EVENT)
+         ) %>% 
+  rename(`Age(years)` = "Age_years",
+         `Serum creatinine` = "Serum_creatinine",
+         `Ejection fraction` = "Ejection_fraction")
+```
+
+```{r}
+#| label: tbl-tables
+#| tbl-cap: Univariate Cox Proportional Hazard Model Showing Factors Associated With Mortality Among Hospitalized Heart Failure Patients (n=299)
+
+heart_table_2 <- Heart_new %>% 
+  select(`Age(years)`,Sex,Anaemia,`Serum creatinine`:Hypertension,Sodium,Platelets,`Ejection fraction`,Time_days,DEATH_EVENT) %>%  mutate(survobj = Surv(Time_days,DEATH_EVENT))
+
+cph_ureg <- 
+  heart_table_2 %>% 
+  tbl_uvregression(
+    method = coxph,
+    y= survobj,
+    exponentiate = TRUE
+  )%>% 
+  add_global_p() %>% 
+  bold_labels() %>% 
+  bold_p()
+  cph_ureg
+```
+
+After adjusting for all variables in the multivariable cox proportional hazard model, patients being aged 65 years and older\[adjusted hazard ratio HR = 2.18(95% CI 1.42, 3.36,pvalue \< 0.001)\], renal dysfunction(elevated serum creatinine)\[HR = 2.49(95% CI 1.58,3.93, pvalue \< 0.001)\], reduced ejection fraction\[HR = 2.04(95% CI 1.06,3.90, pvalue \< 0.001)\] were the significant attributes that increased mortality among hospitalized heart failure patients.Highest hazard of death was observed among patients with renal dysfunction\[HR = 2.49(95% CI 1.58,3.93, pvalue \< 0.001)\]. Full results are shown in @tbl-tabless below.The proportional hazards assumptions were visibly checked with plots of Schonfield residuals.The plot for each covariate was approximately horizontal indicating that the proportional hazard assumption was valid.
+
+```{r}
+#| label: tbl-tabless
+#| tbl-cap: Multivariate Cox Proportional Hazard Model Showing Factors Associated With Mortality Among Hospitalized Heart Failure Patients (n=299)
+
+cph_new <- Heart_new%>% 
+   coxph(survobj ~ `Age(years)`+Sex+  Platelets+Anaemia+Sodium+Diabetes+
+           Smoking+ `Serum creatinine` +
+           `Ejection fraction` + Hypertension, data = .)
+
+
+cph_tbl_new <-  tbl_regression(
+    cph_new,
+    exponentiate = TRUE
+  ) %>% 
+  add_global_p() %>% 
+  bold_labels() %>% 
+  bold_p() 
+
+cph_tbl_new
+
+
+
+  
+```
+
+Kaplan Meier(KM) curves constructed to examine the overall survival probabilities among sexes,ejection fraction categories,age categories and serum creatinine(renal dysfunction) categories.Log rank tests were performed to examine differences in overall survival.There was no difference in overall survival among the sexes(pvalue = 0.9). Patients with reduced ejection fraction(pvalue = 2e-07),patients aged 65 years and above(pvalue = 0.003) and patients with elevated serum creatinine(pvalue = 4e-10) had a significant decrease in survival.
+
+```{r}
+library(patchwork)
+ km_1 <- heart_recoded %>% 
+  survfit2(survobj ~Sex,data = .) %>% 
+   ggsurvfit(linewidth = 1)+
+  labs(x ="Duration of Hospital stay in days" )
+
+km_2 <- heart_recoded %>% 
+  survfit2(survobj ~ Ejection_fraction,data = .) %>% 
+   ggsurvfit(linewidth = 1)+
+  labs(x ="Duration of Hospital stay in days" )
+
+km_3 <- heart_recoded %>% 
+  survfit2(survobj ~ Age_years,data = .) %>% 
+   ggsurvfit(linewidth = 1)+
+  labs(x ="Duration of Hospital stay in days" )
+  
+
+
+km_4 <- heart_recoded %>% 
+  survfit2(survobj ~ Serum_creatinine,data = .) %>% 
+   ggsurvfit(linewidth = 1)+
+  labs(x ="Duration of Hospital stay in days")
+  
+(km_1 +km_2)/(km_3 + km_4)
+
+
+
+
+```
+
+### References
+
+1)*Ahmad, T., Munir, A., Bhatti, S. H., Aftab, M., & Raza, M. A. (Year). Survival analysis of heart failure patients: A case study. Department of Statistics, Government College University, Faisalabad, Pakistan.*
+
+2)*Vittinghoff, E., Glidden, D. V., Shiboski, S. C., & McCulloch, C. E. (2012). Regression Methods in Biostatistics: Linear, Logistic, Survival, and Repeated Measures Models (2nd ed.). Springer.*
+
+3)*In, J., & Lee, D. K. (Year). Survival analysis: Part I — analysis of time-to-event. Department of Anesthesiology and Pain Medicine, Dongguk University Ilsan Hospital, Goyang, Guro Hospital, Korea University School of Medicine, Seoul, Korea.*

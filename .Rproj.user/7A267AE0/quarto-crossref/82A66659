@@ -1,0 +1,1 @@
+{"entries":[{"caption":"<p>First 10 penguins from the dataset</p> ","key":"tbl-penguins","order":{"number":1,"section":[0,3,0,0,0,0,0]}},{"caption":"Bar plot of species of penguins.","key":"fig-barplot-species","order":{"number":1,"section":[0,2,0,0,0,0,0]}}],"headings":["data","species","penguins"]}

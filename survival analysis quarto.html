@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Survival Analysis textbook Quarto</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="survival analysis quarto_files/libs/clipboard/clipboard.min.js"></script>
+<script src="survival analysis quarto_files/libs/quarto-html/quarto.js"></script>
+<script src="survival analysis quarto_files/libs/quarto-html/popper.min.js"></script>
+<script src="survival analysis quarto_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="survival analysis quarto_files/libs/quarto-html/anchor.min.js"></script>
+<link href="survival analysis quarto_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="survival analysis quarto_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="survival analysis quarto_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="survival analysis quarto_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="survival analysis quarto_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Survival Analysis textbook Quarto</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.0     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggsurvfit)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(finalfit)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>colon <span class="ot">&lt;-</span> colon</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>colon <span class="sc">|&gt;</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rx) <span class="sc">|&gt;</span> </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">rx</th>
+<th style="text-align: right;">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Obs</td>
+<td style="text-align: right;">630</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lev</td>
+<td style="text-align: right;">620</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lev+5FU</td>
+<td style="text-align: right;">608</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  colon.OS <span class="ot">&lt;-</span> colon <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(etype<span class="sc">==</span><span class="dv">1</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>colon.TR <span class="ot">&lt;-</span> colon <span class="sc">|&gt;</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(etype<span class="sc">==</span><span class="dv">2</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>colon.OS <span class="ot">&lt;-</span> colon.OS <span class="sc">|&gt;</span> </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">SurvObj =</span><span class="fu">Surv</span>(time,status) )</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>km_colon <span class="ot">&lt;-</span> colon.OS <span class="sc">|&gt;</span> </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">survfit</span>(SurvObj <span class="sc">~</span><span class="dv">1</span>,<span class="at">conf.type=</span><span class="st">"log-log"</span>,<span class="at">data=</span>_)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>km_colon</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = SurvObj ~ 1, data = colon.OS, conf.type = "log-log")
+
+       n events median 0.95LCL 0.95UCL
+[1,] 929    468   2018    1446      NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>rx_km_colon <span class="ot">&lt;-</span> colon.OS <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">survfit</span>(SurvObj <span class="sc">~</span>rx,<span class="at">conf.type=</span><span class="st">"log-log"</span>,<span class="at">data=</span>_)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>rx_km_colon</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = SurvObj ~ rx, data = colon.OS, conf.type = "log-log")
+
+             n events median 0.95LCL 0.95UCL
+rx=Obs     315    177   1236     772    2035
+rx=Lev     310    172   1183     742    2018
+rx=Lev+5FU 304    119     NA      NA      NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rx_km_colon,<span class="at">time=</span><span class="fu">c</span>(<span class="dv">365</span>,<span class="dv">730</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = SurvObj ~ rx, data = colon.OS, conf.type = "log-log")
+
+                rx=Obs 
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+  365    227      88    0.721  0.0253        0.668        0.767
+  730    178      45    0.576  0.0279        0.519        0.629
+
+                rx=Lev 
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+  365    221      86     0.72  0.0256        0.667        0.767
+  730    170      49     0.56  0.0284        0.502        0.613
+
+                rx=Lev+5FU 
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+  365    252      48    0.841  0.0210        0.795        0.878
+  730    209      42    0.700  0.0265        0.645        0.749</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>colon.OS <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">survfit2</span>(SurvObj <span class="sc">~</span>rx,<span class="at">conf.type=</span><span class="st">"log-log"</span>,<span class="at">data=</span>_) <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsurvfit</span>(<span class="at">linewidth=</span><span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_risktable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in ggplot2::geom_blank(): All aesthetics have length 1, but the data has 875 rows.
+ℹ Did you mean to use `annotate()`?
+All aesthetics have length 1, but the data has 875 rows.
+ℹ Did you mean to use `annotate()`?
+All aesthetics have length 1, but the data has 875 rows.
+ℹ Did you mean to use `annotate()`?</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="survival-analysis-quarto_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>colon.OS <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">survfit2</span>(SurvObj <span class="sc">~</span><span class="dv">1</span>,<span class="at">conf.type=</span><span class="st">"log-log"</span>,<span class="at">data=</span>_) <span class="sc">|&gt;</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsurvfit</span>( <span class="at">linewidth=</span><span class="dv">1</span>,<span class="at">color =</span> <span class="st">"steelblue"</span>)<span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_risktable</span>()<span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add_confidence_interval</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in ggplot2::geom_blank(): All aesthetics have length 1, but the data has 750 rows.
+ℹ Did you mean to use `annotate()`?</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in ggplot2::geom_blank(): All aesthetics have length 1, but the data has 750 rows.
+ℹ Did you mean to use `annotate()`?
+All aesthetics have length 1, but the data has 750 rows.
+ℹ Did you mean to use `annotate()`?
+All aesthetics have length 1, but the data has 750 rows.
+ℹ Did you mean to use `annotate()`?
+All aesthetics have length 1, but the data has 750 rows.
+ℹ Did you mean to use `annotate()`?</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="survival-analysis-quarto_files/figure-html/unnamed-chunk-1-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## a logrank test can be performed with the survdiff function</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># comparing survival by gender</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(time,status)<span class="sc">~</span>sex,<span class="at">data=</span> colon.OS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+survdiff(formula = Surv(time, status) ~ sex, data = colon.OS)
+
+        N Observed Expected (O-E)^2/E (O-E)^2/V
+sex=0 445      229      219     0.433     0.815
+sex=1 484      239      249     0.382     0.815
+
+ Chisq= 0.8  on 1 degrees of freedom, p= 0.4 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#comparing survival by treatment</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(time,status) <span class="sc">~</span> rx,<span class="at">data=</span> colon.OS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+survdiff(formula = Surv(time, status) ~ rx, data = colon.OS)
+
+             N Observed Expected (O-E)^2/E (O-E)^2/V
+rx=Obs     315      177      151      4.62      6.82
+rx=Lev     310      172      149      3.69      5.41
+rx=Lev+5FU 304      119      169     14.69     23.04
+
+ Chisq= 23.1  on 2 degrees of freedom, p= 1e-05 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="do">##cox PH model to assess the effect of gender on survival of patients</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>sex_cox <span class="ot">&lt;-</span> colon.OS <span class="sc">|&gt;</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coxph</span>(SurvObj <span class="sc">~</span> sex,<span class="at">data=</span>_)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>sex_cox2 <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time,status) <span class="sc">~</span> sex,<span class="at">data=</span>colon.OS)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>sex_cox</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = SurvObj ~ sex, data = colon.OS)
+
+        coef exp(coef) se(coef)      z     p
+sex -0.08361   0.91979  0.09248 -0.904 0.366
+
+Likelihood ratio test=0.82  on 1 df, p=0.3662
+n= 929, number of events= 468 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sex_cox)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = SurvObj ~ sex, data = colon.OS)
+
+  n= 929, number of events= 468 
+
+        coef exp(coef) se(coef)      z Pr(&gt;|z|)
+sex -0.08361   0.91979  0.09248 -0.904    0.366
+
+    exp(coef) exp(-coef) lower .95 upper .95
+sex    0.9198      1.087    0.7673     1.103
+
+Concordance= 0.515  (se = 0.012 )
+Likelihood ratio test= 0.82  on 1 df,   p=0.4
+Wald test            = 0.82  on 1 df,   p=0.4
+Score (logrank) test = 0.82  on 1 df,   p=0.4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>rx_cox <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time,status) <span class="sc">~</span> rx,<span class="at">data=</span>colon.OS)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>rx_cox</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, status) ~ rx, data = colon.OS)
+
+              coef exp(coef) se(coef)      z        p
+rxLev     -0.01512   0.98499  0.10708 -0.141    0.888
+rxLev+5FU -0.51209   0.59924  0.11863 -4.317 1.58e-05
+
+Likelihood ratio test=24.34  on 2 df, p=5.175e-06
+n= 929, number of events= 468 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rx_cox)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, status) ~ rx, data = colon.OS)
+
+  n= 929, number of events= 468 
+
+              coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+rxLev     -0.01512   0.98499  0.10708 -0.141    0.888    
+rxLev+5FU -0.51209   0.59924  0.11863 -4.317 1.58e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+          exp(coef) exp(-coef) lower .95 upper .95
+rxLev        0.9850      1.015    0.7985    1.2150
+rxLev+5FU    0.5992      1.669    0.4749    0.7561
+
+Concordance= 0.554  (se = 0.013 )
+Likelihood ratio test= 24.34  on 2 df,   p=5e-06
+Wald test            = 22.58  on 2 df,   p=1e-05
+Score (logrank) test = 23.07  on 2 df,   p=1e-05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="do">## if we want to change the reference rx to Lev+ 5FU</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>colon.OS <span class="ot">&lt;-</span> colon.OS <span class="sc">|&gt;</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rx=</span><span class="fu">fct_relevel</span>(rx,<span class="st">"Lev+5FU"</span>))</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>rx_cox2 <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time,status) <span class="sc">~</span> rx,<span class="at">data=</span>colon.OS)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>rx_cox2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, status) ~ rx, data = colon.OS)
+
+        coef exp(coef) se(coef)     z        p
+rxObs 0.5121    1.6688   0.1186 4.317 1.58e-05
+rxLev 0.4970    1.6437   0.1193 4.166 3.11e-05
+
+Likelihood ratio test=24.34  on 2 df, p=5.175e-06
+n= 929, number of events= 468 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rx_cox2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, status) ~ rx, data = colon.OS)
+
+  n= 929, number of events= 468 
+
+        coef exp(coef) se(coef)     z Pr(&gt;|z|)    
+rxObs 0.5121    1.6688   0.1186 4.317 1.58e-05 ***
+rxLev 0.4970    1.6437   0.1193 4.166 3.11e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+      exp(coef) exp(-coef) lower .95 upper .95
+rxObs     1.669     0.5992     1.323     2.106
+rxLev     1.644     0.6084     1.301     2.077
+
+Concordance= 0.554  (se = 0.013 )
+Likelihood ratio test= 24.34  on 2 df,   p=5e-06
+Wald test            = 22.58  on 2 df,   p=1e-05
+Score (logrank) test = 23.07  on 2 df,   p=1e-05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="do">## if we want to change the reference rx to Lev+ 5FU for the entire colon dataset</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>rx_cox3 <span class="ot">&lt;-</span> colon <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">rx=</span><span class="fu">fct_relevel</span>(rx,<span class="st">"Lev+5FU"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coxph</span>(<span class="fu">Surv</span>(time,status)<span class="sc">~</span>rx,<span class="at">data=</span>_)  </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rx_cox3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, status) ~ rx, data = mutate(colon, 
+    rx = fct_relevel(rx, "Lev+5FU")))
+
+  n= 1858, number of events= 920 
+
+         coef exp(coef) se(coef)     z Pr(&gt;|z|)    
+rxObs 0.44101   1.55427  0.08391 5.256 1.47e-07 ***
+rxLev 0.42011   1.52213  0.08451 4.971 6.67e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+      exp(coef) exp(-coef) lower .95 upper .95
+rxObs     1.554     0.6434     1.319     1.832
+rxLev     1.522     0.6570     1.290     1.796
+
+Concordance= 0.545  (se = 0.009 )
+Likelihood ratio test= 35.23  on 2 df,   p=2e-08
+Wald test            = 33.11  on 2 df,   p=6e-08
+Score (logrank) test = 33.63  on 2 df,   p=5e-08</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="do">##fitting an extended cox model</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>rx_cox4 <span class="ot">&lt;-</span> colon.OS <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">rx=</span><span class="fu">fct_relevel</span>(rx,<span class="st">"Obs"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time,status)<span class="sc">~</span>rx <span class="sc">+</span> obstruct <span class="sc">+</span> differ <span class="sc">+</span> extent <span class="sc">+</span> surg <span class="sc">+</span>node4,<span class="at">data=</span>_)  </span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rx_cox4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, status) ~ rx + obstruct + differ + 
+    extent + surg + node4, data = mutate(colon.OS, rx = fct_relevel(rx, 
+    "Obs")))
+
+  n= 906, number of events= 458 
+   (23 observations deleted due to missingness)
+
+               coef exp(coef)  se(coef)      z Pr(&gt;|z|)    
+rxLev+5FU -0.485652  0.615296  0.119707 -4.057 4.97e-05 ***
+rxLev      0.008829  1.008869  0.109119  0.081 0.935509    
+obstruct   0.231023  1.259888  0.115837  1.994 0.046112 *  
+differ     0.217782  1.243316  0.095457  2.281 0.022521 *  
+extent     0.449996  1.568305  0.116132  3.875 0.000107 ***
+surg       0.243566  1.275791  0.102160  2.384 0.017118 *  
+node4      0.834321  2.303249  0.097377  8.568  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+          exp(coef) exp(-coef) lower .95 upper .95
+rxLev+5FU    0.6153     1.6252    0.4866     0.778
+rxLev        1.0089     0.9912    0.8146     1.249
+obstruct     1.2599     0.7937    1.0040     1.581
+differ       1.2433     0.8043    1.0312     1.499
+extent       1.5683     0.6376    1.2490     1.969
+surg         1.2758     0.7838    1.0443     1.559
+node4        2.3032     0.4342    1.9031     2.788
+
+Concordance= 0.659  (se = 0.013 )
+Likelihood ratio test= 131.2  on 7 df,   p=&lt;2e-16
+Wald test            = 132.2  on 7 df,   p=&lt;2e-16
+Score (logrank) test = 138.1  on 7 df,   p=&lt;2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="do">## a more extended model</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>rx_cox5<span class="ot">&lt;-</span> colon.OS <span class="sc">|&gt;</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rx=</span><span class="fu">fct_relevel</span>(rx,<span class="st">"Obs"</span>),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">extent=</span><span class="fu">as.factor</span>(extent)) <span class="sc">|&gt;</span> </span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time,status)<span class="sc">~</span>rx <span class="sc">+</span> obstruct <span class="sc">+</span> differ <span class="sc">+</span> extent <span class="sc">+</span> surg <span class="sc">+</span>node4,<span class="at">data=</span>_) </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>rx_cox5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, status) ~ rx + obstruct + differ + 
+    extent + surg + node4, data = mutate(colon.OS, rx = fct_relevel(rx, 
+    "Obs"), extent = as.factor(extent)))
+
+              coef exp(coef) se(coef)      z        p
+rxLev+5FU -0.48707   0.61443  0.11973 -4.068 4.74e-05
+rxLev      0.01065   1.01070  0.10932  0.097   0.9224
+obstruct   0.23022   1.25888  0.11598  1.985   0.0471
+differ     0.21689   1.24221  0.09547  2.272   0.0231
+extent2    0.02770   1.02809  0.48040  0.058   0.9540
+extent3    0.56832   1.76530  0.45295  1.255   0.2096
+extent4    1.00611   2.73495  0.49289  2.041   0.0412
+surg       0.24578   1.27862  0.10222  2.405   0.0162
+node4      0.83629   2.30778  0.09763  8.566  &lt; 2e-16
+
+Likelihood ratio test=132  on 9 df, p=&lt; 2.2e-16
+n= 906, number of events= 458 
+   (23 observations deleted due to missingness)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rx_cox5) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, status) ~ rx + obstruct + differ + 
+    extent + surg + node4, data = mutate(colon.OS, rx = fct_relevel(rx, 
+    "Obs"), extent = as.factor(extent)))
+
+  n= 906, number of events= 458 
+   (23 observations deleted due to missingness)
+
+              coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+rxLev+5FU -0.48707   0.61443  0.11973 -4.068 4.74e-05 ***
+rxLev      0.01065   1.01070  0.10932  0.097   0.9224    
+obstruct   0.23022   1.25888  0.11598  1.985   0.0471 *  
+differ     0.21689   1.24221  0.09547  2.272   0.0231 *  
+extent2    0.02770   1.02809  0.48040  0.058   0.9540    
+extent3    0.56832   1.76530  0.45295  1.255   0.2096    
+extent4    1.00611   2.73495  0.49289  2.041   0.0412 *  
+surg       0.24578   1.27862  0.10222  2.405   0.0162 *  
+node4      0.83629   2.30778  0.09763  8.566  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+          exp(coef) exp(-coef) lower .95 upper .95
+rxLev+5FU    0.6144     1.6275    0.4859    0.7769
+rxLev        1.0107     0.9894    0.8158    1.2522
+obstruct     1.2589     0.7944    1.0029    1.5802
+differ       1.2422     0.8050    1.0302    1.4978
+extent2      1.0281     0.9727    0.4010    2.6360
+extent3      1.7653     0.5665    0.7266    4.2891
+extent4      2.7350     0.3656    1.0409    7.1862
+surg         1.2786     0.7821    1.0465    1.5622
+node4        2.3078     0.4333    1.9058    2.7945
+
+Concordance= 0.661  (se = 0.013 )
+Likelihood ratio test= 132  on 9 df,   p=&lt;2e-16
+Wald test            = 133.6  on 9 df,   p=&lt;2e-16
+Score (logrank) test = 141.2  on 9 df,   p=&lt;2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="do">## testing proportional hazard assumption...plot of scaled schonfield residuals should be a</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="do">## horizontal line i.e gradient = 0..so the included hypothesis tests whether </span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="do">## the gradient differs from zero foor each variable. No variable significantly </span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="do">## differs from zero at the 5% significance level.</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(rx_cox5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           chisq df       p
+rx        0.0897  2 0.95614
+obstruct  5.3381  1 0.02086
+differ   12.7342  1 0.00036
+extent    1.7102  3 0.63468
+surg      1.2529  1 0.26300
+node4    11.0287  1 0.00090
+GLOBAL   32.3229  9 0.00018</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Cox PH with Weibull distribution</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>weib_cox <span class="ot">&lt;-</span> <span class="fu">survreg</span>(<span class="fu">Surv</span>(time,status) <span class="sc">~</span> rx,<span class="at">dist=</span><span class="st">"weibull"</span>, <span class="at">data=</span> colon.OS)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(weib_cox)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+survreg(formula = Surv(time, status) ~ rx, data = colon.OS, dist = "weibull")
+              Value Std. Error     z       p
+(Intercept)  8.6825     0.1424 60.96 &lt; 2e-16
+rxObs       -0.8005     0.1752 -4.57 4.9e-06
+rxLev       -0.7583     0.1762 -4.30 1.7e-05
+Log(scale)   0.3805     0.0411  9.25 &lt; 2e-16
+
+Scale= 1.46 
+
+Weibull distribution
+Loglik(model)= -4114.6   Loglik(intercept only)= -4128.2
+    Chisq= 27.28 on 2 degrees of freedom, p= 1.2e-06 
+Number of Newton-Raphson Iterations: 5 
+n= 929 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>cox_weib <span class="ot">&lt;-</span> colon.OS <span class="sc">|&gt;</span> </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rx=</span><span class="fu">fct_relevel</span>(rx,<span class="st">"Obs"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">survreg</span>(SurvObj<span class="sc">~</span> rx,<span class="at">dist =</span> <span class="st">"weibull"</span>,<span class="at">data =</span> _)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cox_weib)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+survreg(formula = SurvObj ~ rx, data = mutate(colon.OS, rx = fct_relevel(rx, 
+    "Obs")), dist = "weibull")
+             Value Std. Error     z       p
+(Intercept) 7.8820     0.1123 70.17 &lt; 2e-16
+rxLev+5FU   0.8005     0.1752  4.57 4.9e-06
+rxLev       0.0423     0.1566  0.27    0.79
+Log(scale)  0.3805     0.0411  9.25 &lt; 2e-16
+
+Scale= 1.46 
+
+Weibull distribution
+Loglik(model)= -4114.6   Loglik(intercept only)= -4128.2
+    Chisq= 27.28 on 2 degrees of freedom, p= 1.2e-06 
+Number of Newton-Raphson Iterations: 5 
+n= 929 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>colon.OS <span class="ot">&lt;-</span> colon.OS <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">rx=</span><span class="fu">fct_relevel</span>(rx,<span class="st">"Obs"</span>))</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="do">## the parfm package is used to fit cox weibull models directly</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parfm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: optimx</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>weibull_cox <span class="ot">&lt;-</span> <span class="fu">parfm</span>(<span class="fu">Surv</span>(time,status)<span class="sc">~</span> rx,<span class="at">dist=</span><span class="st">"weibull"</span>,<span class="at">frailty=</span><span class="st">"none"</span>,<span class="at">data=</span> colon.OS)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>weibull_cox</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Frailty distribution: none 
+Baseline hazard distribution: Weibull 
+Loglikelihood: -4114.57 
+
+          ESTIMATE SE    p-val    
+rho        0.684   0.017          
+lambda     0.005   0.001          
+rxLev+5FU -0.547   0.117 &lt;.001 ***
+rxLev     -0.029   0.105 0.783    
+---
+Signif. codes: 0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="do">##final fit</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>dependent<span class="ot">=</span> <span class="st">"Surv(time,status)"</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>explanatory<span class="ot">=</span><span class="fu">c</span>(<span class="st">"rx"</span>,<span class="st">"obstruct"</span>,<span class="st">"differ"</span>,<span class="st">"extent"</span>,<span class="st">"surg"</span>,<span class="st">"node4"</span>)  </span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>colon.OS <span class="sc">|&gt;</span> </span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">finalfit</span>(dependent,explanatory,<span class="at">add_dependent_label =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"Overall Survival"</span><span class="ot">=</span> label) <span class="sc">|&gt;</span> </span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">" "</span><span class="ot">=</span>levels) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 18%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 29%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Overall Survival</th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;">all</th>
+<th style="text-align: left;">HR (univariable)</th>
+<th style="text-align: left;">HR (multivariable)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">rx</td>
+<td style="text-align: left;">Obs</td>
+<td style="text-align: left;">315 (33.9)</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">13</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lev+5FU</td>
+<td style="text-align: left;">304 (32.7)</td>
+<td style="text-align: left;">0.60 (0.47-0.76, p&lt;0.001)</td>
+<td style="text-align: left;">0.61 (0.48-0.77, p&lt;0.001)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">12</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lev</td>
+<td style="text-align: left;">310 (33.4)</td>
+<td style="text-align: left;">0.98 (0.80-1.21, p=0.888)</td>
+<td style="text-align: left;">1.00 (0.80-1.24, p=0.983)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">obstruct</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">749 (80.6)</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">11</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">180 (19.4)</td>
+<td style="text-align: left;">1.27 (1.02-1.58, p=0.036)</td>
+<td style="text-align: left;">1.26 (1.00-1.58, p=0.050)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">differ</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">93 (10.3)</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">663 (73.2)</td>
+<td style="text-align: left;">1.06 (0.77-1.45, p=0.724)</td>
+<td style="text-align: left;">0.97 (0.71-1.34, p=0.868)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">150 (16.6)</td>
+<td style="text-align: left;">1.64 (1.15-2.36, p=0.007)</td>
+<td style="text-align: left;">1.39 (0.96-2.01, p=0.079)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">extent</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">21 (2.3)</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">106 (11.4)</td>
+<td style="text-align: left;">1.39 (0.54-3.55, p=0.494)</td>
+<td style="text-align: left;">1.04 (0.41-2.67, p=0.936)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">759 (81.7)</td>
+<td style="text-align: left;">2.72 (1.13-6.57, p=0.026)</td>
+<td style="text-align: left;">1.79 (0.74-4.34, p=0.200)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">43 (4.6)</td>
+<td style="text-align: left;">4.79 (1.85-12.39, p=0.001)</td>
+<td style="text-align: left;">2.80 (1.06-7.36, p=0.037)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">surg</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">682 (73.4)</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">247 (26.6)</td>
+<td style="text-align: left;">1.29 (1.06-1.57, p=0.011)</td>
+<td style="text-align: left;">1.27 (1.04-1.56, p=0.018)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">node4</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">674 (72.6)</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">255 (27.4)</td>
+<td style="text-align: left;">2.43 (2.01-2.92, p&lt;0.001)</td>
+<td style="text-align: left;">2.31 (1.91-2.80, p&lt;0.001)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#table &lt;- colon.OS |&gt;  summary_factorlist(dependent,explanatory,p=TRUE,</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a> <span class="co">#add_dependent_label = TRUE)</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="do">## testing the proportional hazard assumption</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="do">##The plot  of scaled Schonfield residuals should be a straight line</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>colon.OS <span class="sc">|&gt;</span> </span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coxphmulti</span>(dependent,explanatory) <span class="sc">%&gt;%</span> </span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cox.zph</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  {zph_result <span class="ot">&lt;&lt;-</span> .} <span class="sc">%&gt;%</span></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">var =</span> <span class="dv">6</span>) <span class="do">## numb of covariates</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="survival-analysis-quarto_files/figure-html/unnamed-chunk-1-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>zph_result</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           chisq df       p
+rx        0.0911  2 0.95545
+obstruct  5.3191  1 0.02109
+differ   12.7865  1 0.00035
+extent    0.1097  1 0.74048
+surg      1.2036  1 0.27260
+node4    11.0690  1 0.00088
+GLOBAL   30.3203  7 8.3e-05</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="do">## stratified models are a way of dealing with violations of the PH assumption</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>explanatory <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"rx"</span>,<span class="st">"obstruct"</span>,<span class="st">"differ"</span>,<span class="st">"extent"</span>,<span class="st">'node4'</span>,<span class="st">"strata(surg)"</span>,<span class="st">"node4"</span>)</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>colon.OS <span class="sc">|&gt;</span> </span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">finalfit</span>(dependent,explanatory)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 2%">
+<col style="width: 27%">
+<col style="width: 7%">
+<col style="width: 10%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: left;">Dependent: Surv(time,status)</th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;">all</th>
+<th style="text-align: left;">HR (univariable)</th>
+<th style="text-align: left;">HR (multivariable)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">rx</td>
+<td style="text-align: left;">Obs</td>
+<td style="text-align: left;">315 (33.9)</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">14</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lev+5FU</td>
+<td style="text-align: left;">304 (32.7)</td>
+<td style="text-align: left;">0.60 (0.47-0.76, p&lt;0.001)</td>
+<td style="text-align: left;">0.61 (0.48-0.77, p&lt;0.001)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">13</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Lev</td>
+<td style="text-align: left;">310 (33.4)</td>
+<td style="text-align: left;">0.98 (0.80-1.21, p=0.888)</td>
+<td style="text-align: left;">1.00 (0.80-1.24, p=0.984)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">obstruct</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">749 (80.6)</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">12</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">180 (19.4)</td>
+<td style="text-align: left;">1.27 (1.02-1.58, p=0.036)</td>
+<td style="text-align: left;">1.26 (1.00-1.58, p=0.048)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">differ</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">93 (10.3)</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">663 (73.2)</td>
+<td style="text-align: left;">1.06 (0.77-1.45, p=0.724)</td>
+<td style="text-align: left;">0.98 (0.71-1.34, p=0.881)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">150 (16.6)</td>
+<td style="text-align: left;">1.64 (1.15-2.36, p=0.007)</td>
+<td style="text-align: left;">1.39 (0.96-2.00, p=0.080)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">extent</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">21 (2.3)</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">106 (11.4)</td>
+<td style="text-align: left;">1.39 (0.54-3.55, p=0.494)</td>
+<td style="text-align: left;">1.02 (0.40-2.63, p=0.961)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">759 (81.7)</td>
+<td style="text-align: left;">2.72 (1.13-6.57, p=0.026)</td>
+<td style="text-align: left;">1.76 (0.73-4.29, p=0.210)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">43 (4.6)</td>
+<td style="text-align: left;">4.79 (1.85-12.39, p=0.001)</td>
+<td style="text-align: left;">2.75 (1.04-7.22, p=0.041)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">node4</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">674 (72.6)</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">9</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">255 (27.4)</td>
+<td style="text-align: left;">2.43 (2.01-2.92, p&lt;0.001)</td>
+<td style="text-align: left;">2.31 (1.91-2.80, p&lt;0.001)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">10</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">255 (27.4)</td>
+<td style="text-align: left;">2.43 (2.01-2.92, p&lt;0.001)</td>
+<td style="text-align: left;">2.31 (1.91-2.80, p&lt;0.001)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">strata(surg)</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="do">##Hazard ratio plot</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>colon.OS <span class="sc">|&gt;</span> </span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hr_plot</span>(dependent,explanatory)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Dependent variable is a survival object</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 13 rows containing missing values or values outside the scale range
+(`geom_errorbarh()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="survival-analysis-quarto_files/figure-html/unnamed-chunk-1-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="do">## finalfit of hazard ratio plot</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>colon.OS<span class="sc">|&gt;</span> <span class="fu">ff_plot</span>(dependent,explanatory)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Dependent variable is a survival object</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 13 rows containing missing values or values outside the scale range
+(`geom_errorbarh()`).
+Removed 1 row containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="survival-analysis-quarto_files/figure-html/unnamed-chunk-1-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>cfit <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time,status)<span class="sc">~</span>rx <span class="sc">+</span> obstruct <span class="sc">+</span> differ <span class="sc">+</span> extent <span class="sc">+</span> </span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>                surg <span class="sc">+</span>node4,<span class="at">data=</span>colon.OS)</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>sfit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(cfit)</span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>sfit_tidy <span class="ot">&lt;-</span> <span class="fu">tidy</span>(sfit)</span>
+<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(sfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 19%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 11%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">records</th>
+<th style="text-align: right;">n.max</th>
+<th style="text-align: right;">n.start</th>
+<th style="text-align: right;">events</th>
+<th style="text-align: right;">rmean</th>
+<th style="text-align: right;">rmean.std.error</th>
+<th style="text-align: right;">median</th>
+<th style="text-align: right;">conf.low</th>
+<th style="text-align: right;">conf.high</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">906</td>
+<td style="text-align: right;">906</td>
+<td style="text-align: right;">906</td>
+<td style="text-align: right;">458</td>
+<td style="text-align: right;">2110.77</td>
+<td style="text-align: right;">54.03906</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">2074</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">906</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">tidy</span>(sfit), <span class="fu">aes</span>(time, estimate)) <span class="sc">+</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>( <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">alpha =</span> .<span class="dv">25</span>)<span class="sc">+</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="survival-analysis-quarto_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(cfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">rxLev+5FU</td>
+<td style="text-align: right;">-0.4856519</td>
+<td style="text-align: right;">0.1197070</td>
+<td style="text-align: right;">-4.0570061</td>
+<td style="text-align: right;">0.0000497</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rxLev</td>
+<td style="text-align: right;">0.0088295</td>
+<td style="text-align: right;">0.1091186</td>
+<td style="text-align: right;">0.0809162</td>
+<td style="text-align: right;">0.9355086</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">obstruct</td>
+<td style="text-align: right;">0.2310229</td>
+<td style="text-align: right;">0.1158375</td>
+<td style="text-align: right;">1.9943710</td>
+<td style="text-align: right;">0.0461115</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">differ</td>
+<td style="text-align: right;">0.2177821</td>
+<td style="text-align: right;">0.0954569</td>
+<td style="text-align: right;">2.2814709</td>
+<td style="text-align: right;">0.0225206</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">extent</td>
+<td style="text-align: right;">0.4499956</td>
+<td style="text-align: right;">0.1161318</td>
+<td style="text-align: right;">3.8748690</td>
+<td style="text-align: right;">0.0001067</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">surg</td>
+<td style="text-align: right;">0.2435663</td>
+<td style="text-align: right;">0.1021600</td>
+<td style="text-align: right;">2.3841645</td>
+<td style="text-align: right;">0.0171179</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">node4</td>
+<td style="text-align: right;">0.8343206</td>
+<td style="text-align: right;">0.0973773</td>
+<td style="text-align: right;">8.5679182</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(cfit, <span class="at">exponentiate =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">rxLev+5FU</td>
+<td style="text-align: right;">0.6152959</td>
+<td style="text-align: right;">0.1197070</td>
+<td style="text-align: right;">-4.0570061</td>
+<td style="text-align: right;">0.0000497</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rxLev</td>
+<td style="text-align: right;">1.0088686</td>
+<td style="text-align: right;">0.1091186</td>
+<td style="text-align: right;">0.0809162</td>
+<td style="text-align: right;">0.9355086</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">obstruct</td>
+<td style="text-align: right;">1.2598882</td>
+<td style="text-align: right;">0.1158375</td>
+<td style="text-align: right;">1.9943710</td>
+<td style="text-align: right;">0.0461115</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">differ</td>
+<td style="text-align: right;">1.2433162</td>
+<td style="text-align: right;">0.0954569</td>
+<td style="text-align: right;">2.2814709</td>
+<td style="text-align: right;">0.0225206</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">extent</td>
+<td style="text-align: right;">1.5683053</td>
+<td style="text-align: right;">0.1161318</td>
+<td style="text-align: right;">3.8748690</td>
+<td style="text-align: right;">0.0001067</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">surg</td>
+<td style="text-align: right;">1.2757908</td>
+<td style="text-align: right;">0.1021600</td>
+<td style="text-align: right;">2.3841645</td>
+<td style="text-align: right;">0.0171179</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">node4</td>
+<td style="text-align: right;">2.3032487</td>
+<td style="text-align: right;">0.0973773</td>
+<td style="text-align: right;">8.5679182</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>aug_cfit <span class="ot">&lt;-</span> <span class="fu">augment</span>(cfit)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(cfit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 1%">
+<col style="width: 3%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 7%">
+<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 10%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 2%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">nevent</th>
+<th style="text-align: right;">statistic.log</th>
+<th style="text-align: right;">p.value.log</th>
+<th style="text-align: right;">statistic.sc</th>
+<th style="text-align: right;">p.value.sc</th>
+<th style="text-align: right;">statistic.wald</th>
+<th style="text-align: right;">p.value.wald</th>
+<th style="text-align: right;">statistic.robust</th>
+<th style="text-align: right;">p.value.robust</th>
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">r.squared.max</th>
+<th style="text-align: right;">concordance</th>
+<th style="text-align: right;">std.error.concordance</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">906</td>
+<td style="text-align: right;">458</td>
+<td style="text-align: right;">131.221</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">138.1448</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">132.15</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">0.1348355</td>
+<td style="text-align: right;">0.9985566</td>
+<td style="text-align: right;">0.6592044</td>
+<td style="text-align: right;">0.0126448</td>
+<td style="text-align: right;">-2897.339</td>
+<td style="text-align: right;">5808.679</td>
+<td style="text-align: right;">5837.567</td>
+<td style="text-align: right;">906</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a> sum_cfit <span class="ot">&lt;-</span> <span class="fu">summary</span>(cfit)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a> HR_cfit <span class="ot">&lt;-</span> sum_cfit<span class="sc">$</span>conf.int</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a> HR_cfit <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(HR_cfit)</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a> HR_cfit </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;">exp(coef)</th>
+<th style="text-align: right;">exp(-coef)</th>
+<th style="text-align: right;">lower .95</th>
+<th style="text-align: right;">upper .95</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.6152959</td>
+<td style="text-align: right;">1.6252342</td>
+<td style="text-align: right;">0.4866192</td>
+<td style="text-align: right;">0.7779986</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.0088686</td>
+<td style="text-align: right;">0.9912094</td>
+<td style="text-align: right;">0.8146155</td>
+<td style="text-align: right;">1.2494432</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.2598882</td>
+<td style="text-align: right;">0.7937213</td>
+<td style="text-align: right;">1.0039936</td>
+<td style="text-align: right;">1.5810043</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.2433162</td>
+<td style="text-align: right;">0.8043007</td>
+<td style="text-align: right;">1.0311658</td>
+<td style="text-align: right;">1.4991139</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1.5683053</td>
+<td style="text-align: right;">0.6376309</td>
+<td style="text-align: right;">1.2490477</td>
+<td style="text-align: right;">1.9691655</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1.2757908</td>
+<td style="text-align: right;">0.7838275</td>
+<td style="text-align: right;">1.0442891</td>
+<td style="text-align: right;">1.5586128</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2.3032487</td>
+<td style="text-align: right;">0.4341694</td>
+<td style="text-align: right;">1.9030629</td>
+<td style="text-align: right;">2.7875876</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>coef_fit <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(sum_cfit<span class="sc">$</span>coefficients) <span class="sc">%&gt;%</span> <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">"Treatment"</span>) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">pvalues =</span> <span class="st">`</span><span class="at">Pr(&gt;|z|)</span><span class="st">`</span>)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a> Hazard_ratio <span class="ot">&lt;-</span>  <span class="fu">as.data.frame</span>(sum_cfit<span class="sc">$</span>conf.int) <span class="sc">%&gt;%</span></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">"Treatment"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">rename</span>(<span class="st">"hazard_ratio"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">exp(coef)</span><span class="st">`</span>,</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>           <span class="st">"lower"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">lower .95</span><span class="st">`</span>,</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>          <span class="st">"upper"</span> <span class="ot">=</span> <span class="st">`</span><span class="at">upper .95</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">p_values =</span> coef_fit<span class="sc">$</span>pvalues)</span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb67-13"><a href="#cb67-13" aria-hidden="true" tabindex="-1"></a>Hazard_ratio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Treatment</th>
+<th style="text-align: right;">hazard_ratio</th>
+<th style="text-align: right;">exp(-coef)</th>
+<th style="text-align: right;">lower</th>
+<th style="text-align: right;">upper</th>
+<th style="text-align: right;">p_values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">rxLev+5FU</td>
+<td style="text-align: right;">0.6152959</td>
+<td style="text-align: right;">1.6252342</td>
+<td style="text-align: right;">0.4866192</td>
+<td style="text-align: right;">0.7779986</td>
+<td style="text-align: right;">0.0000497</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">rxLev</td>
+<td style="text-align: right;">1.0088686</td>
+<td style="text-align: right;">0.9912094</td>
+<td style="text-align: right;">0.8146155</td>
+<td style="text-align: right;">1.2494432</td>
+<td style="text-align: right;">0.9355086</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">obstruct</td>
+<td style="text-align: right;">1.2598882</td>
+<td style="text-align: right;">0.7937213</td>
+<td style="text-align: right;">1.0039936</td>
+<td style="text-align: right;">1.5810043</td>
+<td style="text-align: right;">0.0461115</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">differ</td>
+<td style="text-align: right;">1.2433162</td>
+<td style="text-align: right;">0.8043007</td>
+<td style="text-align: right;">1.0311658</td>
+<td style="text-align: right;">1.4991139</td>
+<td style="text-align: right;">0.0225206</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">extent</td>
+<td style="text-align: right;">1.5683053</td>
+<td style="text-align: right;">0.6376309</td>
+<td style="text-align: right;">1.2490477</td>
+<td style="text-align: right;">1.9691655</td>
+<td style="text-align: right;">0.0001067</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">surg</td>
+<td style="text-align: right;">1.2757908</td>
+<td style="text-align: right;">0.7838275</td>
+<td style="text-align: right;">1.0442891</td>
+<td style="text-align: right;">1.5586128</td>
+<td style="text-align: right;">0.0171179</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">node4</td>
+<td style="text-align: right;">2.3032487</td>
+<td style="text-align: right;">0.4341694</td>
+<td style="text-align: right;">1.9030629</td>
+<td style="text-align: right;">2.7875876</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>Hazard_ratio <span class="sc">%&gt;%</span> </span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Treatment))<span class="sc">+</span></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lower,<span class="at">ymax =</span> upper, <span class="at">y=</span> hazard_ratio))<span class="sc">+</span></span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>( <span class="at">yintercept =</span>  <span class="dv">1</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="survival-analysis-quarto_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

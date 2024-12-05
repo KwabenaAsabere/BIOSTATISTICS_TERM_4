@@ -1,0 +1,265 @@
+---
+title: "BACK AGAIN!"
+author: "K.ASABERE"
+format: html
+editor: visual
+df-print: kable
+code-overflow: wrap
+execute: 
+  echo: true
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
+  
+---
+
+```{r}
+library(tidyverse)
+library(broom)
+theme_set(theme_bw())
+iris = read_csv("iris.csv")
+
+iris %>% head()
+iris |> head()
+iris |> names()
+
+
+```
+
+```{r}
+
+slr <-  iris |> 
+  lm(sepal_length ~ sepal_width + petal_length + petal_width, data = _)
+summary(slr) |> tidy()
+
+anova(slr) |> tidy()
+
+```
+
+```{r}
+iris_a <- slr |> augment()
+
+y_pred = predict(slr)
+
+iris_a |> 
+ggplot(aes( x = sepal_length, y= .fitted)) +
+  geom_point(size = 3, color = "steelblue")+
+  labs(x = " True Sepal Length ", y = "Predicted Sepal Length")+
+  geom_smooth(method = "lm",se  = FALSE,color = "red",linetype = "dashed")
+
+
+
+```
+
+
+```{r}
+iris$predicted = y_pred
+iris |> head()
+
+iris <-  iris |> 
+  mutate( Predicted = predict(slr),
+          residuals = Predicted - sepal_length)
+
+
+```
+
+
+```{r}
+iris |> 
+  mutate(sepal_sizes = ntile(sepal_length,4)) |> 
+  pull(sepal_sizes)
+
+
+
+```
+
+
+
+
+```{r}
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

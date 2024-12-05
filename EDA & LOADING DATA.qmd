@@ -1,0 +1,112 @@
+---
+title: "EDA AND LOADING DATA"
+author: "K.Asabere"
+code-line-numbers: true
+format: html
+editor: visual
+execute: 
+  echo: true
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
+---
+
+# Creating a tibble
+```{r}
+#tibble(very simlilar to a dataframe)
+library(tidyverse)
+
+cats_tibble <- tibble(
+  coat = c("calico","black","tabby"),
+  weight = c(1.2,4,3.1),
+  likes_string = c(T,T,F)
+)
+
+cats_tibble
+
+#tribble (row-wise)
+cats_tribble <- tribble(
+  ~coat,~weight,~like_string,
+  "calico",1.2,T,
+  "black",4,T,
+  "tabby",3.1,F
+)
+cats_tribble
+```
+
+
+
+```{r}
+avengers <- read_csv("avengers.csv")
+glimpse(avengers)
+spec(avengers)
+```
+
+# Haven
+```{r}
+library(haven)
+
+crf33<- read_dta("crf33.dta")
+glimpse(crf33)
+str(crf33)
+
+
+
+```
+
+# readxl
+```{r}
+library(readxl)
+steak <- read_excel("steak-risk-survey.xlsx")
+glimpse(steak)
+
+```
+
+#skimr
+```{r}
+library(skimr)
+skim(avengers)
+
+
+
+diamonds %>% 
+  group_by(cut) %>% 
+  skimr::skim()
+
+
+
+
+
+
+```
+# visdat
+```{r}
+library(visdat)
+vis_dat(steak)
+vis_dat(avengers)
+vis_miss(avengers, cluster = TRUE)
+vis_miss(airquality, cluster = TRUE)
+vis_compare(cats_tibble,cats_tribble)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

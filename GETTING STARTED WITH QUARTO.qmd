@@ -1,0 +1,41 @@
+---
+title: "QUARTO...."
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r,message=FALSE}
+
+
+
+
+library(tidyverse)
+library(ggthemes)
+library(palmerpenguins)
+library(gt)
+```
+
+```{r}
+glimpse(penguins)
+```
+
+```{r}
+#|label: fig-bill-dims-species
+#|fig-width: 5
+#|fig-asp: 0.618
+#|fig-cap: A scatterplot of penguins' bill depth and length,colored by species o 
+
+ 
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm,
+             color = species, shape = species)) +
+  geom_point()+
+  theme_minimal()+
+  scale_color_viridis_d(option = "viridis")+
+  labs( x = "Bill length(mm)", y= "Bill depth(mm)")
+
+```
+
+\

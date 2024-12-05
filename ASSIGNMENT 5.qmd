@@ -1,0 +1,170 @@
+---
+title: "ASSIGNMENT 5"
+author: "K.ASABERE"
+format: html
+df-print: kable
+editor: visual
+execute: 
+  
+  echo: true
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+
+library(tidyverse)
+library(lme4)
+library(jtools)
+load("opth_data_long_all_records.Rdata")
+```
+
+```{r}
+opth_data_long <- opth_data_long %>%
+mutate(eye_id = if_else(eye == "OD-right", paste0(id, 1), paste0(id,2)))
+
+```
+
+```{r}
+# Q1 
+dim(opth_data_long)
+
+#Q2
+opth_data_long %>% 
+  distinct(id) %>% 
+  count()
+
+# Q4
+opth_data_long %>% 
+  summarise(va_missing = sum(is.na(va)))
+
+
+```
+
+```{r}
+pat_data <- opth_data_long %>%
+group_by(id) %>%
+summarize(n_per_id=n())
+```
+
+```{r}
+
+summary(pat_data$n_per_id)
+sd(pat_data$n_per_id, na.rm=TRUE)
+```
+
+```{r}
+ pat_data2 <- opth_data_long %>% 
+  filter(!is.na(va)) %>% 
+group_by(id) %>%
+summarize(n_per_id=n())
+
+
+summary(pat_data2$n_per_id)
+sd(pat_data2$n_per_id, na.rm=TRUE)
+
+```
+
+
+```{r}
+pat_data <-opth_data_long %>%
+group_by(id) %>%
+mutate(row = row_number()) %>%
+filter(row == 1) %>%
+dplyr::select(c(id, age, sex))
+```
+
+
+```{r}
+table(pat_data$sex)
+prop.table( table(pat_data$sex))
+mean(pat_data$age, na.rm = TRUE)
+sd(pat_data$age, na.rm = TRUE)
+
+```
+
+```{r}
+opth_data_long %>% 
+  summarise(va_90 = quantile(va,0.90,na.rm = TRUE))
+
+
+
+```
+
+
+```{r}
+pat_data <- opth_data_long %>%
+group_by(id) %>%
+filter(!is.na(va)) %>%
+summarize(id_mean_va = mean(va),
+tot_va_gt_90p = sum(va >= 89),
+n_per_id = n(),
+any_va_gt_90p = tot_va_gt_90p > 0,
+pct_va_gt_90p = tot_va_gt_90p/n_per_id)
+
+
+pat_data %>% 
+  group_by(id) %>% 
+  summarise(max_va = max(id_mean_va)) %>% 
+  arrange(desc(max_va))
+
+summary(pat_data$id_mean_va)
+
+```
+
+
+```{r}
+pat_data %>% 
+  ggplot(aes(x = id_mean_va))+
+  geom_histogram( fill = "steelblue",color = "black")
+
+
+```
+
+```{r}
+
+opth_data_long %>% 
+  
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

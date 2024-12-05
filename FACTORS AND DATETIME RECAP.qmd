@@ -1,0 +1,360 @@
+---
+title: "FACTORS AND DPLYR"
+author: "K.ASABERE"
+format: html
+fig-width: 6
+fig-asp: 0.618
+editor: visual
+df-print: kable
+code-overflow: wrap
+execute: 
+  echo: true
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
+---
+
+## Working With Factors
+```{r}
+library(tidyverse)
+library(gtsummary)
+library(gt) 
+library(finalfit)
+library(broom)
+library(patchwork)
+theme_set(theme_bw())
+
+```
+
+
+```{r}
+
+Islands <- tibble(island=c("Axel Heiberg" ,"Baffin","Banks","Borneo","Britain","Celebes"),Area = c(16,184,23,280,84,73))
+
+str(Islands)
+
+
+
+
+
+
+
+
+```
+
+
+```{r}
+
+gss_cat <- gss_cat
+gss_cat %>% 
+  count(race)
+relig_summary <- gss_cat %>% 
+  group_by(relig) %>% 
+  summarize(
+    tvhours = mean(tvhours, na.rm = TRUE),
+    n = n()
+  )
+
+relig_summary %>% 
+  ggplot(aes(x = tvhours, y= relig))+
+  geom_point()
+
+relig_summary %>% 
+  ggplot(aes(x = tvhours, y= fct_reorder(relig,tvhours)))+
+  geom_point()
+```
+
+
+```{r}
+relig_summary %>% 
+  mutate(
+    relig = fct_reorder(relig,tvhours)
+  ) %>% 
+  ggplot(aes( x = tvhours, y= relig))+
+  geom_point()
+```
+
+```{r}
+rincome_summary <- gss_cat %>% 
+  group_by(rincome) %>% 
+  summarize(
+    age = mean(age,na.rm = TRUE),
+    n = n()
+  )
+
+rincome_summary %>% 
+  mutate(rincome = fct_reorder(rincome, age)) %>% 
+  ggplot(aes(x = age, y = rincome))+
+  geom_point()+
+  labs(x = "Average Age (years)", y = "Reported Income Level")
+  
+
+```
+
+```{r}
+
+by_age <-  gss_cat %>% 
+  filter(!is.na(age)) %>% 
+  count(age,marital) %>% 
+  group_by(age) %>% 
+  mutate(prop = n/sum(n))
+
+by_age %>% 
+  ggplot(aes(x = age, y = prop, color = marital))+
+  geom_line(linewidth = 1)+
+  scale_color_viridis_d(option = "viridis")
+
+
+by_age %>% 
+  ggplot(aes( x = age, y = prop, color = fct_reorder2(marital,age, prop)))+
+  geom_line(linewidth = 1)+
+  scale_color_viridis_d( option = "viridis")+
+  labs(color = "marital")
+  
+```
+
+
+
+
+```{r}
+#| label: charts
+#| fig-cap: 
+#|  - "Chart 1"
+#|  - "Chart 2"
+#| layout-ncol: 2
+
+by_age %>% 
+  ggplot(aes(x = age, y = prop, color = marital))+
+  geom_line(linewidth = 1)+
+  scale_color_viridis_d(option = "viridis")
+
+
+by_age %>% 
+  ggplot(aes( x = age, y = prop, color = fct_reorder2(marital,age, prop)))+
+  geom_line(linewidth = 1)+
+  scale_color_viridis_d( option = "viridis")+
+  labs(color = "marital")
+  
+ 
+```  
+
+
+
+```{r}
+## fct_infreq() order levels in decreasing frequency. combine it with fct_rev() if you want them in increasing frequency
+
+gss_cat %>% 
+  mutate(marital = marital %>% fct_infreq() %>% fct_rev()) %>% 
+  ggplot(aes(x = marital))+
+  geom_bar(aes(fill = marital))+
+  scale_fill_viridis_d(option = "viridis")+
+  theme(legend.position = "none")
+
+```
+
+
+```{r}
+gss_cat %>% 
+  count(partyid)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,60 @@
+---
+title: "STRINGS AND REGULAR EXPRESSIONS"
+author: "K.ASABERE"
+format: html
+df-print: kable
+editor: visual
+code-overflow: wrap
+execute: 
+  echo: true
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
+---
+
+# Strings & Regular Expressions
+
+```{r}
+x <- "gthis is a string"
+class(x)
+z <- c("I","am","a","string","vector")
+z
+z[1:2]
+## simplified and interpreted
+cat(z)
+
+```
+
+# Escape special characters with a backslash
+
+```{r}
+
+a <- "As Michael Scott said, \"I'am not superstitious, but I'am a little stitious.\""
+cat(a)
+
+```
+
+# line break with \n
+
+```{r}
+n <- "As Michael Scott said,\n \"I'am not superstitious, but I'am a little stitious.\""
+print(n)
+cat(n)
+
+```
+
+# tab with t 
+
+```{r}
+t <- "this has \ta tab"
+print(t)
+cat(t)
+```
+
+# Special Characters and unicode
+
+```{r}
+mu <- "\u00b5"
+cat(mu)
+```

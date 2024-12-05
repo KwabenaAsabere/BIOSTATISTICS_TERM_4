@@ -1,0 +1,55 @@
+---
+title: "QUARTO PRACTICE"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+![My Plot](BOXPLOT.png){fig-alt="A Boxplot of lifeExp per continent" fig-align="left"}
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+# | label : load packages
+# | output: false
+
+
+library(tidyverse)
+
+```
+
+You can add options to executable code like this
+
+```         
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+```{r}
+```
+
+## Include a plot
+
+```{r}
+#| label: fig-diamonds
+#| fig-cap : "A bar chart of diamond cuts"
+#| fig-alt: "more descriptive things"
+#| out-width: 50%
+diamonds %>%  
+  ggplot(aes(x = cut))+
+  geom_bar()
+
+```
+
+This is a reference @fig-diamonds
+
+## Using LaTex
+
+we can put formulas in line like this: $\alpha$ We indent like this $$ \pi \in \mathbb{R}$$

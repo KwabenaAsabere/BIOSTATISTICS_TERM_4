@@ -1,0 +1,66 @@
+---
+title: "Hello,Quarto:A world of possibilities"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+---
+
+## Data
+
+For this analysis we will use the `penguins` dataset from the
+
+[palmerpenguins](https://allisonhorst.github.io/palmerpenguins/) package[@gorman2014a]
+
+```{r}
+#| label: load-packages
+#| message: false
+
+library(tidyverse)
+library(palmerpenguins)
+library(gt)
+
+        
+
+```
+
+```{r}
+#| label: glimpse data
+glimpse(penguins)
+
+```
+
+## Species
+
+@fig-barplot-species is a a barplot of penguins
+
+```{r}
+#| label: fig-barplot-species
+#| fig-cap: Bar plot of species of penguins.
+#| fig-width: 5
+#| fig-asp: 0.618
+penguins %>% 
+  ggplot(aes(x= species))+
+  geom_bar()+
+  theme_minimal()+
+  labs(
+    x = "Species",
+    y = "Count"
+  )
+```
+
+## Penguins
+
+@tbl-penguins shows the first 10 penguins from the dataset
+
+```{r}
+#| label: tbl-penguins
+#| tbl-cap: First 10 penguins from the dataset
+
+penguins %>% 
+  slice_head(n = 10) %>% 
+  select(species,island,bill_length_mm,bill_depth_mm) %>% 
+  gt()
+
+```

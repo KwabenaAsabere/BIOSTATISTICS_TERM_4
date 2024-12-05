@@ -1,0 +1,629 @@
+id,age,beck,hercoc,ivhx,ndrugtx,race,treat,site,los,time,relapse,_st,_d,_t,_t0,age_quartile,inter,beck_quartile,offset
+1,39,9,neither heroin or cocaine,current,1,white,long,0,123,188,1,1,1,188,0,4,0,1,5.2364421
+2,33,34,neither heroin or cocaine,previous,8,white,long,0,25,26,1,1,1,26,0,3,0,4,3.2580965
+3,33,10,heroin,current,3,white,long,0,7,207,1,1,1,207,0,3,0,2,5.3327188
+4,32,20,neither heroin or cocaine,current,1,white,short,0,66,144,1,1,1,144,0,3,0,3,4.9698133
+5,24,5,heroin,Never,5,non white,long,0,173,551,0,1,0,551,0,1,0,1,6.3117347
+6,30,32.549999,cocaine,current,1,white,long,0,16,32,1,1,1,32,0,2,0,4,3.4657359
+7,39,19,neither heroin or cocaine,current,34,white,long,0,179,459,1,1,1,459,0,4,0,3,6.1290503
+8,27,10,neither heroin or cocaine,current,2,white,long,0,21,22,1,1,1,22,0,2,0,2,3.0910425
+9,40,29,heroin,current,3,white,long,0,176,210,1,1,1,210,0,4,0,3,5.3471074
+10,36,25,heroin,current,7,white,long,0,124,184,1,1,1,184,0,3,0,3,5.2149358
+11,35,,,,12,non white,long,0,2,5,1,1,1,5,0,3,0,,1.6094379
+12,38,18.9,heroin,current,8,white,long,0,176,212,1,1,1,212,0,4,0,3,5.3565865
+13,29,16,cocaine,Never,1,white,long,0,79,87,1,1,1,87,0,2,0,2,4.4659081
+14,32,36,cocaine,current,2,non white,long,0,182,598,0,1,0,598,0,3,0,4,6.3935909
+15,41,19,heroin and cocaine,current,8,white,long,0,174,260,1,1,1,260,0,4,0,3,5.5606818
+16,31,18,heroin and cocaine,current,1,white,long,0,181,210,1,1,1,210,0,2,0,3,5.3471074
+17,27,12,heroin,current,3,white,long,0,61,84,1,1,1,84,0,2,0,2,4.4308167
+18,28,34,heroin and cocaine,current,6,white,long,0,177,196,1,1,1,196,0,2,0,4,5.2781148
+19,28,23,neither heroin or cocaine,previous,1,white,long,0,19,19,1,1,1,19,0,2,0,3,2.9444389
+20,36,26,cocaine,Never,15,non white,long,0,27,441,1,1,1,441,0,3,0,3,6.089045
+21,32,18.9,heroin,current,5,white,long,0,175,449,1,1,1,449,0,3,0,3,6.1070228
+22,33,15,cocaine,Never,1,white,short,0,12,659,0,1,0,659,0,3,0,2,6.4907236
+23,28,25.200001,heroin and cocaine,current,8,white,short,0,21,21,1,1,1,21,0,2,0,3,3.0445225
+24,29,6.632,neither heroin or cocaine,previous,0,white,short,0,48,53,1,1,1,53,0,2,0,1,3.9702919
+25,35,2.0999999,heroin,current,9,white,short,0,90,225,1,1,1,225,0,3,0,1,5.4161005
+26,45,26,heroin and cocaine,current,6,white,short,0,91,161,1,1,1,161,0,4,0,3,5.0814042
+27,35,39.789001,neither heroin or cocaine,current,5,white,short,0,87,87,1,1,1,87,0,3,0,4,4.4659081
+28,24,20,cocaine,Never,3,white,short,0,88,89,1,1,1,89,0,1,0,3,4.4886365
+29,36,16,heroin and cocaine,current,7,white,short,0,9,44,1,1,1,44,0,3,0,2,3.7841897
+30,27,30,heroin and cocaine,current,30,,short,0,37,37,1,1,1,37,0,2,0,3,3.6109178
+31,39,22,heroin and cocaine,current,9,white,short,0,94,523,0,1,0,523,0,4,0,3,6.2595816
+32,36,9.9469995,neither heroin or cocaine,previous,10,white,short,0,91,226,1,1,1,226,0,3,0,1,5.4205351
+33,37,9.4499998,neither heroin or cocaine,current,1,white,short,0,90,259,1,1,1,259,0,4,0,1,5.556828
+34,30,39,heroin,current,1,white,short,0,89,289,1,1,1,289,0,2,0,4,5.6664267
+35,44,41,heroin and cocaine,current,5,white,short,0,89,103,1,1,1,103,0,4,0,4,4.6347289
+36,28,31,cocaine,Never,6,non white,short,0,100,624,0,1,0,624,0,2,0,3,6.4361506
+37,25,20,cocaine,Never,3,non white,short,0,67,68,1,1,1,68,0,1,0,3,4.2195077
+38,30,8,heroin,current,7,white,long,0,25,57,1,1,1,57,0,2,0,1,4.0430512
+39,24,9,neither heroin or cocaine,Never,1,white,short,0,12,65,1,1,1,65,0,1,0,1,4.1743875
+40,27,20,cocaine,Never,1,white,short,0,79,79,1,1,1,79,0,2,0,3,4.3694477
+41,30,8,cocaine,Never,2,non white,short,0,79,559,0,1,0,559,0,2,0,1,6.3261495
+42,34,8,heroin,current,0,white,long,0,78,79,1,1,1,79,0,3,0,1,4.3694477
+43,33,23,neither heroin or cocaine,previous,2,white,long,0,84,87,1,1,1,87,0,3,0,3,4.4659081
+44,34,18,cocaine,current,6,white,long,0,91,91,1,1,1,91,0,3,0,3,4.5108595
+45,36,13,heroin,current,1,white,long,0,162,297,1,1,1,297,0,3,0,2,5.6937323
+46,27,23,heroin and cocaine,current,0,white,long,0,45,45,1,1,1,45,0,2,0,3,3.8066626
+47,35,9,neither heroin or cocaine,current,1,non white,long,0,61,246,1,1,1,246,0,3,0,1,5.5053315
+48,24,14,heroin and cocaine,current,0,white,long,0,19,37,1,1,1,37,0,1,0,2,3.6109178
+49,28,23,neither heroin or cocaine,Never,2,non white,long,0,37,37,1,1,1,37,0,2,0,3,3.6109178
+50,46,10,heroin and cocaine,current,8,white,long,0,51,538,0,1,0,538,0,4,0,2,6.2878585
+51,26,11,cocaine,current,1,white,long,0,60,541,0,1,0,541,0,1,0,2,6.2934194
+52,42,16,heroin and cocaine,current,25,white,long,0,177,184,1,1,1,184,0,4,0,2,5.2149358
+53,30,0,cocaine,Never,0,white,long,0,43,122,1,1,1,122,0,2,0,1,4.8040209
+54,33,,,,2,non white,long,0,3,5,1,1,1,5,0,3,0,,1.6094379
+55,30,12,neither heroin or cocaine,Never,3,non white,long,0,21,156,1,1,1,156,0,2,0,2,5.0498562
+56,27,21,heroin,current,2,white,short,0,88,121,1,1,1,121,0,2,0,3,4.7957907
+57,38,0,heroin and cocaine,current,6,white,short,0,96,231,1,1,1,231,0,4,0,1,5.4424176
+58,48,8,neither heroin or cocaine,current,10,white,short,0,111,111,1,1,1,111,0,4,0,1,4.7095304
+59,36,25,heroin and cocaine,current,10,white,short,0,38,38,1,1,1,38,0,3,0,3,3.6375861
+60,28,6.3000002,cocaine,Never,7,white,short,0,15,15,1,1,1,15,0,2,0,1,2.7080503
+61,31,20,neither heroin or cocaine,previous,5,white,short,0,50,54,1,1,1,54,0,2,0,3,3.9889841
+62,28,4,heroin,current,5,white,short,0,61,127,1,1,1,127,0,2,0,1,4.8441873
+63,28,20,cocaine,Never,1,white,short,0,31,105,1,1,1,105,0,2,0,3,4.6539602
+64,26,17,heroin,Never,2,non white,short,0,11,11,1,1,1,11,0,1,0,3,2.3978953
+65,34,3,neither heroin or cocaine,current,6,white,short,0,90,153,1,1,1,153,0,3,0,1,5.0304379
+66,26,29,heroin,current,5,white,short,0,11,11,1,1,1,11,0,1,0,3,2.3978953
+67,32,,neither heroin or cocaine,current,6,white,short,0,78,79,1,1,1,79,0,3,0,,4.3694477
+68,31,26,heroin and cocaine,current,5,white,short,0,46,46,1,1,1,46,0,2,0,3,3.8286414
+69,41,12,heroin and cocaine,current,0,non white,short,0,38,655,0,1,0,655,0,4,0,2,6.4846354
+70,30,24,neither heroin or cocaine,current,0,white,short,0,90,166,1,1,1,166,0,2,0,3,5.1119876
+71,35,,,,1,white,short,0,5,6,1,1,1,6,0,3,0,,1.7917595
+72,39,15.75,neither heroin or cocaine,current,5,white,short,0,88,95,1,1,1,95,0,4,0,2,4.5538769
+73,43,3,heroin,current,12,,short,0,81,83,1,1,1,83,0,4,0,1,4.4188404
+74,33,9,heroin,current,12,white,short,0,91,151,1,1,1,151,0,3,0,1,5.0172796
+75,33,18,neither heroin or cocaine,previous,6,white,short,0,85,220,1,1,1,220,0,3,0,3,5.3936276
+76,29,20,neither heroin or cocaine,Never,0,non white,short,0,90,227,1,1,1,227,0,2,0,3,5.4249501
+77,36,17,heroin and cocaine,current,5,white,short,0,52,343,1,1,1,343,0,3,0,3,5.8377304
+78,26,3,neither heroin or cocaine,current,3,white,short,0,88,119,1,1,1,119,0,1,0,1,4.7791233
+79,37,27,heroin and cocaine,current,13,white,short,0,43,43,1,1,1,43,0,4,0,3,3.7612002
+80,42,35.368,heroin and cocaine,current,8,,short,0,67,545,0,1,0,545,0,4,0,4,6.300786
+81,29,31.5,heroin and cocaine,current,8,white,short,0,37,47,1,1,1,47,0,2,0,3,3.8501475
+82,34,,cocaine,current,3,white,short,0,15,15,1,1,1,15,0,3,0,,2.7080503
+83,30,19,cocaine,Never,0,non white,short,0,87,805,0,1,0,805,0,2,0,3,6.6908422
+84,35,15,cocaine,previous,2,white,short,0,20,321,1,1,1,321,0,3,0,2,5.771441
+85,33,22,cocaine,Never,1,white,short,0,9,167,1,1,1,167,0,3,0,3,5.1179938
+86,30,,heroin and cocaine,current,4,white,short,0,77,107,1,1,1,107,0,2,0,,4.6728287
+87,36,16,heroin,current,1,white,short,0,85,491,1,1,1,491,0,3,0,2,6.196444
+88,28,17,heroin and cocaine,current,2,white,short,0,18,35,1,1,1,35,0,2,0,3,3.5553482
+89,31,32.549999,heroin and cocaine,current,12,non white,short,0,71,123,1,1,1,123,0,2,0,4,4.8121843
+90,23,24,heroin and cocaine,current,2,white,short,0,88,597,0,1,0,597,0,1,0,3,6.3919172
+91,33,22,cocaine,previous,1,white,short,0,67,762,0,1,0,762,0,3,0,3,6.6359468
+92,26,,heroin and cocaine,current,5,white,short,0,13,13,1,1,1,13,0,1,0,,2.5649493
+93,37,18,heroin,current,4,white,short,0,30,31,1,1,1,31,0,4,0,3,3.4339871
+94,25,17.85,cocaine,Never,1,white,long,0,68,228,1,1,1,228,0,1,0,3,5.4293456
+95,56,5,heroin,previous,9,non white,long,0,182,553,0,1,0,553,0,4,0,1,6.3153582
+96,23,39,heroin and cocaine,current,1,white,long,0,182,190,1,1,1,190,0,1,0,4,5.2470241
+97,26,21,cocaine,Never,1,white,long,0,146,307,1,1,1,307,0,1,0,3,5.7268476
+98,26,11,heroin and cocaine,current,1,white,long,0,40,73,1,1,1,73,0,1,0,2,4.2904596
+99,23,14,cocaine,Never,1,white,long,0,177,208,1,1,1,208,0,1,0,2,5.3375382
+100,28,31,neither heroin or cocaine,previous,2,non white,long,0,181,267,1,1,1,267,0,2,0,3,5.5872488
+101,33,,,,6,white,long,0,2,2,1,1,1,2,0,3,0,,.69314718
+102,30,14,heroin and cocaine,current,15,white,long,0,168,169,1,1,1,169,0,2,0,2,5.1298985
+103,32,,neither heroin or cocaine,Never,2,non white,long,0,124,125,1,1,1,125,0,3,0,,4.8283138
+104,25,6,heroin,current,5,white,long,0,90,655,0,1,0,655,0,1,0,1,6.4846354
+105,33,16,heroin and cocaine,current,5,white,long,0,61,70,1,1,1,70,0,3,0,2,4.2484951
+106,22,6,cocaine,Never,3,non white,long,0,63,398,1,1,1,398,0,1,0,1,5.9864521
+107,28,,heroin,current,1,white,long,0,15,59,1,1,1,59,0,2,0,,4.0775375
+108,25,20,neither heroin or cocaine,previous,8,non white,long,0,121,122,1,1,1,122,0,1,0,3,4.8040209
+109,30,,,,1,white,long,0,1,29,1,1,1,29,0,2,0,,3.3672957
+110,,18,heroin and cocaine,current,2,white,long,0,8,8,1,1,1,8,0,,0,3,2.0794415
+111,38,9,cocaine,Never,1,non white,short,0,89,96,1,1,1,96,0,4,0,1,4.5643482
+112,35,11,heroin,Never,3,white,long,0,51,1172,0,1,0,1172,0,3,0,2,7.0664668
+113,35,15,cocaine,Never,1,white,short,0,88,734,0,1,0,734,0,3,0,2,6.5985088
+114,25,13,cocaine,current,1,white,short,0,25,26,1,1,1,26,0,1,0,2,3.2580965
+115,33,31,cocaine,Never,3,non white,short,0,83,84,1,1,1,84,0,3,0,3,4.4308167
+116,30,5,cocaine,Never,2,non white,short,0,89,171,1,1,1,171,0,2,0,1,5.1416636
+117,45,10,heroin,current,1,white,short,0,24,159,1,1,1,159,0,4,0,2,5.0689044
+118,29,,,,3,white,short,0,4,5,1,1,1,5,0,2,0,,1.6094379
+119,42,23,heroin,current,20,white,short,0,7,7,1,1,1,7,0,4,0,3,1.9459101
+120,29,16,neither heroin or cocaine,Never,1,non white,short,0,85,763,0,1,0,763,0,2,0,2,6.6372581
+121,24,37.799999,cocaine,Never,0,white,short,0,89,104,1,1,1,104,0,1,0,4,4.6443911
+122,33,10,heroin,current,4,white,short,0,91,162,1,1,1,162,0,3,0,2,5.0875964
+123,32,9,cocaine,Never,0,white,short,0,89,90,1,1,1,90,0,3,0,1,4.4998097
+124,26,15,cocaine,Never,0,white,short,0,82,373,1,1,1,373,0,1,0,2,5.9215784
+125,28,2,heroin and cocaine,current,3,white,short,0,84,115,1,1,1,115,0,2,0,1,4.7449322
+126,36,,,,3,white,short,0,1,67,1,1,1,67,0,3,0,,4.2046928
+127,37,34,heroin,current,1,white,short,0,30,30,1,1,1,30,0,4,0,4,3.4011974
+128,23,11,neither heroin or cocaine,Never,6,white,short,0,7,8,1,1,1,8,0,1,0,2,2.0794415
+129,40,31,heroin,current,3,non white,short,0,84,168,1,1,1,168,0,4,0,3,5.1239638
+130,36,36.75,cocaine,current,0,white,short,0,70,70,1,1,1,70,0,3,0,4,4.2484951
+131,23,26,cocaine,previous,2,white,short,0,76,130,1,1,1,130,0,1,0,3,4.8675346
+132,35,5,neither heroin or cocaine,Never,1,non white,short,0,89,285,1,1,1,285,0,3,0,1,5.6524892
+133,25,19,heroin,current,1,white,long,0,178,569,0,1,0,569,0,1,0,3,6.3438807
+134,35,21,heroin,current,6,white,long,0,87,87,1,1,1,87,0,3,0,3,4.4659081
+135,46,1,neither heroin or cocaine,previous,0,white,long,0,175,310,1,1,1,310,0,4,0,1,5.7365723
+136,32,6,neither heroin or cocaine,Never,3,white,long,0,87,87,1,1,1,87,0,3,0,1,4.4659081
+137,35,23,cocaine,Never,16,non white,long,0,110,544,0,1,0,544,0,3,0,3,6.2989492
+138,34,38,cocaine,current,1,white,long,0,21,156,1,1,1,156,0,3,0,4,5.0498562
+139,43,24,cocaine,Never,3,white,long,0,139,658,0,1,0,658,0,4,0,3,6.4892049
+140,39,3,neither heroin or cocaine,current,15,white,long,0,181,273,1,1,1,273,0,4,0,1,5.6094718
+141,27,16.799999,neither heroin or cocaine,current,2,non white,long,0,33,168,1,1,1,168,0,2,0,2,5.1239638
+142,38,35,heroin and cocaine,current,1,white,long,0,39,83,1,1,1,83,0,4,0,4,4.4188404
+143,37,11,heroin,current,7,white,long,0,4,4,1,1,1,4,0,4,0,2,1.3862944
+144,44,2,heroin and cocaine,current,4,non white,long,0,184,708,0,1,0,708,0,4,0,1,6.5624442
+145,25,16,neither heroin or cocaine,Never,1,non white,long,0,123,137,1,1,1,137,0,1,0,2,4.919981
+146,34,15,cocaine,Never,1,white,long,0,176,259,1,1,1,259,0,3,0,2,5.556828
+147,34,11,cocaine,current,2,non white,long,0,174,560,0,1,0,560,0,3,0,2,6.3279366
+148,38,11,heroin and cocaine,current,1,non white,long,0,181,586,0,1,0,586,0,4,0,2,6.3733196
+149,24,22,heroin,current,2,non white,long,0,113,190,1,1,1,190,0,1,0,3,5.2470241
+150,31,13,cocaine,Never,,white,long,0,156,720,0,1,0,720,0,2,0,2,6.5792513
+151,42,18,heroin,current,3,white,long,0,164,544,0,1,0,544,0,4,0,3,6.2989492
+152,22,,,,3,white,long,0,3,3,1,1,1,3,0,1,0,,1.0986123
+153,34,29,neither heroin or cocaine,current,1,non white,short,0,84,494,1,1,1,494,0,3,0,3,6.2025356
+154,45,27,heroin and cocaine,current,8,white,short,0,80,541,0,1,0,541,0,4,0,3,6.2934194
+155,40,16,heroin,current,4,white,short,0,91,94,1,1,1,94,0,4,0,2,4.5432949
+156,27,9,neither heroin or cocaine,Never,3,non white,short,0,97,567,0,1,0,567,0,2,0,1,6.3403592
+157,24,0,neither heroin or cocaine,Never,3,white,short,0,51,55,1,1,1,55,0,1,0,1,4.0073333
+158,27,15,heroin and cocaine,current,3,white,short,0,91,93,1,1,1,93,0,2,0,2,4.5325994
+159,34,24,cocaine,Never,4,white,short,0,90,276,1,1,1,276,0,3,0,3,5.6204009
+160,36,3,heroin,current,6,white,short,0,46,46,1,1,1,46,0,3,0,1,3.8286414
+161,37,,,,6,white,short,0,4,4,1,1,1,4,0,4,0,,1.3862944
+162,31,9,cocaine,Never,1,white,short,0,76,250,1,1,1,250,0,2,0,1,5.521461
+163,40,5,heroin,current,2,white,short,0,75,106,1,1,1,106,0,4,0,1,4.6634393
+164,40,13,heroin and cocaine,current,4,non white,short,0,91,552,0,1,0,552,0,4,0,2,6.3135481
+165,37,29,heroin,current,5,white,short,0,90,90,1,1,1,90,0,4,0,3,4.4998097
+166,25,11,neither heroin or cocaine,current,6,white,short,0,3,203,1,1,1,203,0,1,0,2,5.3132062
+167,41,22,heroin,current,3,non white,long,0,8,67,1,1,1,67,0,4,0,3,4.2046928
+168,22,9,neither heroin or cocaine,Never,1,white,long,0,33,559,1,1,1,559,0,1,0,1,6.3261495
+169,31,18,heroin,current,8,non white,long,0,31,106,1,1,1,106,0,2,0,3,4.6634393
+170,29,40,heroin and cocaine,Never,1,non white,long,0,174,374,1,1,1,374,0,2,0,4,5.9242558
+171,27,25,cocaine,Never,2,white,long,0,34,630,0,1,0,630,0,2,0,3,6.4457197
+172,22,26,neither heroin or cocaine,previous,3,white,long,0,60,61,1,1,1,61,0,1,0,3,4.1108737
+173,42,,,,6,white,long,0,8,560,0,1,0,560,0,4,0,,6.3279366
+174,37,11,heroin and cocaine,previous,5,non white,long,0,78,547,0,1,0,547,0,4,0,2,6.3044486
+175,36,6,cocaine,Never,2,non white,long,0,182,568,0,1,0,568,0,3,0,1,6.3421216
+176,24,20,cocaine,Never,1,white,long,0,182,490,1,1,1,490,0,1,0,3,6.1944056
+177,28,9,neither heroin or cocaine,Never,0,non white,long,0,78,222,1,1,1,222,0,2,0,1,5.4026775
+178,24,6,neither heroin or cocaine,Never,1,white,long,0,55,56,1,1,1,56,0,1,0,1,4.0253515
+179,28,0,cocaine,Never,2,white,long,0,223,282,1,1,1,282,0,2,0,1,5.6419072
+180,24,5,cocaine,Never,20,non white,long,0,25,35,1,1,1,35,0,1,0,1,3.5553482
+181,24,15,neither heroin or cocaine,Never,0,white,long,0,63,603,0,1,0,603,0,1,0,2,6.401917
+182,27,12,cocaine,Never,,,long,0,101,194,1,1,1,194,0,2,0,2,5.267858
+183,29,14.7,cocaine,Never,1,white,long,0,133,148,1,1,1,148,0,2,0,2,4.9972124
+184,37,3,heroin and cocaine,current,5,non white,long,0,154,354,1,1,1,354,0,4,0,1,5.869297
+185,26,31,heroin and cocaine,Never,2,white,long,0,70,164,1,1,1,164,0,1,0,3,5.0998664
+186,29,14,cocaine,previous,1,white,long,0,66,94,1,1,1,94,0,2,0,2,4.5432949
+187,29,28,heroin,current,4,white,long,0,40,65,1,1,1,65,0,2,0,3,4.1743875
+188,33,18,neither heroin or cocaine,Never,1,white,long,0,75,567,0,1,0,567,0,3,0,3,6.3403592
+189,29,12,neither heroin or cocaine,previous,2,white,long,0,187,634,0,1,0,634,0,2,0,2,6.4520488
+190,32,5,heroin and cocaine,Never,2,non white,long,0,183,633,0,1,0,633,0,3,0,1,6.4504704
+191,32,38,cocaine,Never,4,,long,0,7,127,1,1,1,127,0,3,0,4,4.8441873
+192,33,11,neither heroin or cocaine,Never,8,non white,long,0,182,477,1,1,1,477,0,3,0,2,6.1675167
+193,26,21,neither heroin or cocaine,previous,2,white,long,0,192,436,1,1,1,436,0,1,0,3,6.0776424
+194,31,19,neither heroin or cocaine,current,,white,long,0,187,226,1,1,1,226,0,2,0,3,5.4205351
+195,24,23,heroin,current,4,non white,long,0,162,362,1,1,1,362,0,1,0,3,5.891644
+196,46,32,heroin,current,2,white,long,0,193,552,0,1,0,552,0,4,0,4,6.3135481
+197,23,26,neither heroin or cocaine,Never,2,white,long,0,111,144,1,1,1,144,0,1,0,3,4.9698133
+198,40,19.950001,neither heroin or cocaine,current,8,white,long,0,182,242,1,1,1,242,0,4,0,3,5.4889379
+199,48,17,cocaine,Never,4,white,long,0,180,564,0,1,0,564,0,4,0,3,6.3350544
+200,33,16,cocaine,Never,0,white,long,0,93,299,1,1,1,299,0,3,0,2,5.7004437
+201,21,26.25,neither heroin or cocaine,Never,7,white,long,0,167,167,1,1,1,167,0,1,0,3,5.1179938
+202,38,29,cocaine,Never,2,white,long,0,196,380,1,1,1,380,0,4,0,3,5.9401712
+203,28,23,neither heroin or cocaine,previous,4,white,long,0,106,120,1,1,1,120,0,2,0,3,4.7874918
+204,30,,heroin,current,6,non white,short,0,48,248,1,1,1,248,0,2,0,,5.5134287
+205,39,9,heroin and cocaine,current,6,white,long,0,158,218,1,1,1,218,0,4,0,1,5.3844953
+206,37,26,heroin and cocaine,previous,1,non white,short,0,91,115,1,1,1,115,0,4,0,3,4.7449322
+207,32,22,cocaine,Never,4,non white,short,0,89,224,1,1,1,224,0,3,0,3,5.4116459
+208,39,23,cocaine,previous,2,non white,short,0,89,132,1,1,1,132,0,4,0,3,4.882802
+209,28,0,heroin and cocaine,current,10,white,short,0,88,148,1,1,1,148,0,2,0,1,4.9972124
+210,26,30,cocaine,Never,0,non white,short,0,95,593,0,1,0,593,0,1,0,3,6.3851943
+211,31,21,heroin and cocaine,current,0,white,short,0,5,26,1,1,1,26,0,2,0,3,3.2580965
+212,40,18,heroin,current,,white,short,0,92,113,1,1,1,113,0,4,0,3,4.7273879
+213,34,19,neither heroin or cocaine,current,8,white,short,0,32,32,1,1,1,32,0,3,0,3,3.4657359
+214,26,28,neither heroin or cocaine,previous,2,non white,short,0,92,292,1,1,1,292,0,1,0,3,5.676754
+215,29,8,neither heroin or cocaine,Never,3,white,short,0,66,89,1,1,1,89,0,2,0,1,4.4886365
+216,33,,heroin,current,7,white,short,0,20,21,1,1,1,21,0,3,0,,3.0445225
+217,25,11,cocaine,Never,8,white,short,0,90,364,1,1,1,364,0,1,0,2,5.8971539
+218,34,15,cocaine,previous,3,non white,short,0,93,142,1,1,1,142,0,3,0,2,4.9558272
+219,32,8,cocaine,Never,2,white,short,0,89,188,1,1,1,188,0,3,0,1,5.2364421
+220,39,,,,0,white,short,0,4,4,1,1,1,4,0,4,0,,1.3862944
+221,38,14,neither heroin or cocaine,previous,0,white,short,0,91,92,1,1,1,92,0,4,0,2,4.5217886
+222,32,7,heroin and cocaine,current,8,white,short,0,56,56,1,1,1,56,0,3,0,1,4.0253515
+223,31,13,heroin,current,7,white,short,0,90,110,1,1,1,110,0,2,0,2,4.7004805
+224,40,10,cocaine,Never,3,white,short,0,73,555,0,1,0,555,0,4,0,2,6.3189683
+225,28,17,neither heroin or cocaine,Never,5,non white,short,0,85,220,1,1,1,220,0,2,0,3,5.3936276
+226,40,18,heroin and cocaine,current,3,white,short,0,23,23,1,1,1,23,0,4,0,3,3.1354942
+227,32,5,heroin,current,3,white,short,0,85,285,1,1,1,285,0,3,0,1,5.6524892
+228,29,20,cocaine,current,5,white,short,0,90,90,1,1,1,90,0,2,0,3,4.4998097
+229,25,31,cocaine,Never,4,white,short,0,53,59,1,1,1,59,0,1,0,3,4.0775375
+230,32,15,heroin,current,2,white,short,0,96,156,1,1,1,156,0,3,0,2,5.0498562
+231,36,,neither heroin or cocaine,previous,2,white,short,0,64,194,1,1,1,194,0,3,0,,5.267858
+232,37,4,heroin,previous,2,white,short,0,83,142,1,1,1,142,0,4,0,1,4.9558272
+233,38,15,cocaine,current,8,white,short,0,54,57,1,1,1,57,0,4,0,2,4.0430512
+234,31,14,cocaine,previous,9,white,short,0,79,279,1,1,1,279,0,2,0,2,5.6312118
+235,30,27,heroin and cocaine,current,3,non white,short,0,81,118,1,1,1,118,0,2,0,3,4.7706847
+236,34,30,neither heroin or cocaine,Never,4,non white,short,0,18,567,0,1,0,567,0,3,0,3,6.3403592
+237,33,23,heroin and cocaine,current,4,white,long,0,184,562,0,1,0,562,0,3,0,3,6.331502
+238,36,13,cocaine,previous,10,non white,long,0,39,239,1,1,1,239,0,3,0,2,5.4764633
+239,32,26,neither heroin or cocaine,Never,0,white,long,0,177,578,0,1,0,578,0,3,0,3,6.3595738
+240,29,10,heroin,current,2,non white,long,0,122,551,0,1,0,551,0,2,0,2,6.3117347
+241,32,4,heroin and cocaine,Never,4,non white,long,0,178,313,1,1,1,313,0,3,0,1,5.7462034
+242,34,0,cocaine,Never,7,white,long,0,173,560,0,1,0,560,0,3,0,1,6.3279366
+243,26,35,heroin and cocaine,current,31,white,long,0,53,54,1,1,1,54,0,1,0,4,3.9889841
+244,25,32,heroin and cocaine,current,5,non white,long,0,94,198,1,1,1,198,0,1,0,4,5.2882671
+245,30,2,neither heroin or cocaine,Never,2,non white,long,0,163,164,1,1,1,164,0,2,0,1,5.0998664
+246,33,15,cocaine,previous,6,white,long,0,160,325,1,1,1,325,0,3,0,2,5.7838254
+247,40,23,neither heroin or cocaine,previous,6,white,long,0,61,62,1,1,1,62,0,4,0,3,4.1271343
+248,26,13,cocaine,Never,12,white,long,0,41,45,1,1,1,45,0,1,0,2,3.8066626
+249,26,29,heroin and cocaine,current,5,non white,long,0,53,53,1,1,1,53,0,1,0,3,3.9702919
+250,35,22.105,neither heroin or cocaine,current,4,white,long,0,53,253,1,1,1,253,0,3,0,3,5.5333896
+251,26,15,heroin,previous,11,white,long,0,13,51,1,1,1,51,0,1,0,2,3.9318256
+252,33,7,neither heroin or cocaine,Never,3,non white,long,0,183,540,0,1,0,540,0,3,0,1,6.2915692
+253,27,7,heroin and cocaine,current,4,white,long,0,182,317,1,1,1,317,0,2,0,1,5.7589016
+254,29,33,cocaine,current,3,white,long,0,183,437,1,1,1,437,0,2,0,4,6.0799332
+255,29,23,cocaine,current,9,white,long,0,63,136,1,1,1,136,0,2,0,3,4.9126549
+256,39,21,heroin,current,7,white,long,0,111,115,1,1,1,115,0,4,0,3,4.7449322
+257,43,19,cocaine,previous,2,non white,long,0,174,175,1,1,1,175,0,4,0,3,5.1647859
+258,35,8,cocaine,current,3,white,long,0,173,442,1,1,1,442,0,3,0,1,6.09131
+259,26,24,neither heroin or cocaine,Never,2,non white,long,0,119,122,1,1,1,122,0,1,0,3,4.8040209
+260,27,28.737,neither heroin or cocaine,Never,3,white,long,0,180,181,1,1,1,181,0,2,0,3,5.1984968
+261,28,20,neither heroin or cocaine,Never,2,non white,long,0,98,180,1,1,1,180,0,2,0,3,5.1929569
+262,30,14,cocaine,Never,4,white,long,0,50,51,1,1,1,51,0,2,0,2,3.9318256
+263,31,17,neither heroin or cocaine,previous,1,non white,long,0,178,541,0,1,0,541,0,2,0,3,6.2934194
+264,26,19,heroin,current,16,white,long,0,100,121,1,1,1,121,0,1,0,3,4.7957907
+265,36,5,neither heroin or cocaine,previous,4,white,long,0,93,328,1,1,1,328,0,3,0,1,5.7930136
+266,27,16,neither heroin or cocaine,previous,,white,long,0,8,9,1,1,1,9,0,2,0,2,2.1972246
+267,25,8,heroin,current,3,white,long,0,165,166,1,1,1,166,0,1,0,1,5.1119876
+268,26,22,cocaine,Never,0,non white,long,0,93,556,0,1,0,556,0,1,0,3,6.3207684
+269,30,11,heroin,current,5,white,short,0,44,104,1,1,1,104,0,2,0,2,4.6443911
+270,28,13,cocaine,Never,5,white,short,0,77,102,1,1,1,102,0,2,0,2,4.6249728
+271,31,1,neither heroin or cocaine,Never,,white,short,0,90,533,0,1,0,533,0,2,0,1,6.2785215
+272,34,11.053,cocaine,Never,0,non white,short,0,91,144,1,1,1,144,0,3,0,2,4.9698133
+273,31,24,cocaine,Never,2,white,short,0,95,545,0,1,0,545,0,2,0,3,6.300786
+274,30,19,neither heroin or cocaine,current,1,white,short,0,82,537,0,1,0,537,0,2,0,3,6.2859979
+275,35,27,cocaine,previous,5,non white,short,0,76,625,0,1,0,625,0,3,0,3,6.4377518
+276,30,4,neither heroin or cocaine,previous,3,non white,short,0,5,6,1,1,1,6,0,2,0,1,1.7917595
+277,37,38,heroin and cocaine,current,7,white,short,0,69,307,1,1,1,307,0,4,0,4,5.7268476
+278,29,11,neither heroin or cocaine,Never,12,non white,short,0,90,290,1,1,1,290,0,2,0,2,5.6698809
+279,23,21,neither heroin or cocaine,Never,8,white,short,0,19,20,1,1,1,20,0,1,0,3,2.9957323
+280,23,1,heroin and cocaine,Never,4,white,short,0,60,74,1,1,1,74,0,1,0,1,4.3040652
+281,44,4,neither heroin or cocaine,Never,0,white,short,0,69,100,1,1,1,100,0,4,0,1,4.6051702
+282,43,7,neither heroin or cocaine,previous,8,non white,short,0,85,555,0,1,0,555,0,4,0,1,6.3189683
+283,38,20,heroin,current,3,white,short,0,92,152,1,1,1,152,0,4,0,3,5.0238805
+284,33,17,cocaine,Never,3,non white,short,0,55,115,1,1,1,115,0,3,0,3,4.7449322
+285,36,6.3000002,heroin and cocaine,current,9,white,short,0,20,92,1,1,1,92,0,3,0,1,4.5217886
+286,26,12,heroin and cocaine,current,2,white,short,0,87,554,0,1,0,554,0,1,0,2,6.3171649
+287,30,16,neither heroin or cocaine,Never,0,white,short,0,91,92,1,1,1,92,0,2,0,2,4.5217886
+288,34,31.5,neither heroin or cocaine,Never,0,white,short,0,9,69,1,1,1,69,0,3,0,3,4.2341065
+289,32,30,heroin,current,6,white,short,0,22,25,1,1,1,25,0,3,0,3,3.2188759
+290,30,1,cocaine,Never,1,white,short,0,87,501,0,1,0,501,0,2,0,1,6.2166061
+291,37,32,heroin,current,10,non white,short,0,86,86,1,1,1,86,0,4,0,4,4.4543471
+292,35,29,heroin,current,7,white,short,0,85,99,1,1,1,99,0,3,0,3,4.59512
+293,30,6,cocaine,Never,0,white,short,0,83,87,1,1,1,87,0,2,0,1,4.4659081
+294,34,17,neither heroin or cocaine,Never,6,non white,short,0,83,136,1,1,1,136,0,3,0,3,4.9126549
+295,40,13,heroin and cocaine,previous,6,white,short,0,92,106,1,1,1,106,0,4,0,2,4.6634393
+296,28,15,neither heroin or cocaine,previous,3,non white,short,0,85,220,1,1,1,220,0,2,0,2,5.3936276
+297,32,11,cocaine,Never,6,white,short,0,36,36,1,1,1,36,0,3,0,2,3.583519
+298,45,17,heroin and cocaine,current,2,non white,short,0,87,162,1,1,1,162,0,4,0,3,5.0875964
+299,24,23,heroin,Never,0,white,long,0,56,116,1,1,1,116,0,1,0,3,4.7535901
+300,43,23,heroin and cocaine,current,5,non white,long,0,94,175,1,1,1,175,0,4,0,3,5.1647859
+301,38,15,heroin and cocaine,current,0,non white,long,0,74,209,1,1,1,209,0,4,0,2,5.3423343
+302,33,19,heroin,current,1,white,long,0,186,545,0,1,0,545,0,3,0,3,6.300786
+303,26,21,neither heroin or cocaine,previous,2,non white,long,0,178,245,1,1,1,245,0,1,0,3,5.5012584
+304,40,8,neither heroin or cocaine,current,3,white,long,0,84,176,1,1,1,176,0,4,0,1,5.1704841
+305,27,34,neither heroin or cocaine,previous,0,white,long,0,13,14,1,1,1,14,0,2,0,4,2.6390574
+306,39,21,heroin,current,12,white,long,0,85,113,1,1,1,113,0,4,0,3,4.7273879
+307,29,,neither heroin or cocaine,Never,2,non white,long,0,158,159,1,1,1,159,0,2,0,,5.0689044
+308,29,27,neither heroin or cocaine,previous,3,non white,long,0,9,354,1,1,1,354,0,2,0,3,5.869297
+309,28,32,neither heroin or cocaine,previous,4,white,long,0,162,174,1,1,1,174,0,2,0,4,5.1590552
+310,37,29,heroin and cocaine,current,20,white,short,0,23,23,1,1,1,23,0,4,0,3,3.1354942
+311,37,22,heroin,current,20,white,short,0,26,26,1,1,1,26,0,4,0,3,3.2580965
+312,40,12,neither heroin or cocaine,previous,9,white,short,0,84,98,1,1,1,98,0,4,0,2,4.5849676
+313,25,36,heroin and cocaine,current,5,white,short,0,23,23,1,1,1,23,0,1,0,4,3.1354942
+314,40,15,heroin and cocaine,Never,2,white,short,0,86,555,0,1,0,555,0,4,0,2,6.3189683
+315,40,3,heroin and cocaine,current,4,non white,short,0,90,290,1,1,1,290,0,4,0,1,5.6698809
+316,34,24,heroin,current,8,white,short,0,73,543,0,1,0,543,0,3,0,3,6.2971091
+317,41,18,heroin,current,7,white,short,0,76,274,1,1,1,274,0,4,0,3,5.6131282
+318,35,3,heroin,current,,,short,0,83,536,0,1,0,536,0,3,0,1,6.2841344
+319,32,,,,5,white,short,0,2,3,1,1,1,3,0,3,0,,1.0986123
+320,37,,,,0,white,long,0,3,5,1,1,1,5,0,4,0,,1.6094379
+321,23,2,neither heroin or cocaine,Never,1,white,long,0,18,119,1,1,1,119,0,1,0,1,4.7791233
+322,36,14,cocaine,Never,3,white,long,0,94,164,1,1,1,164,0,3,0,2,5.0998664
+323,28,19,neither heroin or cocaine,Never,2,non white,long,0,76,548,0,1,0,548,0,2,0,3,6.3062754
+324,23,7,cocaine,Never,3,white,long,0,40,175,1,1,1,175,0,1,0,1,5.1647859
+325,27,8,cocaine,Never,3,white,long,0,176,539,0,1,0,539,0,2,0,1,6.2897158
+326,32,27,neither heroin or cocaine,previous,0,white,long,0,104,155,1,1,1,155,0,3,0,3,5.0434251
+327,38,25,neither heroin or cocaine,current,15,white,long,0,5,14,1,1,1,14,0,4,0,3,2.6390574
+328,38,28,neither heroin or cocaine,Never,6,non white,long,0,179,187,1,1,1,187,0,4,0,3,5.2311087
+329,45,39,heroin and cocaine,current,8,white,long,0,35,65,1,1,1,65,0,4,0,4,4.1743875
+330,26,18,heroin,previous,1,white,long,0,24,159,1,1,1,159,0,1,0,3,5.0689044
+331,29,8,heroin and cocaine,current,35,white,long,0,82,96,1,1,1,96,0,2,0,1,4.5643482
+332,33,31,neither heroin or cocaine,Never,3,white,long,0,28,243,1,1,1,243,0,3,0,3,5.4930615
+333,25,6,cocaine,Never,0,non white,long,0,81,85,1,1,1,85,0,1,0,1,4.4426513
+334,36,19,neither heroin or cocaine,Never,2,white,long,0,4,4,1,1,1,4,0,3,0,3,1.3862944
+335,37,19,heroin,current,4,white,long,0,97,121,1,1,1,121,0,4,0,3,4.7957907
+336,29,16,neither heroin or cocaine,Never,0,non white,long,0,78,659,1,1,1,659,0,2,0,2,6.4907236
+337,29,15,neither heroin or cocaine,Never,3,non white,long,0,181,260,1,1,1,260,0,2,0,2,5.5606818
+338,35,54,neither heroin or cocaine,previous,1,white,long,0,29,621,0,1,0,621,0,3,0,4,6.4313312
+339,33,19,neither heroin or cocaine,Never,1,white,long,0,139,199,1,1,1,199,0,3,0,3,5.2933049
+340,31,12,neither heroin or cocaine,current,2,white,long,0,152,565,0,1,0,565,0,2,0,2,6.3368258
+341,37,24,cocaine,previous,5,non white,long,0,90,183,1,1,1,183,0,4,0,3,5.209486
+342,32,37,cocaine,current,4,white,long,0,62,122,1,1,1,122,0,3,0,4,4.8040209
+343,33,9,cocaine,previous,13,white,long,0,110,170,1,1,1,170,0,3,0,1,5.1357985
+344,36,18,cocaine,Never,14,non white,long,0,15,15,1,1,1,15,0,3,0,3,2.7080503
+345,26,4,heroin and cocaine,Never,5,white,long,0,68,268,1,1,1,268,0,1,0,1,5.5909872
+346,35,15,cocaine,Never,0,non white,long,0,19,79,1,1,1,79,0,3,0,2,4.3694477
+347,25,19,heroin and cocaine,current,6,non white,short,0,23,23,1,1,1,23,0,1,0,3,3.1354942
+348,33,26,heroin and cocaine,current,30,white,short,0,92,100,1,1,1,100,0,3,0,3,4.6051702
+349,36,28,heroin,current,8,white,short,0,94,98,1,1,1,98,0,3,0,3,4.5849676
+350,38,14,cocaine,current,6,white,short,0,31,81,1,1,1,81,0,4,0,2,4.3944492
+351,36,15,cocaine,previous,3,non white,short,0,28,546,0,1,0,546,0,3,0,2,6.302619
+352,36,18,heroin,current,10,white,short,0,58,58,1,1,1,58,0,3,0,3,4.0604429
+353,35,29,cocaine,current,6,white,short,0,113,569,0,1,0,569,0,3,0,3,6.3438807
+354,35,10,cocaine,Never,3,non white,short,0,70,575,0,1,0,575,0,3,0,2,6.3543701
+355,,29,neither heroin or cocaine,previous,,white,short,0,11,17,1,1,1,17,0,,0,3,2.8332133
+356,39,16,heroin,current,4,white,short,0,90,91,1,1,1,91,0,4,0,2,4.5108595
+357,37,0,neither heroin or cocaine,current,6,white,short,0,55,57,1,1,1,57,0,4,0,1,4.0430512
+358,30,31,heroin,current,5,white,short,0,89,499,1,1,1,499,0,2,0,3,6.212606
+359,26,33,heroin and cocaine,current,7,non white,short,0,71,123,1,1,1,123,0,1,0,4,4.8121843
+360,39,21,neither heroin or cocaine,Never,5,white,short,0,84,143,1,1,1,143,0,4,0,3,4.9628448
+361,33,23,cocaine,current,,white,short,0,91,130,1,1,1,130,0,3,0,3,4.8675346
+362,32,18,cocaine,Never,4,white,short,0,78,471,1,1,1,471,0,3,0,3,6.1548581
+363,26,37.799999,cocaine,Never,4,non white,short,0,60,74,1,1,1,74,0,1,0,4,4.3040652
+364,33,20,heroin,current,6,white,short,0,82,85,1,1,1,85,0,3,0,3,4.4426513
+365,36,11,neither heroin or cocaine,previous,5,white,short,0,81,95,1,1,1,95,0,3,0,2,4.5538769
+366,42,26,heroin,current,3,white,long,0,35,36,1,1,1,36,0,4,0,3,3.583519
+367,37,43,heroin and cocaine,current,22,white,long,0,16,19,1,1,1,19,0,4,0,4,2.9444389
+368,37,12,heroin,previous,1,non white,long,0,7,38,1,1,1,38,0,4,0,2,3.6375861
+369,32,22,cocaine,Never,4,non white,long,0,30,539,0,1,0,539,0,3,0,3,6.2897158
+370,23,36,neither heroin or cocaine,Never,3,non white,long,0,106,567,0,1,0,567,0,1,0,4,6.3403592
+371,21,16,neither heroin or cocaine,Never,10,white,long,0,174,186,1,1,1,186,0,1,0,2,5.2257466
+372,23,41,cocaine,Never,1,white,long,0,144,546,0,1,0,546,0,1,0,4,6.302619
+373,34,16,neither heroin or cocaine,previous,1,white,long,0,24,24,1,1,1,24,0,3,0,2,3.1780539
+374,33,8,neither heroin or cocaine,previous,3,white,long,0,17,540,0,1,0,540,0,3,0,1,6.2915692
+375,33,10,cocaine,Never,4,non white,long,0,97,157,1,1,1,157,0,3,0,2,5.0562458
+376,26,18,cocaine,current,0,white,long,0,26,86,1,1,1,86,0,1,0,3,4.4543471
+377,28,27,neither heroin or cocaine,Never,2,non white,long,0,31,231,1,1,1,231,0,2,0,3,5.4424176
+378,25,8,neither heroin or cocaine,Never,,non white,long,0,71,271,1,1,1,271,0,1,0,1,5.602119
+379,27,28,heroin and cocaine,current,3,white,short,0,14,14,1,1,1,14,0,2,0,3,2.6390574
+380,22,23,heroin and cocaine,current,2,white,short,0,75,75,1,1,1,75,0,1,0,3,4.3174882
+381,31,32,cocaine,current,6,non white,short,0,20,147,1,1,1,147,0,2,0,4,4.9904327
+382,29,23.1,cocaine,Never,4,white,short,0,104,105,1,1,1,105,0,2,0,3,4.6539602
+383,44,11,neither heroin or cocaine,current,12,white,short,0,85,324,1,1,1,324,0,4,0,2,5.7807436
+384,26,7,cocaine,Never,0,non white,short,0,110,538,0,1,0,538,0,1,0,1,6.2878585
+385,44,24,heroin,current,16,white,short,0,100,300,1,1,1,300,0,4,0,3,5.7037826
+386,34,12,heroin and cocaine,current,1,white,short,0,73,73,1,1,1,73,0,3,0,2,4.2904596
+387,36,25,heroin,current,6,white,short,0,65,65,1,1,1,65,0,3,0,3,4.1743875
+388,43,4,heroin,current,20,white,short,0,75,568,1,1,1,568,0,4,0,1,6.3421216
+389,37,5,cocaine,Never,1,white,short,0,83,84,1,1,1,84,0,4,0,1,4.4308167
+390,44,13,neither heroin or cocaine,previous,17,white,long,0,15,22,1,1,1,22,0,4,0,2,3.0910425
+391,31,17,heroin and cocaine,current,30,non white,long,0,44,44,1,1,1,44,0,2,0,3,3.7841897
+392,24,24,heroin,Never,3,white,long,0,7,7,1,1,1,7,0,1,0,3,1.9459101
+393,,26,heroin and cocaine,current,,non white,long,0,14,540,0,1,0,540,0,,0,3,6.2915692
+394,37,32,cocaine,current,4,white,long,0,20,21,1,1,1,21,0,4,0,4,3.0445225
+395,41,19,heroin and cocaine,current,12,non white,long,0,175,537,0,1,0,537,0,4,0,3,6.2859979
+396,32,9,cocaine,Never,3,non white,long,0,71,186,1,1,1,186,0,3,0,1,5.2257466
+397,23,6,cocaine,Never,2,white,long,0,26,40,1,1,1,40,0,1,0,1,3.6888795
+398,33,10,heroin,current,3,white,long,0,161,287,1,1,1,287,0,3,0,2,5.659482
+399,43,11,neither heroin or cocaine,Never,9,white,long,0,36,538,0,1,0,538,0,4,0,2,6.2878585
+400,33,16,neither heroin or cocaine,current,8,white,long,0,30,30,1,1,1,30,0,3,0,2,3.4011974
+401,41,25,neither heroin or cocaine,previous,3,white,long,0,179,516,1,1,1,516,0,4,0,3,6.2461066
+402,41,17,heroin,current,2,white,long,0,199,268,1,1,1,268,0,4,0,3,5.5909872
+403,37,24,heroin,current,3,white,long,0,182,568,0,1,0,568,0,4,0,3,6.3421216
+404,26,27,heroin and cocaine,Never,3,white,short,0,112,131,1,1,1,131,0,1,0,3,4.8751974
+405,33,24,heroin and cocaine,current,6,white,short,0,8,399,1,1,1,399,0,3,0,3,5.9889612
+406,30,26,cocaine,Never,2,white,short,0,18,78,1,1,1,78,0,2,0,3,4.356709
+407,33,17,neither heroin or cocaine,Never,6,non white,short,0,20,80,1,1,1,80,0,3,0,3,4.3820267
+408,33,26,heroin,current,3,white,short,0,88,102,1,1,1,102,0,3,0,3,4.6249728
+409,,32,heroin and cocaine,current,,white,short,0,3,3,1,1,1,3,0,,0,4,1.0986123
+410,37,13,cocaine,Never,6,white,short,0,88,124,1,1,1,124,0,4,0,2,4.8202815
+411,44,11,heroin,current,20,white,short,0,76,80,1,1,1,80,0,4,0,2,4.3820267
+412,20,8,neither heroin or cocaine,Never,1,white,short,0,22,23,1,1,1,23,0,1,0,1,3.1354942
+413,33,12,heroin and cocaine,current,4,white,short,0,110,274,1,1,1,274,0,3,0,2,5.6131282
+414,,,heroin,current,,non white,short,0,5,10,1,1,1,10,0,,0,,2.3025851
+415,36,31,heroin,current,3,white,short,0,85,459,1,1,1,459,0,3,0,3,6.1290503
+416,34,8.3999996,heroin,current,3,white,short,0,10,10,1,1,1,10,0,3,0,1,2.3025851
+417,35,10,heroin and cocaine,current,17,white,long,0,157,176,1,1,1,176,0,3,0,2,5.1704841
+418,38,16,heroin,current,26,white,long,0,133,332,1,1,1,332,0,4,0,2,5.8051348
+419,24,13,cocaine,Never,3,white,long,0,83,119,1,1,1,119,0,1,0,2,4.7791233
+420,24,18,cocaine,Never,4,white,long,0,152,217,1,1,1,217,0,1,0,3,5.3798971
+421,32,13,cocaine,Never,4,white,long,0,169,285,1,1,1,285,0,3,0,2,5.6524892
+422,35,11,neither heroin or cocaine,previous,3,white,long,0,89,576,0,1,0,576,0,3,0,2,6.3561077
+423,33,21,heroin and cocaine,current,5,white,long,0,92,106,1,1,1,106,0,3,0,3,4.6634393
+424,29,37,heroin,previous,4,non white,long,0,21,81,1,1,1,81,0,2,0,4,4.3944492
+425,42,32,heroin,current,30,white,long,0,31,47,1,1,1,47,0,4,0,4,3.8501475
+426,23,33,neither heroin or cocaine,Never,1,white,long,0,31,76,1,1,1,76,0,1,0,4,4.3307333
+427,28,11,neither heroin or cocaine,current,16,white,long,0,133,348,1,1,1,348,0,2,0,2,5.8522024
+428,39,,neither heroin or cocaine,Never,5,white,long,0,20,20,1,1,1,20,0,4,0,,2.9957323
+429,43,29,heroin,current,4,white,long,0,153,306,1,1,1,306,0,4,0,3,5.7235851
+430,33,23,heroin,Never,0,white,short,0,90,192,1,1,1,192,0,3,0,3,5.2574954
+431,37,15,heroin and cocaine,current,20,white,short,0,102,216,1,1,1,216,0,4,0,2,5.3752785
+432,49,22,heroin,current,7,white,short,0,85,189,1,1,1,189,0,4,0,3,5.2417469
+433,27,26.25,neither heroin or cocaine,current,,white,short,0,44,403,1,1,1,403,0,2,0,3,5.9989367
+434,36,25,cocaine,Never,1,non white,short,0,89,193,1,1,1,193,0,3,0,3,5.2626901
+435,27,30,heroin and cocaine,current,13,white,short,0,28,28,1,1,1,28,0,2,0,3,3.3322046
+436,35,23,heroin and cocaine,current,1,white,short,0,90,150,1,1,1,150,0,3,0,3,5.0106354
+437,25,10,cocaine,previous,3,white,short,0,84,99,1,1,1,99,0,1,0,2,4.59512
+438,33,8,heroin and cocaine,current,3,white,short,0,85,510,0,1,0,510,0,3,0,1,6.2344108
+439,34,16,heroin and cocaine,current,7,white,short,0,36,306,1,1,1,306,0,3,0,2,5.7235851
+440,38,9,heroin and cocaine,current,10,non white,short,0,74,101,1,1,1,101,0,4,0,1,4.6151204
+441,36,12.158,heroin,current,0,non white,short,0,42,102,1,1,1,102,0,3,0,2,4.6249728
+442,27,5,heroin and cocaine,current,1,white,short,0,90,510,0,1,0,510,0,2,0,1,6.2344108
+443,31,,,,,white,short,0,9,69,1,1,1,69,0,2,0,,4.2341065
+444,40,19,heroin and cocaine,current,0,non white,short,0,108,503,0,1,0,503,0,4,0,3,6.2205901
+445,32,23,cocaine,current,3,white,short,1,49,52,1,1,1,52,0,3,0,3,3.9512436
+446,38,28,cocaine,current,1,non white,short,1,219,547,0,1,0,547,0,4,0,3,6.3044486
+447,38,16,heroin and cocaine,current,6,white,short,1,108,168,1,1,1,168,0,4,0,2,5.1239638
+448,23,25,neither heroin or cocaine,Never,0,white,short,1,178,461,1,1,1,461,0,1,0,3,6.1333981
+449,26,22,neither heroin or cocaine,previous,2,white,short,1,42,538,0,1,0,538,0,1,0,3,6.2878585
+450,36,28,heroin,current,7,white,short,1,182,349,1,1,1,349,0,3,0,3,5.855072
+451,30,28,neither heroin or cocaine,Never,5,white,short,1,6,44,1,1,1,44,0,2,0,3,3.7841897
+452,31,18,neither heroin or cocaine,previous,3,white,long,1,351,548,0,1,0,548,0,2,1,3,6.3062754
+453,23,15,cocaine,Never,1,white,long,1,12,12,1,1,1,12,0,1,1,2,2.4849067
+454,43,9,heroin and cocaine,current,0,non white,long,1,6,6,1,1,1,6,0,4,1,1,1.7917595
+455,24,26,neither heroin or cocaine,Never,1,white,long,1,91,575,0,1,0,575,0,1,1,3,6.3543701
+456,42,19,neither heroin or cocaine,Never,1,white,long,1,245,589,0,1,0,589,0,4,1,3,6.3784261
+457,35,26,neither heroin or cocaine,previous,1,white,long,1,372,408,1,1,1,408,0,3,1,3,6.0112672
+458,21,10,neither heroin or cocaine,Never,0,white,long,1,218,232,1,1,1,232,0,1,1,2,5.4467373
+459,45,1,neither heroin or cocaine,previous,0,non white,long,1,46,143,1,1,1,143,0,4,1,1,4.9628448
+460,43,30,heroin,current,6,white,long,1,363,582,0,1,0,582,0,4,1,3,6.3664703
+461,24,7,neither heroin or cocaine,Never,0,non white,long,1,133,134,1,1,1,134,0,1,1,1,4.89784
+462,37,11,cocaine,current,1,white,long,1,7,7,1,1,1,7,0,4,1,2,1.9459101
+463,40,10,neither heroin or cocaine,previous,0,white,long,1,112,548,0,1,0,548,0,4,1,2,6.3062754
+464,27,11,cocaine,previous,2,white,short,1,21,81,1,1,1,81,0,2,0,2,4.3944492
+465,29,11,heroin,current,1,white,short,1,169,170,1,1,1,170,0,2,0,2,5.1357985
+466,34,12,neither heroin or cocaine,current,6,white,short,1,28,29,1,1,1,29,0,3,0,2,3.3672957
+467,29,29,cocaine,current,20,white,short,1,47,78,1,1,1,78,0,2,0,3,4.356709
+468,35,27,heroin and cocaine,current,5,white,short,1,20,81,1,1,1,81,0,3,0,3,4.3944492
+469,39,20,heroin and cocaine,current,4,white,long,1,352,369,1,1,1,369,0,4,1,3,5.9107966
+470,41,9,neither heroin or cocaine,previous,0,white,long,1,66,69,1,1,1,69,0,4,1,1,4.2341065
+471,37,18,neither heroin or cocaine,Never,6,non white,long,1,55,115,1,1,1,115,0,4,1,3,4.7449322
+472,30,10,cocaine,previous,7,white,long,1,344,361,1,1,1,361,0,2,1,2,5.8888779
+473,31,1,neither heroin or cocaine,Never,0,white,long,1,153,245,1,1,1,245,0,2,1,1,5.5012584
+474,40,5,neither heroin or cocaine,previous,8,white,short,1,184,233,1,1,1,233,0,4,0,1,5.4510384
+475,32,20,neither heroin or cocaine,Never,0,white,short,1,183,227,1,1,1,227,0,3,0,3,5.4249501
+476,32,7,neither heroin or cocaine,previous,3,non white,short,1,22,97,1,1,1,97,0,3,0,1,4.5747108
+477,27,7,neither heroin or cocaine,Never,0,white,short,1,183,547,0,1,0,547,0,2,0,1,6.3044486
+478,23,26,cocaine,Never,0,white,short,1,140,224,1,1,1,224,0,1,0,3,5.4116459
+479,23,4,neither heroin or cocaine,Never,2,white,short,1,19,211,1,1,1,211,0,1,0,1,5.3518581
+480,43,11,heroin,current,12,white,short,1,184,220,1,1,1,220,0,4,0,2,5.3936276
+481,24,20,neither heroin or cocaine,Never,0,white,short,1,50,54,1,1,1,54,0,1,0,3,3.9889841
+482,36,11,neither heroin or cocaine,Never,2,non white,short,1,132,192,1,1,1,192,0,3,0,2,5.2574954
+483,29,31,heroin and cocaine,current,1,white,short,1,128,138,1,1,1,138,0,2,0,3,4.9272537
+484,39,13,neither heroin or cocaine,previous,1,white,long,1,107,107,1,1,1,107,0,4,1,2,4.6728287
+485,23,6,neither heroin or cocaine,Never,0,white,long,1,368,597,0,1,0,597,0,1,1,1,6.3919172
+486,27,17,cocaine,current,4,white,long,1,219,226,1,1,1,226,0,2,1,3,5.4205351
+487,26,5,neither heroin or cocaine,previous,5,white,long,1,374,434,1,1,1,434,0,1,1,1,6.0730443
+488,26,27,cocaine,Never,1,non white,long,1,92,106,1,1,1,106,0,1,1,3,4.6634393
+489,25,9,neither heroin or cocaine,Never,0,white,long,1,45,180,1,1,1,180,0,1,1,1,5.1929569
+490,34,10,cocaine,Never,0,white,long,1,366,557,0,1,0,557,0,3,1,2,6.3225651
+491,45,5,neither heroin or cocaine,current,2,white,long,1,368,556,0,1,0,556,0,4,1,1,6.3207684
+492,23,17,neither heroin or cocaine,Never,1,white,short,1,78,619,0,1,0,619,0,1,0,3,6.4281054
+493,26,7,neither heroin or cocaine,Never,0,white,short,1,184,546,0,1,0,546,0,1,0,1,6.302619
+494,33,,,,2,white,short,1,4,85,1,1,1,85,0,3,0,,4.4426513
+495,24,27,heroin and cocaine,previous,2,white,short,1,187,233,1,1,1,233,0,1,0,3,5.4510384
+496,30,23,heroin,current,2,non white,short,1,101,102,1,1,1,102,0,2,0,3,4.6249728
+497,22,26,cocaine,Never,0,white,short,1,141,548,0,1,0,548,0,1,0,3,6.3062754
+498,25,10,cocaine,Never,1,white,short,1,24,99,1,1,1,99,0,1,0,2,4.59512
+499,30,8.3999996,cocaine,previous,40,white,short,1,36,36,1,1,1,36,0,2,0,1,3.583519
+500,37,,,,8,non white,short,1,32,32,1,1,1,32,0,4,0,,3.4657359
+501,33,23,neither heroin or cocaine,Never,0,non white,long,1,56,78,1,1,1,78,0,3,1,3,4.356709
+502,34,15,cocaine,previous,8,white,long,1,367,502,1,1,1,502,0,3,1,2,6.2186003
+503,29,24,cocaine,Never,2,white,long,1,70,71,1,1,1,71,0,2,1,3,4.2626801
+504,39,33,neither heroin or cocaine,previous,6,white,long,1,58,59,1,1,1,59,0,4,1,4,4.0775375
+505,33,,cocaine,Never,1,non white,long,1,52,115,1,1,1,115,0,3,1,,4.7449322
+506,26,21,cocaine,Never,4,white,long,1,366,533,0,1,0,533,0,1,1,3,6.2785215
+507,32,23,heroin,current,6,white,long,1,10,10,1,1,1,10,0,3,1,3,2.3025851
+508,42,23.1,heroin and cocaine,current,2,white,short,1,214,274,1,1,1,274,0,4,0,3,5.6131282
+509,39,25,heroin and cocaine,previous,8,white,short,1,197,255,1,1,1,255,0,4,0,3,5.5412636
+510,36,2,neither heroin or cocaine,Never,0,non white,short,1,89,503,0,1,0,503,0,3,0,1,6.2205901
+511,22,20,cocaine,Never,1,white,short,1,56,256,1,1,1,256,0,1,0,3,5.5451775
+512,27,23,neither heroin or cocaine,Never,1,white,short,1,9,9,1,1,1,9,0,2,0,3,2.1972246
+513,21,,,,3,white,short,1,24,550,0,1,0,550,0,1,0,,6.3099184
+514,28,9,neither heroin or cocaine,Never,0,white,short,1,186,386,1,1,1,386,0,2,0,1,5.9558372
+515,36,28,cocaine,previous,1,white,long,1,303,547,0,1,0,547,0,3,1,3,6.3044486
+516,31,13,cocaine,Never,3,white,long,1,32,45,1,1,1,45,0,2,1,2,3.8066626
+517,27,22,cocaine,previous,4,white,long,1,8,58,1,1,1,58,0,2,1,3,4.0604429
+518,23,17,cocaine,Never,1,white,long,1,63,124,1,1,1,124,0,1,1,3,4.8202815
+519,24,20,cocaine,previous,20,white,short,1,108,540,0,1,0,540,0,1,0,3,6.2915692
+520,38,5,cocaine,previous,1,white,short,1,183,243,1,1,1,243,0,4,0,1,5.4930615
+521,25,8,neither heroin or cocaine,Never,1,white,long,1,151,549,0,1,0,549,0,1,1,1,6.3080983
+522,26,20,cocaine,Never,0,white,short,1,7,12,1,1,1,12,0,1,0,3,2.4849067
+523,22,34,cocaine,Never,2,white,short,1,38,51,1,1,1,51,0,1,0,4,3.9318256
+524,33,13,neither heroin or cocaine,Never,2,white,long,1,176,562,0,1,0,562,0,3,1,2,6.331502
+525,30,23,heroin and cocaine,current,7,white,long,1,93,94,1,1,1,94,0,2,1,3,4.5432949
+526,45,8,neither heroin or cocaine,current,3,white,short,1,200,204,1,1,1,204,0,4,0,1,5.31812
+527,24,15,cocaine,previous,0,white,short,1,178,238,1,1,1,238,0,1,0,2,5.4722705
+528,27,22,neither heroin or cocaine,Never,0,white,long,1,78,140,1,1,1,140,0,2,1,3,4.9416423
+529,36,19,neither heroin or cocaine,previous,10,white,long,1,119,120,1,1,1,120,0,3,1,3,4.7874918
+530,38,23,neither heroin or cocaine,previous,2,non white,short,1,154,154,1,1,1,154,0,4,0,3,5.0369525
+531,31,17,heroin,current,2,white,long,1,163,177,1,1,1,177,0,2,1,3,5.1761498
+532,40,22,neither heroin or cocaine,previous,7,white,long,1,118,119,1,1,1,119,0,4,1,3,4.7791233
+533,22,12,cocaine,Never,0,non white,long,1,76,83,1,1,1,83,0,1,1,2,4.4188404
+534,31,13,neither heroin or cocaine,Never,0,non white,long,1,116,130,1,1,1,130,0,2,1,2,4.8675346
+535,23,,neither heroin or cocaine,previous,20,white,long,1,10,11,1,1,1,11,0,1,1,,2.3978953
+536,39,7,cocaine,current,3,non white,short,1,88,159,1,1,1,159,0,4,0,1,5.0689044
+537,23,,neither heroin or cocaine,Never,1,white,short,1,76,211,1,1,1,211,0,1,0,,5.3518581
+538,33,14,cocaine,Never,1,white,short,1,33,33,1,1,1,33,0,3,0,2,3.4965076
+539,27,10,cocaine,current,2,white,long,1,70,72,1,1,1,72,0,2,1,2,4.2766662
+540,37,7,neither heroin or cocaine,Never,2,non white,long,1,68,161,1,1,1,161,0,4,1,1,5.0814042
+541,35,16,neither heroin or cocaine,previous,25,white,short,1,191,191,1,1,1,191,0,3,0,2,5.2522736
+542,25,11,cocaine,Never,5,white,short,1,35,181,1,1,1,181,0,1,0,2,5.1984968
+543,27,11,cocaine,Never,1,non white,long,1,32,546,0,1,0,546,0,2,1,2,6.302619
+544,34,15,neither heroin or cocaine,Never,0,white,short,1,28,540,0,1,0,540,0,3,0,2,6.2915692
+545,30,15,cocaine,Never,3,white,short,1,15,76,1,1,1,76,0,2,0,2,4.3307333
+546,35,17,heroin and cocaine,current,7,white,short,1,7,7,1,1,1,7,0,3,0,3,1.9459101
+547,34,23,neither heroin or cocaine,Never,0,white,short,1,43,44,1,1,1,44,0,3,0,3,3.7841897
+548,25,23,cocaine,previous,5,white,short,1,89,103,1,1,1,103,0,1,0,3,4.6347289
+549,34,18,cocaine,Never,1,white,short,1,38,79,1,1,1,79,0,3,0,3,4.3694477
+550,24,23,neither heroin or cocaine,current,3,white,short,1,204,339,1,1,1,339,0,1,0,3,5.8260002
+551,24,20,neither heroin or cocaine,Never,2,white,short,1,76,90,1,1,1,90,0,1,0,3,4.4998097
+552,40,36,neither heroin or cocaine,Never,3,white,short,1,195,542,0,1,0,542,0,4,0,4,6.2952662
+553,33,9,cocaine,Never,1,non white,short,1,184,384,1,1,1,384,0,3,0,1,5.9506426
+554,38,14,neither heroin or cocaine,previous,1,non white,long,1,254,255,1,1,1,255,0,4,1,2,5.5412636
+555,32,1,cocaine,Never,0,white,long,1,371,431,1,1,1,431,0,3,1,1,6.0661082
+556,33,3,neither heroin or cocaine,Never,1,white,short,1,196,587,0,1,0,587,0,3,0,1,6.3750248
+557,28,40,cocaine,Never,2,non white,short,1,198,198,1,1,1,198,0,2,0,4,5.2882671
+558,31,13,cocaine,current,2,white,short,1,170,551,0,1,0,551,0,2,0,2,6.3117347
+559,31,39,heroin,current,4,white,long,1,50,110,1,1,1,110,0,2,1,4,4.7004805
+560,33,24,neither heroin or cocaine,Never,0,white,long,1,163,541,0,1,0,541,0,3,1,3,6.2934194
+561,24,26,cocaine,Never,11,white,short,1,182,242,1,1,1,242,0,1,0,3,5.4889379
+562,26,18,cocaine,Never,3,white,short,1,150,537,0,1,0,537,0,1,0,3,6.2859979
+563,31,19,heroin,current,7,white,long,1,34,56,1,1,1,56,0,2,1,3,4.0253515
+564,40,14.7,heroin,current,4,white,long,1,34,34,1,1,1,34,0,4,1,2,3.5263605
+565,36,10,neither heroin or cocaine,previous,,white,long,1,354,567,0,1,0,567,0,3,1,2,6.3403592
+566,34,2,cocaine,Never,3,white,long,1,366,549,0,1,0,549,0,3,1,1,6.3080983
+567,30,11,cocaine,previous,7,white,short,1,133,133,1,1,1,133,0,2,0,2,4.8903489
+568,36,0,cocaine,previous,3,white,short,1,69,226,1,1,1,226,0,3,0,1,5.4205351
+569,38,17,heroin,current,6,white,long,1,366,401,1,1,1,401,0,4,1,3,5.9939613
+570,31,20,heroin and cocaine,current,6,non white,long,1,14,14,1,1,1,14,0,2,1,3,2.6390574
+571,27,22,heroin,previous,2,white,short,1,184,548,0,1,0,548,0,2,0,3,6.3062754
+572,32,21,heroin and cocaine,current,15,white,long,1,89,224,1,1,1,224,0,3,1,3,5.4116459
+573,35,23,cocaine,Never,5,non white,short,1,183,540,0,1,0,540,0,3,0,3,6.2915692
+574,44,29,heroin,current,13,white,short,1,177,237,1,1,1,237,0,4,0,3,5.46806
+575,31,5,heroin,current,10,white,long,1,154,354,1,1,1,354,0,2,1,1,5.869297
+576,28,23,cocaine,previous,20,white,short,1,123,123,1,1,1,123,0,2,0,3,4.8121843
+577,40,8,neither heroin or cocaine,previous,1,white,short,1,146,170,1,1,1,170,0,4,0,1,5.1357985
+578,25,12,cocaine,Never,10,non white,long,1,203,203,1,1,1,203,0,1,1,2,5.3132062
+579,32,10,heroin and cocaine,current,6,white,long,1,360,360,1,1,1,360,0,3,1,2,5.8861041
+580,29,15.75,neither heroin or cocaine,Never,2,white,short,1,79,139,1,1,1,139,0,2,0,2,4.934474
+581,40,2,heroin,previous,5,white,long,1,201,215,1,1,1,215,0,4,1,1,5.3706379
+582,27,9,neither heroin or cocaine,previous,0,white,long,1,129,129,1,1,1,129,0,2,1,1,4.8598123
+583,26,2,cocaine,Never,1,white,long,1,365,396,1,1,1,396,0,1,1,1,5.9814143
+584,34,15,cocaine,Never,4,non white,long,1,159,547,0,1,0,547,0,3,1,2,6.3044486
+585,49,4,neither heroin or cocaine,previous,2,white,short,1,177,547,0,1,0,547,0,4,0,1,6.3044486
+586,21,25,heroin and cocaine,current,1,white,long,1,71,71,1,1,1,71,0,1,1,3,4.2626801
+587,39,23,cocaine,current,2,white,long,1,108,168,1,1,1,168,0,4,1,3,5.1239638
+588,33,15,neither heroin or cocaine,previous,4,white,long,1,198,228,1,1,1,228,0,3,1,2,5.4293456
+589,32,3,cocaine,Never,1,white,long,1,372,551,0,1,0,551,0,3,1,1,6.3117347
+590,35,9,neither heroin or cocaine,previous,6,white,short,1,25,654,0,1,0,654,0,3,0,1,6.4831076
+591,31,20,neither heroin or cocaine,Never,0,non white,long,1,48,51,1,1,1,51,0,2,1,3,3.9318256
+592,28,5,neither heroin or cocaine,Never,3,white,short,1,191,548,0,1,0,548,0,2,0,1,6.3062754
+593,27,29,cocaine,previous,5,white,long,1,171,231,1,1,1,231,0,2,1,3,5.4424176
+594,29,21,heroin,Never,1,non white,long,1,145,280,1,1,1,280,0,2,1,3,5.6347895
+595,30,1,heroin,Never,20,white,short,1,183,184,1,1,1,184,0,2,0,1,5.2149358
+596,27,18,neither heroin or cocaine,Never,3,non white,short,1,72,86,1,1,1,86,0,2,0,3,4.4543471
+597,33,,,,1,white,short,1,13,560,0,1,0,560,0,3,0,,6.3279366
+598,40,15,neither heroin or cocaine,previous,1,white,long,1,44,46,1,1,1,46,0,4,1,2,3.8286414
+599,37,20,cocaine,Never,2,non white,long,1,140,200,1,1,1,200,0,4,1,3,5.2983174
+600,33,10,neither heroin or cocaine,Never,0,white,short,1,184,244,1,1,1,244,0,3,0,2,5.4971681
+601,28,20,neither heroin or cocaine,Never,2,white,short,1,94,182,1,1,1,182,0,2,0,3,5.2040067
+602,40,15,neither heroin or cocaine,previous,8,white,long,1,296,296,1,1,1,296,0,4,1,2,5.6903596
+603,48,20,neither heroin or cocaine,Never,0,non white,short,1,23,24,1,1,1,24,0,4,0,3,3.1780539
+604,38,25,cocaine,Never,1,white,short,1,128,142,1,1,1,142,0,4,0,3,4.9558272
+605,35,13,neither heroin or cocaine,Never,0,white,short,1,106,120,1,1,1,120,0,3,0,2,4.7874918
+606,37,13,neither heroin or cocaine,previous,0,white,short,1,46,47,1,1,1,47,0,4,0,2,3.8501475
+607,25,15,cocaine,Never,0,non white,long,1,150,519,1,1,1,519,0,1,1,2,6.251904
+608,26,8,neither heroin or cocaine,Never,2,white,long,1,48,248,1,1,1,248,0,1,1,1,5.5134287
+609,30,9,cocaine,current,3,white,short,1,29,31,1,1,1,31,0,2,0,1,3.4339871
+610,28,16,neither heroin or cocaine,previous,2,white,short,1,179,567,0,1,0,567,0,2,0,2,6.3403592
+611,23,11,heroin,current,4,white,short,1,170,353,1,1,1,353,0,1,0,2,5.866468
+612,36,31,neither heroin or cocaine,Never,1,white,long,1,365,458,1,1,1,458,0,3,1,3,6.1268692
+613,36,13,neither heroin or cocaine,previous,4,white,long,1,400,554,0,1,0,554,0,3,1,2,6.3171649
+614,24,5,neither heroin or cocaine,Never,0,non white,short,1,56,116,1,1,1,116,0,1,0,1,4.7535901
+615,33,9,cocaine,previous,5,white,short,1,24,74,1,1,1,74,0,3,0,1,4.3040652
+616,38,15,neither heroin or cocaine,previous,6,white,short,1,10,10,1,1,1,10,0,4,0,2,2.3025851
+617,41,20,cocaine,current,21,white,long,1,354,355,1,1,1,355,0,4,1,3,5.872118
+618,31,21,cocaine,Never,0,non white,long,1,232,232,1,1,1,232,0,2,1,3,5.4467373
+619,31,23,neither heroin or cocaine,previous,11,white,long,1,54,68,1,1,1,68,0,2,1,3,4.2195077
+620,37,5,neither heroin or cocaine,Never,0,non white,long,1,48,48,1,1,1,48,0,4,1,1,3.871201
+621,37,17,neither heroin or cocaine,previous,4,non white,short,1,57,60,1,1,1,60,0,4,0,3,4.0943446
+622,33,13,neither heroin or cocaine,Never,0,white,short,1,46,50,1,1,1,50,0,3,0,2,3.9120231
+623,36,9,neither heroin or cocaine,previous,,white,short,1,37,51,1,1,1,51,0,3,0,1,3.9318256
+624,53,9,neither heroin or cocaine,previous,6,white,short,1,39,126,1,1,1,126,0,4,0,1,4.8362818
+625,37,20,heroin,current,4,white,short,1,17,18,1,1,1,18,0,4,0,3,2.8903718
+626,28,10,neither heroin or cocaine,previous,3,white,long,1,21,35,1,1,1,35,0,2,1,2,3.5553482
+627,35,17,heroin and cocaine,current,2,white,short,1,184,379,1,1,1,379,0,3,0,3,5.9375362
+628,46,31.5,heroin and cocaine,current,15,non white,long,1,9,377,1,1,1,377,0,4,1,3,5.9322453

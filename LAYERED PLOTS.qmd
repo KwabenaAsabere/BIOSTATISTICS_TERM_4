@@ -1,0 +1,39 @@
+---
+title: "LAYERED PLOTS"
+author: "K.ASABERE"
+df-print: kable
+format: html
+code-overflow: wrap
+fig-width: 6
+fig-asp: 0.618
+execute: 
+  echo: true
+  warning: false
+  message: false
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(gtsummary)
+library(finalfit)
+library(broom)
+theme_set(theme_bw())
+```
+
+```{r}
+
+framingham <- read_csv("framingham.csv")
+
+```
+
+```{r}
+framingham %>% 
+  ggplot()+
+  geom_histogram(aes(x =BMI),fill = "lightgrey",alpha = 0.7)+
+  geom_smooth(aes(x=BMI, y= totChol),method = "lm")
+  
+  
+```

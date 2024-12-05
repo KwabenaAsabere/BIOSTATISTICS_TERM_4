@@ -1,0 +1,50 @@
+---
+title: "MULTIPLE LINEAR REGRESSION OF AMES HOUSING DATA"
+author: "K.Asabere"
+format: html
+editor: visual
+execute:
+  
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(finalfit)
+library(broom)
+theme_set(theme_minimal())
+```
+
+```{r}
+#| label: fig-sales prices
+#| fig-cap: Distribution of sales prices
+
+
+ames <- read_csv("ames_housing.csv")
+head(ames, n= 5)
+ames %>% 
+  ggplot(aes(x =Sale_Price))+
+  geom_histogram(fill = "steelblue")
+  
+```
+
+```{r}
+#| label: fig-size of household
+#| fig-cap: plot of price against size of house
+#| fig-cap-location: top
+
+
+ames %>% 
+  ggplot(aes(x= Gr_Liv_Area,y= Sale_Price))+
+  geom_point()+
+  theme_minimal()
+```
+
+```{r}
+
+ames %>% 
+  filter(Gr_Liv_Area > 4000) %>% 
+  arrange(Sale_Price)
+```

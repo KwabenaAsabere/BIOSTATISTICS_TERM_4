@@ -1,0 +1,60 @@
+---
+title: "QUARTO ALL THE THINGS"
+author: "K.ASABERE"
+format: html
+code-line-numbers: true
+editor: visual
+execute: 
+  echo: true
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(gt)
+library(tidyverse)
+```
+
+First, let's take a look at the dataset.
+
+```{r}
+gt(head(Theoph))
+```
+
+Let's also look at a concentration time profile
+
+```{r}
+#| label: fig-conc-time
+#| fig-cap: Concentration time plot for Theoph
+#| fig-subcap: 
+#| - Regular scale
+#| - Semi log scale
+#| layout-ncol: 2
+
+p_ct <- Theoph %>% 
+  ggplot(aes( x= Time, y = conc))+
+  geom_point(color = "steelblue")+
+  theme_bw()
+p_ct
+p_ct+ scale_x_log10()
+```
+
+As shown in @fig-conc-time-1, we have some interesting insights.We also have a semi-log representation in @fig-conc-time-2
+
+::: {layout="[70,30]"}
+```{r}
+#| fig-width: 4
+#| fig-height: 3
+
+p_ct
+```
+
+```{r}
+Theoph %>% group_by(Subject) %>% summarise(cmax = max(conc)) %>% gt()
+```
+:::
+
+```{r}
+sessioninfo::session_info()
+```

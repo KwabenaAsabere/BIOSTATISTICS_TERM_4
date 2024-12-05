@@ -1,0 +1,5 @@
+"0","#| label: fig-diamonds"
+"0",""
+"0","diamonds %>% "
+"0","  ggplot(aes(x = cut))+"
+"0","  geom_bar()"

@@ -1,0 +1,101 @@
+permanent_facility_id,facility_name,sex,length_of_stay,total_costs
+000245,Stony Brook University Hospital,F,43,98173.06
+000409,Highland Hospital,F,2,3431.6
+000913,Huntington Hospital,F,2,4281.05
+001139,Westchester Medical Center,M,12,19338.9
+001286,Brookdale Hospital Medical Center,M,2,4638.58
+000574,Niagara Falls Memorial Medical Center,F,32,83818.98
+001288,Brooklyn Hospital Center - Downtown Campus,F,1,2627.18
+000699,Garnet Health Medical Center,M,3,6205.9
+000541,North Shore University Hospital,M,8,15521.34
+000324,Adirondack Medical Center-Saranac Lake Site,M,NA,13474.57
+001315,Kingsbrook Jewish Medical Center,M,9,35918.759999999995
+000541,North Shore University Hospital,NA,3,8779.140000000001
+001626,Elmhurst Hospital Center,F,-99,11190.44
+000001,Albany Medical Center Hospital,F,4,10258.17
+001304,NYU Langone Hospital-Brooklyn,NA,2,24193.14
+001626,Elmhurst Hospital Center,F,4,17040.79
+001453,Memorial Hospital for Cancer and Allied Diseases,M,6,29146.24
+000541,North Shore University Hospital,F,20,58192.78999999999
+000330,Nathan Littauer Hospital,F,3,11115.83
+000551,St. Joseph Hospital,M,18,38526.380000000005
+001464,New York-Presbyterian Hospital - Columbia Presbyterian Center,F,-99,511.97999999999996
+001305,Maimonides Medical Center,M,2,843.12
+000746,Mary Imogene Bassett Hospital,F,1,4231.26
+000411,Rochester General Hospital,M,-99,17212
+000913,Huntington Hospital,NA,5,20009.05
+001450,Lenox Hill Hospital,M,1,1232.62
+001306,New York - Presbyterian Brooklyn Methodist Hospital,F,4,6999.51
+001072,Montefiore New Rochelle Hospital,NA,4,7771.48
+000208,John R. Oishei Children's Hospital,M,1,3314.42
+000245,Stony Brook University Hospital,F,3,2808.34
+000541,North Shore University Hospital,F,2,7276.59
+000146,Columbia Memorial Hospital,F,NA,5183.08
+000043,Our Lady of Lourdes Memorial Hospital,F,3,7795.820000000001
+000913,Huntington Hospital,M,1,12076.98
+003376,Cohen Children's Medical Center,M,1,3825.59
+000779,Good Samaritan Hospital of Suffern,F,1,3274.2
+001172,Lincoln Medical & Mental Health Center,F,1,5404.01
+001456,Mount Sinai Hospital,F,75,492329.66
+000005,St. Peter's Hospital,F,2,7477.22
+001005,Glens Falls Hospital,M,7,20828.35
+001464,New York-Presbyterian Hospital - Columbia Presbyterian Center,M,5,NA
+001439,Mount Sinai Beth Israel,M,2,3196.14
+001638,Long Island Jewish Forest Hills,F,1,2473.16
+001304,NYU Langone Hospital-Brooklyn,F,13,38746.83
+001306,New York - Presbyterian Brooklyn Methodist Hospital,F,2,3660.4900000000002
+001139,Westchester Medical Center,F,4,6534.91
+001438,Bellevue Hospital Center,F,46,197517.72
+000005,St. Peter's Hospital,M,4,4798.7699999999995
+001072,Montefiore New Rochelle Hospital,F,-99,8566.83
+001628,Flushing Hospital Medical Center,F,2,4432.42
+000752,Putnam Hospital,M,2,4316.6900000000005
+000005,St. Peter's Hospital,M,2,1089.82
+001178,BronxCare Hospital Center,M,2,9820.640000000001
+000058,United Health Services Hospitals Inc. - Wilson Medical Center,F,11,15102.48
+000589,"Rome Memorial Hospital, Inc",F,3,3004.9100000000003
+001046,Winifred Masterson Burke Rehabilitation Hospital,NA,19,26538.6
+001458,New York-Presbyterian Hospital - New York Weill Cornell Center,M,4,NA
+000527,Mount Sinai South Nassau,F,1,4302.07
+000511,NYU Langone Hospital-Long Island,M,9,25128.760000000002
+001456,Mount Sinai Hospital,F,6,39789.47
+000635,University Hospital SUNY Health Science Center,M,10,20292.14
+001456,Mount Sinai Hospital,F,32,146601.81999999998
+001117,Northern Westchester Hospital,M,3,12849.84
+000990,HealthAlliance Hospital Broadway Campus,M,4,8837.349999999999
+001447,Hospital for Special Surgery,F,3,24509.58
+000098,"Brooks-TLC Hospital System, Inc.",M,2,9526.29
+001638,Long Island Jewish Forest Hills,F,2,7733
+001639,Mount Sinai Hospital - Mount Sinai Hospital of Queens,NA,1,3977.8500000000004
+001633,Queens Hospital Center,F,3,3779.9
+000818,Saratoga Hospital,F,4,9664.449999999999
+000925,Good Samaritan Hospital Medical Center,M,NA,3869.65
+000267,Kenmore Mercy Hospital,F,1,1912.25
+001288,Brooklyn Hospital Center - Downtown Campus,M,3,7559.87
+000527,Mount Sinai South Nassau,M,3,15351.26
+001165,Jacobi Medical Center,M,4,4658.120000000001
+000541,North Shore University Hospital,F,3,6297.23
+000635,University Hospital SUNY Health Science Center,F,6,7400.81
+000630,St. Joseph's Hospital Health Center,M,77,931132.25
+000325,The University of Vermont Health Network - Alice Hyde Medical Center,F,2,3276.57
+000635,University Hospital SUNY Health Science Center,F,5,5820.95
+001305,Maimonides Medical Center,M,2,5241.41
+001178,BronxCare Hospital Center,F,NA,11411.859999999999
+000628,UPSTATE University Hospital at Community General,M,3,4444.52
+000218,Sisters of Charity Hospital,M,-99,2031.5
+000924,South Shore University Hospital,M,3,9986.07
+000103,UPMC Chautauqua at WCA,NA,NA,6403.68
+000896,St. Charles Hospital,M,14,11991.68
+001172,Lincoln Medical & Mental Health Center,F,50,42362.689999999995
+000885,Long Island Community Hospital,M,3,5884.59
+001168,Montefiore Medical Center-Wakefield Hospital,F,3,7231.2699999999995
+001463,NYU Langone Hospitals,F,1,4746.21
+001637,New York - Presbyterian/Queens,F,11,NA
+000925,Good Samaritan Hospital Medical Center,M,2,2479.58
+001463,NYU Langone Hospitals,M,2,8215.08
+001463,NYU Langone Hospitals,F,7,32368.24
+000630,St. Joseph's Hospital Health Center,F,3,8235.859999999999
+000636,Crouse Hospital,M,6,5536.969999999999
+000397,Oneida Health Hospital,F,11,17713.460000000003
+000635,University Hospital SUNY Health Science Center,M,2,5551.21
+000471,The Unity Hospital of Rochester,M,14,6474.110000000001

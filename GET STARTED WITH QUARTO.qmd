@@ -1,0 +1,46 @@
+---
+title: "GET STARTED WITH QUARTO - MINE"
+format: html
+editor: visual
+---
+
+```{r}
+
+#|label:load-packages
+#| message: false
+
+
+
+
+library(tidyverse)
+library(ggthemes)
+library(palmerpenguins)
+library(gt)
+```
+
+## DATA
+
+**For this analysis we will be using the penguins dataset from the palmerpenguins package**
+
+```{r}
+glimpse(penguins)
+
+```
+
+```{}
+```
+
+```{r}
+#|label: bill-dims-species
+#|fig-width:5
+#|fig-asp: 0.618
+
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm,
+             color = species, shape = species)) +
+  geom_point()+
+  theme_minimal()+
+  scale_color_brewer(option = "viridis")+
+  labs( x = "Bill length(mm)", y= "Bill depth(mm")
+
+```

@@ -1,0 +1,398 @@
+---
+title: "BIOSTATS PROJECT"
+author: "K.ASABERE"
+format: html
+editor: visual
+df-print: kable
+execute: 
+  echo: true
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(gtsummary)
+library(gt) 
+library(survival)
+library(ggsurvfit)
+library(broom)
+library(finalfit)
+
+heart_failure <- read_csv("heart_failure_clinical_records_dataset.csv")
+```
+
+```{r}
+
+heart_recoded <-  heart_failure %>% 
+  mutate(`Age(years)` = if_else(age <65,"Less than 65","65 and above"),
+  Anaemia=if_else(anaemia == 1,"Yes","No"),
+ Sex = if_else(sex == 1,"Male","Female"),
+`Serum creatinine(mg/dl)` = if_else(serum_creatinine >=1.5,"Elevated","Normal"),
+Diabetes = if_else(diabetes == 1,"Yes","No"),
+Smoking = if_else(smoking ==1, "Yes","No"),
+Hypertension = if_else(high_blood_pressure ==1,"Yes","No"),
+ `Ejection Fraction` = if_else(ejection_fraction <= 30,"HFrEF",
+if_else(ejection_fraction <=45,"HFmrEF","HFpEF")),
+`Serum sodium(mEq/L)`= if_else(serum_sodium < 135,"Low",if_else(serum_sodium >145,"High","Normal")),
+`Platelets(/L)` = if_else(platelets < 150000, "Low",if_else(platelets > 450000,"High","Normal")),
+`Time(days)` = time,
+`Creatinine phosphokinase(mcg/dL)`=creatinine_phosphokinase
+)
+
+
+
+
+heart_df <- heart_recoded %>% 
+ select(`Age(years)`:`Creatinine phosphokinase(mcg/dL)`)
+
+
+heart_df <- heart_df %>%
+  mutate(`Ejection Fraction` = factor(`Ejection Fraction`, levels = c("HFrEF", "HFmrEF", "HFpEF"),
+labels= c("Reduced ejection fraction(HFrEF)", "Moderate ejection fraction(HFmrEF)",
+    "Preserved ejection fraction(HFpEF)"))) %>% 
+  relocate(Anaemia,.before = Diabetes)
+
+heart_recoded <-  heart_recoded %>% 
+mutate(Sodium = if_else(serum_sodium < 135,"Low",if_else(serum_sodium >145,"High","Normal")),
+       Platelets = if_else(platelets < 150000, "Low",if_else(platelets > 450000,"High","Normal"))) %>% 
+  rename("Ejection_fraction" = 'Ejection Fraction',
+         "Age_years" = `Age(years)`)
+
+heart_recoded <-  heart_recoded %>% 
+  rename( "Serum_creatinine" = `Serum creatinine(mg/dl)`,
+          "Time_days" = `Time(days)`)
+      
+
+
+
+
+
+```
+
+
+```{r}
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+
+heart_recoded <- heart_recoded %>% 
+  mutate(survobj = Surv(Time_days,DEATH_EVENT))
+
+km_1 <- heart_recoded %>% 
+  survfit(survobj ~1,data = .)
+km_1
+summary(km_1, times = c(10,30,60,90,120,150,180,210,240,270))
+
+ heart_recoded %>% 
+  survfit2(survobj ~1,data = .) %>% 
+   ggsurvfit(linewidth = 1)+
+   add_risktable()+
+   add_confidence_interval()
+ 
+ cph_1 <- heart_recoded %>% 
+   coxph(survobj ~ Age_years+sex+  Platelets+anaemia+Sodium+diabetes+
+           smoking+ Serum_creatinine+ creatinine_phosphokinase+
+           Ejection_fraction + high_blood_pressure, data = .)
+cph_1 %>% tidy()
+summary(cph_1)
+
+```
+
+```{r}
+heart_recoded %>% 
+  survfit2(survobj ~Sex,data = .) %>% 
+   ggsurvfit(linewidth = 1)
+   
+
+```
+
+
+```{r}
+heart_recoded %>% 
+  survfit2(survobj ~ Ejection_fraction,data = .) %>% 
+   ggsurvfit(linewidth = 1)
+
+```
+
+```{r}
+heart_recoded %>% 
+  survfit2(survobj ~ Age_years,data = .) %>% 
+   ggsurvfit(linewidth = 1)
+
+```
+
+
+```{r}
+#survobj = Surv(`Time(days)`,DEATH_EVEN)
+dependent_os <- "Surv(Time_days,DEATH_EVENT)"
+explanatory <- c("Age_years", "sex", "Platelets","anaemia", "Sodium","diabetes",
+           "smoking ", "Serum_creatinine", "creatinine_phosphokinase",
+           "Ejection_fraction", "high_blood_pressure")
+
+
+```
+
+```{r}
+heart_recoded %>% 
+  finalfit(dependent_os,explanatory)
+```
+
+
+```{r}
+heart_recoded %>% 
+  finalfit(dependent_os, explanatory, add_dependent_label = FALSE) %>% 
+  rename("Overall survival" = label) %>% 
+  ##rename(" " = levels) %>% 
+  rename(" " = all)
+
+```
+
+```{r}
+heart_recoded <-  heart_recoded %>% 
+  mutate(
+    Platelets = fct_relevel(Platelets,"Normal"),
+    Age_years = fct_relevel(Age_years,"Less than 65"),
+    Serum_creatinine = fct_relevel(Serum_creatinine,"Normal"),
+    Ejection_fraction = fct_relevel(Ejection_fraction,"HFpEF"),
+    Sodium = fct_relevel(Sodium, "Normal")
+  )
+```
+
+
+```{r}
+Dependent_os <- "Surv(Time_days,DEATH_EVENT)"
+Explanatory <- c("Age_years", "Sex", "Platelets","Anaemia", "Sodium","Diabetes",
+           "Smoking ", "Serum_creatinine", "creatinine_phosphokinase",
+           "Ejection_fraction", "Hypertension")
+
+heart_recoded %>% 
+  finalfit(Dependent_os,Explanatory)
+
+
+heart_recoded %>% 
+  finalfit(Dependent_os, Explanatory, add_dependent_label = FALSE) %>% 
+  rename("Overall survival" = label) %>% 
+  rename(" " = levels) %>% 
+  rename("  " = all)
+
+
+## Testing the proportional hazards assumption
+
+zph_result <- heart_recoded %>% 
+  coxphmulti(Dependent_os,Explanatory) %>% 
+  cox.zph() 
+
+zph_result
+plot(zph_result)
+
+heart_recoded %>% 
+  hr_plot(Dependent_os, Explanatory)
+```
+
+
+
+```{r}
+cph_tbl <- 
+  tbl_regression(
+    cph_1
+  )
+cph_tbl
+```
+
+```{r}
+
+
+```
+
+
+```{r}
+
+cph_2  <- heart_recoded %>% 
+   coxph(survobj ~ Age_years+sex+  Platelets+Anaemia+Sodium+diabetes+
+           smoking+ Serum_creatinine+ creatinine_phosphokinase+
+           Ejection_fraction + high_blood_pressure, data = .)
+cph_tbl2 <- 
+  tbl_regression(
+    cph_2,
+    exponentiate = TRUE
+  ) %>% 
+  add_global_p() %>% 
+  bold_labels() %>% 
+  bold_p()  
+  
+
+
+```
+
+```{r}
+cph_tbl2
+```
+
+
+
+
+```{r}
+cph_tbl3 <- 
+  tbl_regression(
+    cph_2,
+    exponentiate = TRUE
+  ) %>% 
+  add_global_p() %>% 
+  add_glance_table(
+    include = c(nobs,logLik,AIC,BIC)
+  )
+cph_tbl3
+```
+
+
+
+
+```{r}
+Heart_new <-  heart_recoded %>% 
+  mutate(Hypertension = if_else(Hypertension =="Yes",1,0),
+         Anaemia =if_else(Anaemia =="Yes",1,0),
+         Smoking = if_else(Smoking =="Yes",1,0),
+         Diabetes = if_else(Diabetes== "Yes",1,0),
+         Sex = sex,
+         survobj = Surv(Time_days,DEATH_EVENT)
+         ) %>% 
+  rename(`Age(years)` = "Age_years",
+         `Serum creatinine` = "Serum_creatinine",
+         `Ejection fraction` = "Ejection_fraction")
+  
+
+
+```
+
+
+```{r}
+heart_table_1 <- Heart_new %>% 
+  select(`Age(years)`,Sex,Anaemia,`Serum creatinine`:Hypertension,Sodium,Platelets,`Ejection fraction`)
+
+table_one <- heart_table_1 %>% 
+  tbl_summary(
+    by = `Ejection fraction`,
+    
+  ) 
+
+
+table_one <- table_one %>% 
+  add_overall() %>% 
+  bold_labels() %>% 
+  italicize_levels() %>% 
+  modify_spanning_header(
+    update = all_stat_cols() ~ "**Classification of Heart Failure  According to Ejection Fraction**"
+  ) %>% 
+  modify_footnote(
+    update = all_stat_cols() ~
+      "mean(sd) for continuous ;n(%) for categorical"
+  ) 
+  
+    
+    table_one
+
+
+
+
+```
+
+
+```{r}
+cph_new <- Heart_new%>% 
+   coxph(survobj ~ `Age(years)`+Sex+  Platelets+Anaemia+Sodium+Diabetes+
+           Smoking+ `Serum creatinine` +
+           `Ejection fraction` + Hypertension, data = .)
+
+
+cph_tbl_new <-  tbl_regression(
+    cph_new,
+    exponentiate = TRUE
+  ) %>% 
+  add_global_p() %>% 
+  bold_labels() %>% 
+  bold_p() 
+
+cph_tbl_new
+
+cph_ureg <- 
+  Heart_new %>% 
+  tbl_uvregression(
+    method = coxph,
+    y= survobj,
+    exponentiate = TRUE
+  )
+  cph_ureg
+
+
+
+
+
+```
+
+
+
+```{r}
+Heart_new2 <-  heart_recoded %>% 
+  mutate(Hypertension = if_else(Hypertension =="Yes",1,0),
+         Anaemia =if_else(Anaemia =="Yes",1,0),
+         Smoking = if_else(Smoking =="Yes",1,0),
+         Diabetes = if_else(Diabetes== "Yes",1,0),
+         Sex = sex,
+         survobj = Surv(Time_days,DEATH_EVENT)
+         ) %>% 
+  mutate(
+    Age_years =ff_label(Age_years,"Age(years)"),
+    Serum_creatinine= ff_label(Serum_creatinine,"Serum creatinine"),
+    Ejection_fraction = ff_label(Ejection_fraction,"Ejection fraction")
+  )
+  
+  
+  Dependent_os <- "Surv(Time_days,DEATH_EVENT)"
+Explanatory_cph <- c("Age_years", "Sex", "Platelets","Anaemia", "Sodium","Diabetes",
+           "Smoking ","Serum_creatinine",
+           "Ejection_fraction", "Hypertension")
+
+Heart_new2 %>% 
+  finalfit(Dependent_os,Explanatory_cph)
+
+
+Heart_new2 %>% 
+  finalfit(Dependent_os, Explanatory_cph, add_dependent_label = FALSE) %>% 
+  rename("Overall survival" = label) %>% 
+  rename(" " = levels) %>% 
+  rename("  " = all)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

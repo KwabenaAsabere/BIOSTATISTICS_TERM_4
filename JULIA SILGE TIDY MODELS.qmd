@@ -1,0 +1,185 @@
+---
+title: "JULIA SILGE"
+author: "K.ASABERE"
+format: html
+df-print: kable
+code-overflow: wrap
+editor: visual
+execute: 
+  echo: true
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
+---
+
+
+```{r}
+
+library(tidyverse)
+library(tidymodels)
+theme_set(theme_bw())
+```
+
+## Explore Data
+```{r}
+
+library(palmerpenguins)
+penguins <- penguins
+
+
+```
+
+
+
+```{r}
+penguins %>% count(island,species)
+
+```
+
+```{r}
+
+penguins %>% 
+  filter(!is.na(sex)) %>% 
+  ggplot(aes(flipper_length_mm,bill_length_mm,color = sex, size = body_mass_g))+
+  geom_point(alpha = 0.7)+
+  facet_wrap((~species))
+```
+
+
+
+```{r}
+penguins_df <- penguins %>% 
+  filter(!is.na(sex)) %>% 
+  select(-year,-island)
+```
+
+```{r}
+set.seed(123)
+penguin_split <- initial_split(penguins_df, strata = sex)
+
+penguin_train <- training(penguin_split)
+penguin_test <- testing(penguin_split)
+
+set.seed(234)
+penguin_boot <- bootstraps(penguin_train)
+
+
+```
+
+
+
+```{r}
+glm_spec <- logistic_reg() %>% 
+  set_engine("glm")
+
+rf_spec <- rand_forest() %>% 
+  set_mode("classification") %>% 
+  set_engine("ranger")
+
+```
+
+
+```{r}
+penguin_wf <- workflow() %>% 
+  add_formula(sex ~ .)
+
+
+
+```
+
+
+
+```{r}
+glm_rs <- penguin_wf %>% 
+  add_model(glm_spec) %>% 
+  fit_resamples(
+    resamples = penguin_boot,
+    control = control_resamples(save_pred = TRUE, verbose = TRUE)
+  )
+
+rf_rs <- penguin_wf %>% 
+  add_model(rf_spec) %>% 
+  fit_resamples(
+    resamples = penguin_boot,
+    control = control_resamples(save_pred = TRUE, verbose = TRUE)
+  )
+
+
+```
+
+
+## Evaluate Modeling
+```{r}
+
+collect_metrics(rf_rs)
+```
+
+```{r}
+collect_metrics(glm_rs)
+```
+
+
+```{r}
+glm_rs %>% 
+  conf_mat_resampled()
+
+```
+
+
+```{r}
+glm_rs %>% 
+  collect_predictions() %>% 
+  group_by(id) %>% 
+  roc_curve(sex, .pred_female) %>% 
+  ggplot(aes(1-specificity,sensitivity, color = id))+
+  geom_abline(lty = 2, color = "gray80", size = 1.5)+
+  geom_path(show.legend = FALSE, alpha = 0.6, size = 1.2 )+
+  coord_equal()
+```
+
+
+
+```{r}
+penguin_final <- penguin_wf %>% 
+  add_model(glm_spec) %>% 
+  last_fit(penguin_split)
+
+
+
+collect_metrics(penguin_final)
+
+collect_predictions(penguin_final) %>% 
+  conf_mat(sex, .pred_class)
+
+```
+
+```{r}
+penguin_final$.workflow[[1]] %>% 
+  tidy(exponentiate = TRUE) %>% 
+  arrange(estimate)
+
+```
+
+```{r}
+penguins %>% 
+  filter(!is.na(sex)) %>% 
+  ggplot(aes(bill_depth_mm,bill_length_mm,color = sex, size = body_mass_g))+
+  geom_point(alpha = 0.7)+
+  facet_wrap((~species))
+```
+
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+

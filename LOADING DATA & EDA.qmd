@@ -1,0 +1,36 @@
+---
+title: "LOADING DATA"
+author: "K.ASABERE"
+format: html
+editor: visual
+execute: 
+  echo: true
+  warning: false
+editor_options: 
+  chunk_output_type: console
+---
+
+## Quarto Practice
+
+```{r}
+#| label: load packages
+library(tidyverse)
+```
+
+This is a work along of the *Loading Data and Exploratory Analysis* video  from **Kelsey Gonzalez**
+
+```{r}
+#| label: fig-diamonds
+#| fig-cap: " A bar chart of diamond cuts"
+#| fig-width: 6
+#| fig-asp: 0.618
+diamonds %>% 
+  ggplot(aes(x=cut))+
+  geom_bar(aes(fill = cut))+
+  theme_minimal()+
+  theme(legend.position= "top")+
+  scale_fill_viridis_d()
+  
+```
+
+This is a reference @fig-diamonds 

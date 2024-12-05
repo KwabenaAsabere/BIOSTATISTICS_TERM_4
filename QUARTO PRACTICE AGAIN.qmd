@@ -1,0 +1,216 @@
+---
+title: "QUARTO"
+author: "K.ASABERE"
+format: html
+df-print: kable
+code-overflow: wrap
+editor: visual
+fig-width: 6
+fig-asp: 0.618
+execute: 
+  echo: true
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| label: Loading packages
+library(tidyverse)
+library(finalfit)
+library(broom)
+library(gtsummary)
+heart <- read_csv("framingham.csv")
+
+```
+
+[Quarto](https://quarto.org/docs/authoring/markdown-basics.html)
+
+<https://quarto.org/docs/authoring/markdown-basics.html>
+
+* UNORDERED LIST
+  + first point
+  + second time
+    - third point
+    
+    
+    
+    
+  (@) first point
+  (@) second point
+  
+ 
+  Term
+  : definition of the term
+
+
+
+superscript^2^
+
+subscript~2~
+
+`verbatim code`
+
+
+#### Links & Images
+
+<https://Quarto.org>
+
+[Quarto](https://Quarto.org)
+
+### Inserting an image
+
+![Boxplot of life expectancies of the continents](BOXPLOT)
+
+#### To make the image a hyperlink
+
+[![Boxplot of life expectancies of the continents](BOXPLOT)](https://Quarto.org)
+
+
+
+
+
+[![Boxplot of life expectancies of the continents](BOXPLOT "A boxplot of life expectancies")](https://Quarto.org)
+
+
+
+
+
+[![](BOXPLOT){fig-alt="Boxplot of Life expectancies"}](https://quarto.org)
+
+
+
+### Lists
+
+##### Making a list followed by another list
+
+::: {}
+
+1. First point
+2. another point
+
+:::
+
+::: {}
+
+1. first point of second list
+2. second point of second list
+
+::: 
+
+
+### Source code
+
+```r
+
+heart %>% 
+summarise(mean = mean(age,na.rm = TRUE))
+
+```
+#### Inserting a manual page break
+page 1
+
+{{< pagebreak >}}
+
+page 2
+
+
+
+#### Divs & Spans
+
+**Adding a border class to a region of content**
+
+:::{.border}
+
+       This content can be styled with a border
+
+:::
+
+
+
+::::: {#special .sidebar}
+
+::: {.warning}
+
+Here is a warning.
+
+:::
+
+More content.
+:::::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

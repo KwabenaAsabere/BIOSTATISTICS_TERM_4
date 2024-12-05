@@ -1,0 +1,123 @@
+---
+title: "FINAL FIT TABLES"
+df-print: kable
+author: "K.ASABERE"
+format:  html
+editor: visual
+code-overflow: wrap
+fig-width: 6
+fig-asp: 0.618
+execute: 
+  echo: true
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(gtsummary)
+library(gt) 
+library(finalfit)
+library(broom)
+library(survival)
+library(ggsurvfit)
+
+heart <- read_csv("heart_failure_clinical_records_dataset.csv")
+```
+
+```{r}
+
+## Labelling and recoding variables
+heart <- heart %>% 
+  mutate(
+    age = if_else(age<65,"Less than 65","Above 65") %>% 
+      fct_relevel("Less than 65") %>% 
+      ff_label("Age(years)"),
+    ejection_fraction= if_else(ejection_fraction<30,"HFrEF",if_else(ejection_fraction>45,"HFpEF","HFmrEF")) %>% 
+      fct_relevel("HFpEF") %>% 
+      ff_label("Ejection fraction"),
+    serum_creatinine=if_else(serum_creatinine>1.5,"Elevated","Normal") %>% 
+      fct_relevel("Normal") %>% 
+      ff_label("Serum creatinine(mg/dL)"),
+    serum_sodium = if_else(serum_sodium< 135,"Low",if_else(serum_sodium>145,"Elevated","Normal")) %>% 
+      fct_relevel("Normal") %>% 
+      ff_label("Serum Sodium(mEq/L)"),
+    Sex = if_else(sex ==1,"Male","Female"),
+    time= ff_label(time,"Time(days)"),
+    creatinine_phosphokinase =if_else(creatinine_phosphokinase >170,"Elevated","Normal") %>% 
+      fct_relevel("Normal") %>% 
+      ff_label("Creatinine phosphokinase(mcg/dL)"),
+    platelets = if_else(platelets <150000,"Low",if_else(platelets>450000,"Elevated","Normal")) %>% 
+      fct_relevel("Normal") %>% 
+      ff_label("Platelets(/L)")
+    
+  ) %>% 
+  rename("Anaemia" = anaemia,
+         "Smoking" = smoking,
+         "Diabetes" = diabetes,
+         "Hypertension" =high_blood_pressure,
+         "death" = DEATH_EVENT)
+```
+
+
+
+
+```{r}
+#| label: tbl-tableOne
+#| tbl-cap: "**Study Participant Characteristics**"
+
+heart %>% 
+  select(age,Sex,Anaemia,Diabetes,Hypertension,Smoking,
+   platelets,serum_creatinine,creatinine_phosphokinase,serum_sodium,time,ejection_fraction) %>% 
+ 
+   tbl_summary(
+    by =ejection_fraction,
+    
+    statistic = 
+      list(all_categorical() ~ "{n} ({p}%)",
+           all_continuous() ~ "{mean} ({sd})"),
+    
+    digits = list(all_categorical() ~ 0,
+                  all_continuous() ~ 0),
+    
+  ) %>% 
+  add_overall() %>% 
+  bold_labels() %>% 
+  italicize_levels() %>% 
+  modify_spanning_header(
+    update = all_stat_cols() ~ "**Classification of Heart Failure According to Ejection Fraction**"
+  ) %>% 
+  modify_footnote( 
+    update = all_stat_cols() ~ 
+      "*mean(standard deviation) for continuous; n(%) for categorical;
+    HFrEF-Heart failure with reduced ejection fraction;
+    HFpEF-Heart failure with preserved ejection fraction;
+   HFmrEF-Heart failure with moderately reduced ejection fraction*"
+    
+  )
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

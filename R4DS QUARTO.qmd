@@ -1,0 +1,65 @@
+---
+title: "R4DS Quarto"
+author: "K.Asabere"
+format: pdf
+editor: visual
+editor_options: 
+  chunk_output_type: console
+bibliography: references.bib
+---
+
+```{r}
+#|label:setup 
+#|message:false
+
+
+library(tidyverse)
+library(gt)
+
+smaller <- diamonds %>% 
+  filter(carat <=2.5)
+
+```
+
+We have data about `r nrow(diamonds)` diamonds.
+
+Only `r nrow(diamonds) - nrow(smaller)` are larger than 2.5 carats.
+
+The distribution of the remainder is shown below:
+
+```{r}
+#| label:plot-smaller-diamonds
+#| echo:false
+
+smaller %>% 
+  ggplot(aes(x = carat))+
+  geom_freqpoly(binwidth = 0.01)+
+  theme_minimal()
+```
+
+```{r}
+mtcars[1:5,] 
+knitr::kable(mtcars[1:5,])
+
+mtcars %>% 
+  slice_head(n=5) %>% 
+  gt()
+  
+mtcars %>% 
+  slice_head(n=5) %>% 
+ knitr:: kable()
+```
+
+@tbl-diamonds shows the first five rows of *diamonds* dataset
+
+```{r}
+#| label: tbl-diamonds
+#| tbl-cap: First 5 rows of diamonds dataset
+
+diamonds %>% 
+  slice_head(n=5) %>% 
+  gt()
+  
+```
+
+This analysis uses the `diamonds` dataset embedded in the [`ggplot2`](https://ggplot2.tidyverse.org/) packgae.[@ggplot2-2]
